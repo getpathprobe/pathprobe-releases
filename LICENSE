@@ -1,0 +1,85 @@
+PathProbe End User License Agreement
+Version 1.0
+
+Copyright (c) 2026 PathProbe. All rights reserved.
+
+IMPORTANT: Read this agreement before installing or using PathProbe (the
+"Software"). By installing, copying, or using the Software you agree to these
+terms. If you do not agree, do not install or use it.
+
+1. License grant
+   PathProbe grants you a non-exclusive, non-transferable, revocable license
+   to install and run the Software on devices you own or control, for your own
+   internal use or your employer's internal use, subject to this agreement.
+
+2. Free and Pro tiers
+   a. Free tier. Without a license key the Software runs in the Free tier
+      (up to 5 simulated DHCP clients and at most a single 802.1Q VLAN tag).
+      The Free tier may be used at no charge.
+   b. Pro tier. A purchased license key (a "PP1" token) unlocks the Pro tier
+      (up to 1000 simulated DHCP clients, QinQ, saved profiles and export) for
+      the term shown in the key. A key is licensed to the purchaser, may be
+      used by that purchaser on the devices they control, and must not be
+      shared, resold, published, or used to build a key generator.
+   c. Fees are non-refundable except where required by law or stated in the
+      refund terms shown at the time of purchase.
+
+3. Authorized use only
+   PathProbe sends real network traffic, including DHCP requests that can use
+   up the address pool of a DHCP server, ARP/NDP, ICMP, and raw frames. You may
+   use the Software only on networks and devices that you own or for which you
+   have explicit written permission to test. You are solely responsible for
+   obtaining that permission and for complying with all applicable laws,
+   contracts, and acceptable-use policies. You must not use the Software to
+   disrupt, attack, or gain unauthorized access to any network, system, or
+   service.
+
+4. Restrictions
+   You may not, except where the law does not allow this restriction:
+   (a) copy, modify, or distribute the Software, except to make backup copies
+       and to install it on your own devices;
+   (b) reverse engineer, decompile, or disassemble the Software, or remove,
+       alter, or bypass the license check or the tier limits;
+   (c) sell, rent, lease, sublicense, or provide the Software to third parties
+       as a service; or
+   (d) remove copyright, trademark, or license notices.
+
+5. Third-party components
+   The Software includes open-source Go libraries that are licensed under their
+   own terms. On Windows, raw packet access needs Npcap, which is not included
+   and is licensed separately by its authors (https://npcap.com). You are
+   responsible for complying with the Npcap license.
+
+6. Ownership
+   The Software is licensed, not sold. PathProbe and its licensors keep all
+   right, title, and interest in the Software, including all intellectual
+   property rights. No rights are granted other than those stated here.
+
+7. No warranty
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+   PARTICULAR PURPOSE, ACCURACY, AND NON-INFRINGEMENT. PathProbe does not
+   warrant that the Software is error-free, that its results are complete or
+   accurate, or that it will not affect the networks on which it is run.
+
+8. Limitation of liability
+   TO THE MAXIMUM EXTENT PERMITTED BY LAW, PATHPROBE AND ITS LICENSORS ARE NOT
+   LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE
+   DAMAGES, OR FOR LOST PROFITS, LOST DATA, OR NETWORK OUTAGES, ARISING FROM
+   THE USE OF OR INABILITY TO USE THE SOFTWARE. TOTAL LIABILITY FOR ANY CLAIM
+   IS LIMITED TO THE AMOUNT YOU PAID FOR THE SOFTWARE IN THE 12 MONTHS BEFORE
+   THE CLAIM, OR USD 10 FOR THE FREE TIER.
+
+9. Termination
+   This license ends automatically if you breach it. On termination you must
+   stop using the Software and delete all copies. Sections 3, 4, 6, 7, 8, and
+   10 survive termination.
+
+10. General
+    This agreement is the entire agreement about the Software and replaces any
+    earlier agreement about it. If a provision is unenforceable, the rest
+    stays in effect. This agreement is governed by the laws of the
+    jurisdiction in which the publisher is established, without regard to its
+    conflict-of-law rules.
+
+Contact: service@getpathprobe.com
