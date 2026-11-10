@@ -15,8 +15,19 @@ $ pathprobe traceroute example.com</pre>
 <p>Every release ships with SHA-256 checksums (<code>SHA256SUMS</code>).</p>
 <h2 id="pricing">Pricing</h2><div class="grid">
 <div class="card"><h3>Free — $0</h3><ul><li>All core commands</li><li>DHCP simulation up to 5 IPs / clients, single 802.1Q tag</li><li>Scan, link speed, internet check, WAN whoami, traceroute, static addressing, packet capture</li></ul><a class="btn" href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">Download</a></div>
-<div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li></ul><a class="btn off" href="#pricing">Buy Pro — coming soon</a></div></div>
+<div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li></ul><a class="btn" id="buy-pro" href="#pricing">Buy Pro — $9.99</a><br><small>Secure checkout by Paddle. Your license key is emailed within about 15 minutes.</small></div></div>
 <p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
 <h2>Responsible use</h2><p>Only test networks you own or are authorized to test.</p>
 <h2>Support</h2><p>Email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</p>
-<footer><span>© 2026 PathProbe</span><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer></body></html>
+<footer><span>© 2026 PathProbe</span><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer><script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
+document.getElementById("buy-pro").addEventListener("click", function (e) {
+  e.preventDefault();
+  Paddle.Checkout.open({
+    items: [{ priceId: "pri_01m73ekxcrj5517ar1aqrw71rg", quantity: 1 }],
+    settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks.html" }
+  });
+});
+</script>
+</body></html>
