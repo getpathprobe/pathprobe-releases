@@ -24,10 +24,13 @@ $ pathprobe traceroute example.com</pre>
 Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
 document.getElementById("buy-pro").addEventListener("click", function (e) {
   e.preventDefault();
-  Paddle.Checkout.open({
+  var code = new URLSearchParams(window.location.search).get("code");
+  var opts = {
     items: [{ priceId: "pri_01m73ekxcrj5517ar1aqrw71rg", quantity: 1 }],
     settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks.html" }
-  });
+  };
+  if (code) { opts.discountCode = code; }
+  Paddle.Checkout.open(opts);
 });
 </script>
 </body></html>
