@@ -12,38 +12,38 @@ Get the latest version from the [Releases page](https://github.com/getpathprobe/
 
 | Platform | File |
 |---|---|
-| Debian/Ubuntu x86_64 | `pathprobe_1.1.1_amd64.deb` |
-| Debian/Ubuntu ARM64 | `pathprobe_1.1.1_arm64.deb` |
-| Linux x86_64 (generic) | `pathprobe-1.1.1-linux-amd64.tar.gz` |
-| Linux ARM64 (generic) | `pathprobe-1.1.1-linux-arm64.tar.gz` |
-| Windows 10/11 x64 installer | `PathProbe-Setup-1.1.1.exe` |
-| Windows 10/11 x64 portable | `PathProbe-1.1.1-windows-amd64.zip` |
+| Debian/Ubuntu x86_64 | `pathprobe_1.1.2_amd64.deb` |
+| Debian/Ubuntu ARM64 | `pathprobe_1.1.2_arm64.deb` |
+| Linux x86_64 (generic) | `pathprobe-1.1.2-linux-amd64.tar.gz` |
+| Linux ARM64 (generic) | `pathprobe-1.1.2-linux-arm64.tar.gz` |
+| Windows 10/11 x64 installer | `PathProbe-Setup-1.1.2.exe` |
+| Windows 10/11 x64 portable | `PathProbe-1.1.2-windows-amd64.zip` |
 
 ## Install
 
 **Debian / Ubuntu**
 ```sh
-sudo apt install ./pathprobe_1.1.1_amd64.deb
+sudo apt install ./pathprobe_1.1.2_amd64.deb
 pathprobe --help
 ```
 
 **Other Linux**
 ```sh
-tar xzf pathprobe-1.1.1-linux-amd64.tar.gz
-sudo install pathprobe-1.1.1-linux-amd64/pathprobe /usr/local/bin/
+tar xzf pathprobe-1.1.2-linux-amd64.tar.gz
+sudo install pathprobe-1.1.2-linux-amd64/pathprobe /usr/local/bin/
 pathprobe --help
 ```
 Raw-socket features need root, or `sudo setcap cap_net_raw,cap_net_admin+ep $(command -v pathprobe)`.
 
 **Windows**
-Run `PathProbe-Setup-1.1.1.exe` as Administrator (adds PathProbe to the system PATH), or unzip the portable build. Then open an **Administrator** Command Prompt and run `pathprobe --help`.
+Run `PathProbe-Setup-1.1.2.exe` as Administrator (adds PathProbe to the system PATH), or unzip the portable build. Then open an **Administrator** Command Prompt and run `pathprobe --help`.
 DHCP simulation, scan and capture require [Npcap](https://npcap.com/#download) installed in "WinPcap API-compatible Mode" (not bundled). The installer and binaries are not code-signed yet, so SmartScreen may warn.
 
 ## Verify checksums
 ```sh
 sha256sum -c SHA256SUMS --ignore-missing
 ```
-Windows PowerShell: `Get-FileHash .\PathProbe-Setup-1.1.1.exe -Algorithm SHA256` and compare with `SHA256SUMS`.
+Windows PowerShell: `Get-FileHash .\PathProbe-Setup-1.1.2.exe -Algorithm SHA256` and compare with `SHA256SUMS`.
 
 ## Free vs Pro
 - **Free:** all core commands; DHCP simulation limited to 5 clients / IPs.
