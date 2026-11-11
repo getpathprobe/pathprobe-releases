@@ -47,7 +47,7 @@ Windows PowerShell: `Get-FileHash .\PathProbe-Setup-1.1.1.exe -Algorithm SHA256`
 
 ## Free vs Pro
 - **Free:** all core commands; DHCP simulation limited to 5 clients / IPs.
-- **Pro ($9.99):** up to 1000 DHCP clients, QinQ, and saved profiles with export. Purchase via Paddle — coming soon.
+- **Pro ($9.99):** up to 1000 DHCP clients, QinQ, and saved profiles with export. Buy Pro at https://getpathprobe.com/#pricing (Paddle checkout).
 
 ## Documentation
 `README.md` and `EXAMPLES.md` are attached to each release and installed with the packages.
