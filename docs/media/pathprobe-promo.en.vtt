@@ -1,0 +1,54 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.000
+PathProbe turns one laptop into a whole network test bench.
+
+2
+00:00:04.100 --> 00:00:07.600
+Simulate DHCP clients, each with its own MAC address
+
+3
+00:00:07.600 --> 00:00:11.200
+and an optional VLAN tag, and watch them bind to your server.
+
+4
+00:00:11.300 --> 00:00:13.700
+Every bound client answers ARP and ping,
+
+5
+00:00:13.800 --> 00:00:16.300
+so the device you're testing sees real hosts.
+
+6
+00:00:16.400 --> 00:00:19.600
+Save the whole exchange to a pcapng file for Wireshark.
+
+7
+00:00:19.800 --> 00:00:24.100
+Check link speed, scan the LAN, trace a path, or set a static IP,
+
+8
+00:00:24.250 --> 00:00:27.700
+all from one command-line tool on Linux and Windows.
+
+9
+00:00:27.850 --> 00:00:29.200
+Mac is coming soon.
+
+10
+00:00:29.350 --> 00:00:31.300
+The free tier runs five clients.
+
+11
+00:00:31.450 --> 00:00:37.400
+Pro is $9.99, one time, for up to 1.000 clients,
+QinQ, and saved profiles.
+
+12
+00:00:37.600 --> 00:00:40.000
+Only test networks you're allowed to test.
+
+13
+00:00:40.150 --> 00:00:43.680
+Download PathProbe free at getpathprobe.com
