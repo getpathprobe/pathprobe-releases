@@ -18,7 +18,9 @@ $ pathprobe traceroute example.com</pre>
 <p>Every release ships with SHA-256 checksums (<code>SHA256SUMS</code>).</p>
 <h2 id="pricing">Pricing</h2><div class="grid">
 <div class="card"><h3>Free — $0</h3><ul><li>All core commands</li><li>DHCP simulation up to 5 IPs / clients, single 802.1Q tag</li><li>Scan, link speed, internet check, WAN whoami, traceroute, static addressing, packet capture</li></ul><a class="btn" href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">Download</a></div>
-<div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li></ul><a class="btn" id="buy-pro" href="#pricing">Buy Pro — $9.99</a><br><small>Secure checkout by Paddle. Your license key is emailed within about 15 minutes.</small></div></div>
+<div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li></ul><!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
+<a class="btn" id="buy-pro" href="#pricing" hidden>Buy Pro — $9.99</a>
+<p class="note" id="sales-paused-notice">Purchases temporarily paused — licensing update in progress. The free download is still available.</p></div></div>
 <p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
 <h2 id="jackedin">Also from us: JackedIN™</h2>
 <div class="card" style="display:flex;gap:16px;align-items:center;background:#000;color:#d8ffd8;border-color:#00c400"><a href="jackedin/"><img src="jackedin/jackedin-logo.png" alt="JackedIN logo" width="96" height="96" style="border-radius:16px"></a><div><strong style="color:#00ff00;font-size:1.2em">JackedIN™ — the terminal, evolved</strong><br>SSH, Telnet and serial consoles in a desktop window, a full command line and a local API, for Windows and Linux (Mac version coming soon). <strong style="color:#00ff00">Free 3-day trial — try it before you buy it.</strong> Then $19 one-time launch price.<br><a class="btn" style="background:#00ff00;color:#000;margin-top:8px" href="jackedin/">Try JackedIN free</a> <a href="jackedin/" style="color:#00ff00">getjackedin.com</a></div></div>
@@ -26,18 +28,30 @@ $ pathprobe traceroute example.com</pre>
 <p><small>JackedIN™ in 50 seconds: SSH, Telnet and serial in one window, the CLI, and the token-protected local API. Voiceover is AI-generated.</small></p>
 <h2>Responsible use</h2><p>Only test networks you own or are authorized to test.</p>
 <h2>Support</h2><p>Email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</p>
-<footer><span>© 2026 PathProbe</span><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer><script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-<script>
-Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
-document.getElementById("buy-pro").addEventListener("click", function (e) {
-  e.preventDefault();
-  var code = new URLSearchParams(window.location.search).get("code");
-  var opts = {
-    items: [{ priceId: "pri_01m73ekxcrj5517ar1aqrw71rg", quantity: 1 }],
-    settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks.html" }
+<footer><span>© 2026 PathProbe</span><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer><script>
+// SALES_ENABLED: set to true to restore the Buy Pro button and Paddle checkout.
+var SALES_ENABLED = false;
+if (SALES_ENABLED) {
+  var paused = document.getElementById("sales-paused-notice");
+  var buyBtn = document.getElementById("buy-pro");
+  if (paused) paused.hidden = true;
+  if (buyBtn) buyBtn.hidden = false;
+  var s = document.createElement("script");
+  s.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+  s.onload = function () {
+    Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
+    document.getElementById("buy-pro").addEventListener("click", function (e) {
+      e.preventDefault();
+      var code = new URLSearchParams(window.location.search).get("code");
+      var opts = {
+        items: [{ priceId: "pri_01m73ekxcrj5517ar1aqrw71rg", quantity: 1 }],
+        settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks.html" }
+      };
+      if (code) { opts.discountCode = code; }
+      Paddle.Checkout.open(opts);
+    });
   };
-  if (code) { opts.discountCode = code; }
-  Paddle.Checkout.open(opts);
-});
+  document.head.appendChild(s);
+}
 </script>
 </body></html>
