@@ -48,19 +48,19 @@ $ jackedin license status</pre>
 
 <section id="download"><h2>Download</h2>
 <table><tr><th>Platform</th><th>File</th></tr>
-<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.31/JackedIN_1.0.31_x64-setup.exe"><code>JackedIN_1.0.31_x64-setup.exe</code></a></td></tr>
-<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.31/JackedIN_1.0.31_Windows.zip"><code>JackedIN_1.0.31_Windows.zip</code></a></td></tr>
-<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.31/JackedIN_1.0.31_amd64.deb"><code>JackedIN_1.0.31_amd64.deb</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.32/JackedIN_1.0.32_x64-setup.exe"><code>JackedIN_1.0.32_x64-setup.exe</code></a></td></tr>
+<tr><td>Linux x86_64 — portable</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.32/JackedIN_1.0.32_Linux_x64.zip"><code>JackedIN_1.0.32_Linux_x64.zip</code></a></td></tr>
+<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.32/JackedIN_1.0.32_amd64.deb"><code>JackedIN_1.0.32_amd64.deb</code></a></td></tr>
 <tr><td>macOS</td><td>Coming soon</td></tr></table>
-<p><a class="btn primary" href="https://github.com/getpathprobe/jackedin-releases/releases/latest">Download v1.0.31 — free 3-day trial</a></p>
+<p><a class="btn primary" href="https://github.com/getpathprobe/jackedin-releases/releases/latest">Download v1.0.32 — free 3-day trial</a></p>
 <p><b>Windows:</b> the installer is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
-<b>Linux:</b> <code>sudo apt install ./JackedIN_1.0.31_amd64.deb</code><br>
-Every release includes <a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.31/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest/download/JackedIN-Users-Guide.html">user's guide</a>.</p></section>
+<b>Linux:</b> <code>sudo apt install ./JackedIN_1.0.32_amd64.deb</code><br>
+Every release includes <a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.0.32/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest/download/JackedIN-Users-Guide.html">user's guide</a>.</p></section>
 
 <section id="pricing"><h2>Pricing</h2>
 <div class="grid"><div class="card"><h3>JackedIN™ license</h3>
 <div class="price">$19 <s>$29</s></div><small>Launch price, one-time. Regular price $29.</small>
-<ul><li>Everything in the app: GUI, CLI and local API</li><li>1 year of updates included</li><li>Any version released in that year keeps working forever</li><li>Optional renewal: $15 for another year of updates</li><li>Offline license key, emailed within about 15 minutes</li><li>Single user, Windows and Linux</li></ul>
+<ul><li>Everything in the app: GUI, CLI and local API</li><li>1 year of updates included</li><li>Any version released in that year keeps working forever</li><li>Optional renewal: $15 for another year of updates</li><li>License key, emailed within about 15 minutes</li><li>1 license = 1 computer, 1 user, non-transferable (Windows or Linux)</li></ul>
 <a class="btn primary" id="buy" href="#pricing" hidden>Buy JackedIN — $19</a>
 <p class="note" id="sales-paused-notice">Purchases temporarily paused — licensing update in progress. Free 3-day trial still available.</p></div>
 <div class="card"><h3>Not sure yet?</h3><p>That's what the trial is for. Install it, plug in a console cable, open a few SSH sessions, script a ping. Buy only after it's proven itself.</p><a class="btn ghost" href="https://github.com/getpathprobe/jackedin-releases/releases/latest">Start the free 3-day trial</a></div></div>
@@ -77,7 +77,7 @@ Every release includes <a href="https://github.com/getpathprobe/jackedin-release
 <footer><div class="wrap"><span>Copyright © 2026 JackedIN</span><a href="../privacy.html">Privacy</a><a href="../refund.html">Refunds</a><a href="../terms.html">Terms</a><a href="https://github.com/getpathprobe/jackedin-releases/releases/latest/download/EULA.txt">EULA</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></div></footer>
 <script>
 // SALES_ENABLED: set to true to restore the Buy buttons and Paddle checkout.
-var SALES_ENABLED = false;
+var SALES_ENABLED = true;
 if (SALES_ENABLED) {
   ["sales-paused-notice-top", "sales-paused-notice"].forEach(function (id) {
     var el = document.getElementById(id);
