@@ -1,0 +1,55 @@
+# PathProbe
+
+> A command-line network test tool for Linux and Windows.
+
+PathProbe is a command-line network test tool. It has no graphical interface and no API. Every feature runs from a terminal: a Linux shell, or an Administrator Command Prompt or PowerShell on Windows.
+
+Official website: https://getpathprobe.com/
+Support: service@getpathprobe.com
+
+## Features
+
+- DHCP client simulation (DHCPv4 and DHCPv6), with custom MACs and VLAN tags, to test servers and relays
+- Interface and link checks: list adapters, link speed and addresses; select an interface by name or MAC
+- Subnet scans (ARP / IPv6), internet check, WAN address lookup
+- ICMP traceroute bound to an interface
+- Packet capture
+- Flags results that break RFC/IEEE standards
+- JSON output for scripts
+- Static addressing
+
+Use PathProbe only on networks you own or are authorized to test.
+
+## Platforms
+
+- Debian and Ubuntu (.deb, amd64 and arm64)
+- Other Linux (.tar.gz, amd64 and arm64)
+- Windows 10 and 11 x64 (installer or portable zip; some features require Npcap)
+- macOS: coming soon
+
+Every release includes SHA-256 checksums (SHA256SUMS).
+
+## Pricing
+
+- Free: $0. All core commands. DHCP simulation limited to 5 clients / IPs, with a single 802.1Q tag.
+- Pro: $9.99 USD, one-time purchase. Up to 1000 simulated DHCP clients, QinQ (stacked VLAN tags), and saved profiles with export.
+
+Checkout is handled by Paddle, the merchant of record.
+
+## Licensing
+
+One license equals one computer and is non-transferable. Pro is activated online once with a license key emailed after purchase (`pathprobe license activate --key ...`).
+
+## Links
+
+- Website: https://getpathprobe.com/
+- Download (free and Pro installers): https://github.com/getpathprobe/pathprobe-releases/releases/latest
+- Buy Pro: https://getpathprobe.com/#pricing
+- Terms: https://getpathprobe.com/terms.html
+- Privacy: https://getpathprobe.com/privacy.html
+- Refunds: https://getpathprobe.com/refund.html
+- Support: service@getpathprobe.com
+
+## Related product
+
+JackedIN is a separate product: an SSH, Telnet and serial terminal with a desktop window, a command line and a local API. Free 3-day trial, then $19 USD one-time. https://getjackedin.com/ (product page: https://getpathprobe.com/jackedin/)

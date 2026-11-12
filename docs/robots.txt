@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://getpathprobe.com/sitemap.xml
+Sitemap: https://getpathprobe.com/jackedin/sitemap.xml

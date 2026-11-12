@@ -1,0 +1,61 @@
+# JackedIN
+
+> The terminal, evolved. An SSH, Telnet and serial terminal with a desktop window, a full command line and a local automation API, for Windows and Linux.
+
+JackedIN is a desktop terminal application. Run it with no arguments for the graphical window. Run it with a command and it stays in the terminal, prints a result, and exits, ready for scripts and pipes.
+
+Official website: https://getjackedin.com/
+The current product page is served at https://getpathprobe.com/jackedin/ (getjackedin.com redirects there).
+Support: service@getpathprobe.com
+
+## Features
+
+- SSH, Telnet and serial consoles in one desktop window
+- Full command-line interface (`jackedin ...`) for the same features
+- Local automation API (off by default, 127.0.0.1 only, Bearer token)
+- Serial consoles: DB9 RS-232 and RJ45-to-DB9 console cables; defaults to 9600 8N1; prefers common USB-serial adapters (FTDI, Prolific, CH340, CP210x)
+- SSH: passwords, one-time codes, OpenSSH and PuTTY keys, ssh-agent and ~/.ssh/config; host-key checks that always warn on a changed key
+- Source interface: pick the NIC or source IP for each outgoing connection
+- Clean, readable text logs (including from Junos-style CR CR LF consoles); raw mode when you need control codes
+- Tabs, split panes, a saved-session tree with search, recents, and reconnect after a dropped session
+- Network tools: port scan, session-limit test, other-sessions indicator after SSH login, ping and traceroute
+- Optional Wireshark/dumpcap capture on connect, including loopback filtered to the session port
+
+SFTP file transfer is not in the current release. Only scan or connect to devices you own or are allowed to test.
+
+## Platforms
+
+- Windows 10 and 11 x64: installer or portable zip
+- Ubuntu and Debian x86_64: .deb package
+- Linux x86_64: portable zip
+- macOS: coming soon
+
+Every release includes SHA-256 checksums (SHA256SUMS) and a user's guide.
+
+## Pricing
+
+- Free 3-day trial: every feature unlocked, no card and no sign-up required
+- License: $19 USD, one-time purchase. Includes 1 year of updates. Any version released in that year keeps working afterward.
+
+Checkout is handled by Paddle, the merchant of record. All sales are final, except where required by law.
+
+## Licensing
+
+One license equals one computer and one user, and is non-transferable (Windows or Linux). After purchase, a license key is emailed; paste it into the app or run `jackedin license activate`. The trial becomes a licensed copy with no reinstall.
+
+## Links
+
+- Website: https://getjackedin.com/
+- Product page: https://getpathprobe.com/jackedin/
+- Download (free 3-day trial): https://github.com/getpathprobe/jackedin-releases/releases/latest
+- User's guide: https://github.com/getpathprobe/jackedin-releases/releases/latest/download/JackedIN-Users-Guide.html
+- Buy: https://getpathprobe.com/jackedin/#pricing
+- Terms: https://getpathprobe.com/terms.html
+- Privacy: https://getpathprobe.com/privacy.html
+- Refunds: https://getpathprobe.com/refund.html
+- EULA: https://github.com/getpathprobe/jackedin-releases/releases/latest/download/EULA.txt
+- Support: service@getpathprobe.com
+
+## Related product
+
+PathProbe is a separate product: a command-line network test tool for Linux and Windows. Free tier, plus Pro at $9.99 USD one-time. https://getpathprobe.com/
