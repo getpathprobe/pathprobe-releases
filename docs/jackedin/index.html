@@ -57,8 +57,7 @@
 <p class="tag">The terminal, evolved. SSH, Telnet and serial consoles in a desktop window, a full command line, and a local automation API — for Windows and Linux.</p>
 <a class="btn primary" href="https://github.com/getpathprobe/jackedin-releases/releases/latest">Download free trial</a>
 <!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
-<a class="btn ghost" id="buy-top" href="#pricing" hidden>Buy — $19 launch price</a><br>
-<p class="note" id="sales-paused-notice-top">Purchases temporarily paused — licensing update in progress. Free 3-day trial still available.</p>
+<a class="btn ghost" id="buy-top" href="#pricing">Buy — $19 launch price</a><br>
 <small>Every feature unlocked for 3 days. No card, no sign-up.</small><br>
 <span class="mac">🍎 <b>Mac version coming soon.</b> Windows 10/11 and Ubuntu/Debian available now.</span></div></section>
 
@@ -107,8 +106,7 @@ Every release includes <a href="https://github.com/getpathprobe/jackedin-release
 <div class="grid"><div class="card"><h3>JackedIN™ license</h3>
 <div class="price">$19 <s>$29</s></div><small>Launch price, one-time. Regular price $29.</small>
 <ul><li>Everything in the app: GUI, CLI and local API</li><li>1 year of updates included</li><li>Any version released in that year keeps working forever</li><li>License key, emailed within about 15 minutes</li><li>1 license = 1 computer, 1 user, non-transferable (Windows or Linux)</li></ul>
-<a class="btn primary" id="buy" href="#pricing" hidden>Buy JackedIN — $19</a>
-<p class="note" id="sales-paused-notice">Purchases temporarily paused — licensing update in progress. Free 3-day trial still available.</p></div>
+<a class="btn primary" id="buy" href="#pricing">Buy JackedIN — $19</a></div>
 <div class="card"><h3>Not sure yet?</h3><p>That's what the trial is for. Install it, plug in a console cable, open a few SSH sessions, script a ping. Buy only after it's proven itself.</p><a class="btn ghost" href="https://github.com/getpathprobe/jackedin-releases/releases/latest">Start the free 3-day trial</a></div></div>
 <p>All sales are final, no refunds except where required by law. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p></section>
 
@@ -125,10 +123,6 @@ Every release includes <a href="https://github.com/getpathprobe/jackedin-release
 // SALES_ENABLED: set to true to restore the Buy buttons and Paddle checkout.
 var SALES_ENABLED = true;
 if (SALES_ENABLED) {
-  ["sales-paused-notice-top", "sales-paused-notice"].forEach(function (id) {
-    var el = document.getElementById(id);
-    if (el) el.hidden = true;
-  });
   ["buy-top", "buy"].forEach(function (id) {
     var el = document.getElementById(id);
     if (el) el.hidden = false;
