@@ -43,7 +43,7 @@ One license equals one computer and is non-transferable. Pro is activated online
 ## Links
 
 - Website: https://getpathprobe.com/
-- Download (free and Pro installers): https://github.com/getpathprobe/pathprobe-releases/releases/latest
+- Download (free and Pro installers): https://getpathprobe.com/#download
 - Buy Pro: https://getpathprobe.com/#pricing
 - Terms: https://getpathprobe.com/terms.html
 - Privacy: https://getpathprobe.com/privacy.html
