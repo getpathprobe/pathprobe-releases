@@ -106,4 +106,39 @@ if (SALES_ENABLED) {
   document.head.appendChild(s);
 }
 </script>
+<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "fa82a94d739c4f02b711e5d39ab2a855"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+(function () {
+  var ENDPOINT = "https://site-events.getpathprobe.workers.dev/e";
+  var product = "pathprobe";
+  function payload(event) {
+    var q = new URLSearchParams(window.location.search);
+    var keep = function (v) { return (v || "").toLowerCase().replace(/[^a-z0-9._-]/g, "").slice(0, 64); };
+    return {
+      event: event,
+      product: product,
+      path: window.location.pathname,
+      utm_source: keep(q.get("utm_source")),
+      utm_medium: keep(q.get("utm_medium")),
+      utm_campaign: keep(q.get("utm_campaign"))
+    };
+  }
+  function send(data) {
+    try {
+      var qs = new URLSearchParams(data).toString();
+      var url = ENDPOINT + "?" + qs;
+      if (navigator.sendBeacon) { navigator.sendBeacon(url, new Blob([], { type: "text/plain" })); }
+      else { fetch(url, { method: "GET", mode: "no-cors", credentials: "omit", keepalive: true }); }
+    } catch (e) {}
+  }
+  send(payload("page_view"));
+  document.addEventListener("click", function (e) {
+    var t = e.target && e.target.closest && e.target.closest("#buy-pro, #buy, #buy-top");
+    if (!t) return;
+    var data = payload("buy_click");
+    data.button = t.id;
+    send(data);
+  }, true);
+})();
+</script>
 </body></html>
