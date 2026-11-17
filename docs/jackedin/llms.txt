@@ -47,13 +47,13 @@ One license equals one computer and one user, and is non-transferable (Windows o
 
 - Website: https://getjackedin.com/
 - Product page: https://getpathprobe.com/jackedin/
-- Download (free 3-day trial): https://github.com/getpathprobe/jackedin-releases/releases/latest
-- User's guide: https://github.com/getpathprobe/jackedin-releases/releases/latest/download/JackedIN-Users-Guide.html
+- Download (free 3-day trial): https://getpathprobe.com/jackedin/#download
+- User's guide: https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html
 - Buy: https://getpathprobe.com/jackedin/#pricing
 - Terms: https://getpathprobe.com/terms.html
 - Privacy: https://getpathprobe.com/privacy.html
 - Refunds: https://getpathprobe.com/refund.html
-- EULA: https://github.com/getpathprobe/jackedin-releases/releases/latest/download/EULA.txt
+- EULA: https://site-events.getpathprobe.workers.dev/dl/EULA.txt
 - Support: service@getpathprobe.com
 
 ## Related product
