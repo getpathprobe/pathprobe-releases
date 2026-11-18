@@ -34,7 +34,7 @@
   "description": "An SSH, Telnet and serial terminal with a desktop window, a full command line and a local automation API, for Windows and Linux. Free 3-day trial, then $19 USD one-time.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.0.32",
+  "softwareVersion": "1.0.33",
   "downloadUrl": "https://getpathprobe.com/jackedin/#download",
   "offers": {
     "@type": "Offer",
@@ -92,13 +92,22 @@ $ jackedin license status</pre>
 <p><small>SFTP file transfer is not in this release. Only scan devices you own or are allowed to test.</small></p></section>
 
 <section id="download"><h2>Download</h2>
+<p class="note">JackedIN 1.0.33 is here — verified exec, Send Break, keepalive, and tighter SSH host-key handling. Free 3-day trial.</p>
+<h3>What's new in 1.0.33</h3>
+<ul>
+<li>Verified exec, Send Break, and keepalive.</li>
+<li>SSH host-key pinning, paced paste, and <code>jackedin.com</code> for Windows scripts.</li>
+<li>Device profiles for common network operating systems. Only Junos was tested on real gear.</li>
+<li>One license is still one computer, non-transferable. After activation, the copy works offline. The first activation still needs the activation service.</li>
+</ul>
 <table><tr><th>Platform</th><th>File</th></tr>
-<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.32_x64-setup.exe"><code>JackedIN_1.0.32_x64-setup.exe</code></a></td></tr>
-<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.32_Linux_x64.zip"><code>JackedIN_1.0.32_Linux_x64.zip</code></a></td></tr>
-<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.32_amd64.deb"><code>JackedIN_1.0.32_amd64.deb</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.33_x64-setup.exe"><code>JackedIN_1.0.33_x64-setup.exe</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.33_Windows_x64.zip"><code>JackedIN_1.0.33_Windows_x64.zip</code></a></td></tr>
+<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.33_Linux_x64.zip"><code>JackedIN_1.0.33_Linux_x64.zip</code></a></td></tr>
+<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.0.33_amd64.deb"><code>JackedIN_1.0.33_amd64.deb</code></a></td></tr>
 <tr><td>macOS</td><td>Coming soon</td></tr></table>
-<p><b>Windows:</b> the installer is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
-<b>Linux:</b> <code>sudo apt install ./JackedIN_1.0.32_amd64.deb</code><br>
+<p><b>Windows:</b> the installer is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>. The portable zip is the same program without an installer; scripts use <code>jackedin.com</code>.<br>
+<b>Linux:</b> <code>sudo apt install ./JackedIN_1.0.33_amd64.deb</code><br>
 Every release includes <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a>. All files are also on <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest">GitHub Releases</a>.</p></section>
 
 <section id="pricing"><h2>Pricing</h2>
