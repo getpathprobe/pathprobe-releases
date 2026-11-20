@@ -43,8 +43,12 @@ sha256sum -c SHA256SUMS --ignore-missing
 Windows PowerShell: `Get-FileHash .\PathProbe-1.1.3-windows-amd64.zip -Algorithm SHA256` and compare with `SHA256SUMS`.
 
 ## Free vs Pro
-- **Free:** all core commands; DHCP simulation limited to 5 clients / IPs.
-- **Pro ($9.99):** up to 1000 DHCP clients, QinQ, and saved profiles with export. One license = one computer, non-transferable (one-time online activation: `pathprobe license activate --key PP1....`). Buy Pro at https://getpathprobe.com/#pricing (Paddle checkout).
+- **Free ($0):** all core commands (DHCP, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target); DHCP simulation up to 5 clients; none or a single 802.1Q tag; packet capture (pcapng); core RFC/IEEE standards checks; JSON on interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status; examples command.
+- **Pro ($9.99 one-time):** everything in Free, plus up to 1,000 DHCP clients, QinQ (stacked VLAN tags), saved profiles with export, and extra standards checks. One license = one computer, non-transferable (one-time online activation: `pathprobe license activate --key PP1....`).
+- **Coming in 1.2 (Pro):** JSON on dhcp run, target, static, dhcp release/stop, and profiles; automatic run log; MCP server (use PathProbe from an AI agent); scheduled profile runs with webhook alerts.
+- **Coming in 1.2 (Free and Pro):** tab completion and typo suggestions, copy a run as a command, and clearer error messages.
+
+Buy Pro at https://getpathprobe.com/#pricing (Paddle checkout).
 
 ## Documentation
 `README` and `EXAMPLES` are included in each download and installed with the packages.

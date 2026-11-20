@@ -45,7 +45,7 @@
       "name": "Pro",
       "price": "9.99",
       "priceCurrency": "USD",
-      "description": "One-time purchase. Up to 1000 simulated DHCP clients, QinQ, and saved profiles with export.",
+      "description": "One-time purchase. 1 license = 1 computer, non-transferable. Up to 1000 simulated DHCP clients, QinQ, saved profiles with export, and extra standards checks. Coming in 1.2: JSON on dhcp run, target, static, dhcp release/stop, and profiles; automatic run log; MCP server (use PathProbe from an AI agent); scheduled profile runs with webhook alerts. Also coming in 1.2 for Free and Pro: tab completion and typo suggestions, copy a run as a command, and clearer error messages.",
       "url": "https://getpathprobe.com/#pricing"
     }
   ]
@@ -82,6 +82,116 @@ $ pathprobe traceroute example.com</pre>
 <div class="card"><h3>Free — $0</h3><ul><li>All core commands</li><li>DHCP simulation up to 5 IPs / clients, single 802.1Q tag</li><li>Scan, link speed, internet check, WAN whoami, traceroute, static addressing, packet capture</li></ul><a class="btn" href="#download">Download</a></div>
 <div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li><li>1 license = 1 computer, non-transferable (one-time online activation)</li></ul><!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
 <a class="btn" id="buy-pro" href="#pricing">Buy Pro — $9.99</a></div></div>
+<div class="compare-wrap">
+<h3 id="compare">Free vs Pro</h3>
+<p class="compare-legend">A <span class="coming">Coming in 1.2</span> label means the feature is planned for PathProbe 1.2 and is not in the current 1.1.3 download.</p>
+<table class="compare">
+  <caption class="visually-hidden">PathProbe Free and Pro feature comparison</caption>
+  <thead>
+    <tr>
+      <th scope="col">Feature</th>
+      <th scope="col" class="col-free">Free</th>
+      <th scope="col" class="col-pro">Pro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="group"><th scope="colgroup" colspan="3">Available now (v1.1.3)</th></tr>
+    <tr>
+      <th scope="row">Price</th>
+      <td class="col-free" data-label="Free">$0</td>
+      <td class="col-pro" data-label="Pro">$9.99 USD, one-time</td>
+    </tr>
+    <tr>
+      <th scope="row">Core commands<span class="feature-note">DHCP, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target</span></th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">DHCP simulation</th>
+      <td class="col-free" data-label="Free">Up to 5 clients</td>
+      <td class="col-pro" data-label="Pro">Up to 1,000 clients</td>
+    </tr>
+    <tr>
+      <th scope="row">VLAN tagging</th>
+      <td class="col-free" data-label="Free">None or a single 802.1Q tag</td>
+      <td class="col-pro" data-label="Pro">Single tag and QinQ (stacked VLAN tags)</td>
+    </tr>
+    <tr>
+      <th scope="row">Packet capture (pcapng)</th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">Standards checks<span class="feature-note">Flags results that break RFC/IEEE standards. Pro adds extra checks, including DHCP T1/T2 timers, QinQ TPIDs, and traceroute path issues.</span></th>
+      <td class="col-free" data-label="Free">Core checks</td>
+      <td class="col-pro" data-label="Pro">Core checks, plus extra Pro checks</td>
+    </tr>
+    <tr>
+      <th scope="row">JSON output for scripts<span class="feature-note">On interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status</span></th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">Examples command</th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">Saved profiles with export</th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">License</th>
+      <td class="col-free" data-label="Free">Download and use</td>
+      <td class="col-pro" data-label="Pro">1 license = 1 computer, non-transferable. Key emailed after purchase. One-time online activation.</td>
+    </tr>
+    <tr>
+      <th scope="row">Updates</th>
+      <td class="col-free" data-label="Free">New Free versions are always downloadable</td>
+      <td class="col-pro" data-label="Pro">Includes updates for all 1.x releases. A future 2.0 may need a new license.</td>
+    </tr>
+    <tr class="group"><th scope="colgroup" colspan="3">Coming in 1.2</th></tr>
+    <tr>
+      <th scope="row">JSON on dhcp run, target, static, dhcp release/stop, and profiles</th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">Automatic run log<span class="feature-note">Logs each run (command, time, exit code, and output). License keys are redacted. Turn off with --no-log.</span></th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">MCP server<span class="feature-note">Use PathProbe from an AI agent</span></th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">Scheduled profile runs with webhook alerts</th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">Tab completion and typo suggestions</th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">Copy a run as a command</th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+    <tr>
+      <th scope="row">Clearer error messages</th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+    </tr>
+  </tbody>
+</table>
+<p class="compare-footnote">Pro is a one-time purchase. <strong>1 license = 1 computer, non-transferable.</strong> After purchase, a license key is emailed to you. Activate once online with <code>pathprobe license activate --key PP1....</code> Activating again on the same computer is allowed. Another computer needs its own license. There is no trial; the Free tier is the way to try PathProbe first. See the <a href="refund.html">Refund Policy</a>.</p>
+<p class="compare-cta"><a class="btn buy-pro" id="buy" href="#pricing">Buy Pro — $9.99</a></p>
+</div>
 <p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
 <h2 id="jackedin">Also from us: JackedIN™</h2>
 <div class="card" style="display:flex;gap:16px;align-items:center;background:#000;color:#d8ffd8;border-color:#00c400"><a href="jackedin/"><img src="jackedin/jackedin-logo.png" alt="JackedIN logo" width="96" height="96" style="border-radius:16px"></a><div><strong style="color:#00ff00;font-size:1.2em">JackedIN™ — the terminal, evolved</strong><br>SSH, Telnet and serial consoles in a desktop window, a full command line and a local API, for Windows, Linux and Raspberry Pi (Mac version coming soon). <strong style="color:#00ff00">New: JackedIN 1.1.1, now with Raspberry Pi (64-bit) support.</strong> <strong style="color:#00ff00">Free 3-day trial — try it before you buy it.</strong> Then $19 one-time launch price.<br><a class="btn" style="background:#00ff00;color:#000;margin-top:8px" href="jackedin/">Try JackedIN free</a> <a href="jackedin/" style="color:#00ff00">getjackedin.com</a></div></div>
@@ -99,7 +209,7 @@ if (SALES_ENABLED) {
   s.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
   s.onload = function () {
     Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
-    document.getElementById("buy-pro").addEventListener("click", function (e) {
+    function openCheckout(e) {
       e.preventDefault();
       var code = new URLSearchParams(window.location.search).get("code");
       var opts = {
@@ -108,6 +218,9 @@ if (SALES_ENABLED) {
       };
       if (code) { opts.discountCode = code; }
       Paddle.Checkout.open(opts);
+    }
+    document.querySelectorAll("#buy-pro, #buy, a.buy-pro").forEach(function (el) {
+      el.addEventListener("click", openCheckout);
     });
   };
   document.head.appendChild(s);
