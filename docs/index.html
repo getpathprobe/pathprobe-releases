@@ -30,7 +30,7 @@
   "description": "A command-line network test tool for Linux and Windows: DHCP client simulation, interface and link checks, subnet scans, traceroute and packet capture.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.1.3",
+  "softwareVersion": "1.2.0",
   "downloadUrl": "https://getpathprobe.com/#download",
   "offers": [
     {
@@ -57,7 +57,7 @@
 <header><strong><a href="index.html" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="index.html#features">Features</a><a href="index.html#pricing">Pricing</a><a href="#download">Download</a><a href="jackedin/">JackedIN</a><a href="mailto:service@getpathprobe.com">Support</a></header>
 <h1>PathProbe</h1><p>A command-line network test tool for Linux and Windows: DHCP client simulation, interface and link checks, subnet scans, traceroute and packet capture.</p>
 <p class="note"><strong>Command-line only.</strong> PathProbe has no graphical interface and no API. You run it from a terminal (Linux shell, or an Administrator Command Prompt/PowerShell on Windows).</p>
-<p><a class="btn" href="#download">Download v1.1.3</a></p>
+<p><a class="btn" href="#download">Download v1.2.0</a></p>
 <pre>$ sudo pathprobe dhcp run --iface eth0 --count 5 --authorized
 $ pathprobe interfaces
 $ pathprobe traceroute example.com</pre>
@@ -71,12 +71,15 @@ $ pathprobe traceroute example.com</pre>
 <div class="card"><h3>Standards checks &amp; JSON</h3>Flags results that break RFC/IEEE standards; JSON output and packet capture for scripts.</div></div>
 <h2>Platforms</h2><ul><li>Debian/Ubuntu (.deb, amd64 &amp; arm64)</li><li>Other Linux (.tar.gz, amd64 &amp; arm64)</li><li>Windows 10/11 x64 (installer or portable zip; requires <a href="https://npcap.com/#download">Npcap</a>)</li><li><strong>macOS: Mac version coming soon.</strong></li></ul>
 <p>Every release ships with SHA-256 checksums (<code>SHA256SUMS</code>).</p>
-<h2 id="download">Download v1.1.3</h2>
+<h2 id="download">Download v1.2.0</h2>
 <ul>
-<li>Debian/Ubuntu x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.1.3_amd64.deb"><code>pathprobe_1.1.3_amd64.deb</code></a></li>
-<li>Other Linux x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.1.3-linux-amd64.tar.gz"><code>pathprobe-1.1.3-linux-amd64.tar.gz</code></a></li>
-<li>Windows 10/11 x64 (portable zip; requires <a href="https://npcap.com/#download">Npcap</a>) — <a href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.1.3-windows-amd64.zip"><code>PathProbe-1.1.3-windows-amd64.zip</code></a></li>
+<li>Debian/Ubuntu x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.0_amd64.deb"><code>pathprobe_1.2.0_amd64.deb</code></a></li>
+<li>Debian/Ubuntu arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.0_arm64.deb"><code>pathprobe_1.2.0_arm64.deb</code></a></li>
+<li>Other Linux x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.0-linux-amd64.tar.gz"><code>pathprobe-1.2.0-linux-amd64.tar.gz</code></a></li>
+<li>Other Linux arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.0-linux-arm64.tar.gz"><code>pathprobe-1.2.0-linux-arm64.tar.gz</code></a></li>
+<li>Windows 10/11 x64 (portable zip; requires <a href="https://npcap.com/#download">Npcap</a>) — <a href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.0-windows-amd64.zip"><code>PathProbe-1.2.0-windows-amd64.zip</code></a></li>
 </ul>
+<p><strong>What's new in 1.2.0:</strong> <code>dhcp run</code> JSON/NDJSON output, a run log, an MCP server for AI agents, scheduled profile runs with ntfy and webhook alerts, NetBox/Nautobot inventory, and CLI polish. Pro includes live <code>dhcp run --json</code> events, the new <code>--json</code> on target/static/dhcp release/stop/profile, MCP, and scheduled alerts. Free includes the nine JSON commands from 1.1.3, the dhcp run final summary, the run log, and inventory. 1.1.3 seats stay Pro on the same computer; a 1.1.2 key needs a one-time online activation.</p>
 <p>SHA-256 checksums: <a href="https://site-events.getpathprobe.workers.dev/dl/SHA256SUMS"><code>SHA256SUMS</code></a>. All files are also on <a href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">GitHub Releases</a>.</p>
 <h2 id="pricing">Pricing</h2><div class="grid">
 <div class="card"><h3>Free — $0</h3><ul><li>All core commands</li><li>DHCP simulation up to 5 IPs / clients, single 802.1Q tag</li><li>Scan, link speed, internet check, WAN whoami, traceroute, static addressing, packet capture</li></ul><a class="btn" href="#download">Download</a></div>
