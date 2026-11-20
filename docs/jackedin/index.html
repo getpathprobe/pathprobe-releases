@@ -34,7 +34,7 @@
   "description": "An SSH, Telnet and serial terminal with a desktop window, a full command line and a local automation API, for Windows and Linux. Free 3-day trial, then $19 USD one-time.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.1.0",
+  "softwareVersion": "1.1.1",
   "downloadUrl": "https://getpathprobe.com/jackedin/#download",
   "offers": {
     "@type": "Offer",
@@ -92,24 +92,28 @@ $ jackedin license status</pre>
 <p><small>SFTP file transfer is not in this release. Only scan devices you own or are allowed to test.</small></p></section>
 
 <section id="download"><h2>Download</h2>
-<p class="note">JackedIN 1.1.0 is here — run commands on many devices, back up and diff configs, JSON output, console-server login, and serial autosense. Free 3-day trial.</p>
-<h3>What's new in 1.1.0</h3>
+<p class="note">JackedIN 1.1.1 is here — now also for Raspberry Pi OS 64-bit, with older-SSH support and a new host-key dialog. Free 3-day trial.</p>
+<h3>What's new in 1.1.1</h3>
 <ul>
-<li>One line ending per pasted line, the version in the window title, and <code>user@host</code> in quick connect.</li>
-<li><code>jackedin fleet</code> runs commands across a CSV or YAML inventory. <code>backup</code> and <code>diff</code> keep and compare configs.</li>
-<li><code>--output json</code> and <code>--template</code> for structured output.</li>
-<li>Console-server login, <code>--baud-autosense</code>, and <code>--wake</code> for quiet consoles.</li>
-<li>AAA prompt handling with an OTP wait, a <code>--local-user</code> fallback, a retry cap, and a local audit log.</li>
-<li>Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more. Tested on real Juniper hardware.</li>
-<li>One license is still one computer, non-transferable. After activation, the copy works offline. The first activation still needs the activation service.</li>
+<li>Raspberry Pi OS 64-bit (arm64): a <code>.deb</code>, a portable zip, and the portable binary.</li>
+<li>Older SSH devices can connect. A notice names any legacy algorithms in use; <code>--no-legacy-ssh</code> turns them off.</li>
+<li>First-connect host-key dialog with <b>Trust and connect</b>, <b>Connect once</b>, and <b>Cancel</b>. A changed host key is refused with a warning.</li>
+<li>Sign-in takes the password right away, even after the host-key dialog was left open. Cancel on sign-in does not send a password.</li>
+<li>Clearer help for a silent serial port, cleaner session logs (<code>--raw</code> keeps everything), and a correct console password still works after a wrong one.</li>
+<li>F11 full screen returns to the normal window, and large output no longer freezes the terminal.</li>
+<li>Tested on real Cisco IOS and Juniper Junos switches. One license is still one computer, non-transferable.</li>
 </ul>
 <table><tr><th>Platform</th><th>File</th></tr>
-<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.0_Windows_x64.zip"><code>JackedIN_1.1.0_Windows_x64.zip</code></a></td></tr>
-<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.0_Linux_x64.zip"><code>JackedIN_1.1.0_Linux_x64.zip</code></a></td></tr>
-<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.0_amd64.deb"><code>JackedIN_1.1.0_amd64.deb</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Windows_x64.zip"><code>JackedIN_1.1.1_Windows_x64.zip</code></a></td></tr>
+<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Linux_x64.zip"><code>JackedIN_1.1.1_Linux_x64.zip</code></a></td></tr>
+<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_amd64.deb"><code>JackedIN_1.1.1_amd64.deb</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit (arm64)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_arm64.deb"><code>JackedIN_1.1.1_arm64.deb</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Linux_arm64.zip"><code>JackedIN_1.1.1_Linux_arm64.zip</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — binary only</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.1.1_linux_arm64"><code>jackedin_1.1.1_linux_arm64</code></a></td></tr>
 <tr><td>macOS</td><td>Coming soon</td></tr></table>
 <p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. Prefer an installer? The <a href="https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.0.33">1.0.33 installer</a> is still available. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
-<b>Linux:</b> <code>sudo apt install ./JackedIN_1.1.0_amd64.deb</code><br>
+<b>Linux:</b> <code>sudo apt install ./JackedIN_1.1.1_amd64.deb</code><br>
+<b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.1.1_arm64.deb</code><br>
 Every release includes <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a>. All files are also on <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest">GitHub Releases</a>.</p></section>
 
 <section id="pricing"><h2>Pricing</h2>
