@@ -1,54 +1,45 @@
 WEBVTT
 
 1
-00:00:00.000 --> 00:00:04.000
-PathProbe turns one laptop into a whole network test bench.
+00:00:00.250 --> 00:00:05.057
+PathProbe 1.2 is out, and it's built for automation.
 
 2
-00:00:04.100 --> 00:00:07.600
-Simulate DHCP clients, each with its own MAC address
+00:00:06.007 --> 00:00:15.881
+Add --json to a DHCP run, and Pro streams a live event for every client as it's offered and bound.
 
 3
-00:00:07.600 --> 00:00:11.200
-and an optional VLAN tag, and watch them bind to your server.
+00:00:16.807 --> 00:00:27.439
+On the free tier you still get the final JSON summary, and every run is saved to a run log you can turn off with --no-log.
 
 4
-00:00:11.300 --> 00:00:13.700
-Every bound client answers ARP and ping,
+00:00:28.340 --> 00:00:40.409
+The new MCP server lets an AI agent run link checks, scans and DHCP tests for you, and read the results as clean JSON.
 
 5
-00:00:13.800 --> 00:00:16.300
-so the device you're testing sees real hosts.
+00:00:41.340 --> 00:00:52.495
+Save a profile, schedule it every hour, and get an alert on your phone through ntfy, Slack or a webhook when a check fails.
 
 6
-00:00:16.400 --> 00:00:19.600
-Save the whole exchange to a pcapng file for Wireshark.
+00:00:54.107 --> 00:01:02.806
+Pull devices straight from NetBox or Nautobot, and check every one with a single command. That one's free.
 
 7
-00:00:19.800 --> 00:00:24.100
-Check link speed, scan the LAN, trace a path, or set a static IP,
+00:01:03.707 --> 00:01:11.256
+Common errors now end with a fix line, and pathprobe last repeats your previous command.
 
 8
-00:00:24.250 --> 00:00:27.700
-all from one command-line tool on Linux and Windows.
+00:01:12.206 --> 00:01:18.136
+And arm64 builds run on a Raspberry Pi, next to Linux and Windows.
 
 9
-00:00:27.850 --> 00:00:29.200
-Mac is coming soon.
+00:01:18.939 --> 00:01:31.426
+Free covers the core tools and five clients. Pro is $9.99, one time, for 1,000 clients, automation, and alerts.
 
 10
-00:00:29.350 --> 00:00:31.300
-The free tier runs five clients.
+00:01:32.639 --> 00:01:37.106
+Only test networks you own, or are authorized to test.
 
 11
-00:00:31.450 --> 00:00:37.400
-Pro is $9.99, one time, for up to 1.000 clients,
-QinQ, and saved profiles.
-
-12
-00:00:37.600 --> 00:00:40.000
-Only test networks you're allowed to test.
-
-13
-00:00:40.150 --> 00:00:43.680
-Download PathProbe free at getpathprobe.com
+00:01:37.706 --> 00:01:42.173
+Download PathProbe free at getpathprobe.com.
