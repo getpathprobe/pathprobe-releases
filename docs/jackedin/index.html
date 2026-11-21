@@ -92,7 +92,7 @@ $ jackedin license status</pre>
 </div>
 <p><small>SFTP file transfer is included. Only scan devices you own or are allowed to test.</small></p></section>
 
-<section id="automation"><h2>Automation: why and how</h2>
+<section id="automation"><style>#automation .card code{overflow-wrap:anywhere;word-break:break-word}</style><h2>Automation: why and how</h2>
 <p>JackedIN runs the same engine from the window, the command line, Python, Nornir and Ansible. Every automation feature below is built so you can see what will happen before it happens, and prove it worked after. The Python packages are free; like the terminal, they need the 3-day trial or a license. Tested on real Juniper hardware.</p>
 <div class="grid">
 <div class="card"><h3>Dry-run</h3><b>Why:</b> see the exact commands before anything touches a device. Nothing connects and no password is sent.<br><b>How:</b> <code>jackedin exec --host 192.0.2.10 --dry-run --cmd 'show version'</code>, <code>fleet --dry-run</code>, or <code>device.dry_run([...])</code> in Python.</div>
