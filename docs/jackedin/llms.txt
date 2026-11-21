@@ -21,14 +21,28 @@ Support: service@getpathprobe.com
 - Network tools: port scan, session-limit test, other-sessions indicator after SSH login, ping and traceroute
 - Optional Wireshark/dumpcap capture on connect, including loopback filtered to the session port
 
-SFTP file transfer is not in the current release. Only scan or connect to devices you own or are allowed to test.
+- SFTP file transfer, session import (PuTTY, SecureCRT, MobaXterm, SSH config), fleet, backup and diff, NetBox and Nautobot sync, password-manager logins, an MCP server
+
+## Automation
+
+- Dry-run: print the exact commands without connecting (`jackedin exec --dry-run`, `fleet --dry-run`)
+- Commit confirmed: `jackedin change junos --minutes 5` prints commit confirmed, confirm and rollback
+- Expect rules: YAML `command` / `expect_match` / `expect_no_match` checks with `--expect-file`
+- Enable mode: `--enable-password-env VAR`; the secret is never on the command line or logged
+- Python client `jackedin` and Nornir plugin `nornir-jackedin` (free; the app's trial or license is needed). Install: `pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/jackedin-1.2.0-py3-none-any.whl`
+- pytest helpers: `assert_matches`, `jackedin_expect` fixture
+- Ansible collection `jackedin.terminal` in the portable zip; CI and unattended recipes
+- Python guide: https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md
+
+Only scan or connect to devices you own or are allowed to test.
 
 ## Platforms
 
 - Windows 10 and 11 x64: installer or portable zip
 - Ubuntu and Debian x86_64: .deb package
 - Linux x86_64: portable zip
-- macOS: coming soon
+- Raspberry Pi OS 64-bit (arm64): .deb, portable tarball, or binary
+- macOS: no build yet
 
 Every release includes SHA-256 checksums (SHA256SUMS) and a user's guide.
 
