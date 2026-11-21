@@ -29,7 +29,7 @@ Support: service@getpathprobe.com
 - Commit confirmed: `jackedin change junos --minutes 5` prints commit confirmed, confirm and rollback
 - Expect rules: YAML `command` / `expect_match` / `expect_no_match` checks with `--expect-file`
 - Enable mode: `--enable-password-env VAR`; the secret is never on the command line or logged
-- Python client `jackedin` and Nornir plugin `nornir-jackedin` (free; the app's trial or license is needed). Install: `pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/jackedin-1.2.0-py3-none-any.whl`
+- Python client `jackedin` and Nornir plugin `nornir-jackedin` (free; the app's trial or license is needed). Install: `pip install jackedin` (the same wheels are also on the v1.2.0 release)
 - pytest helpers: `assert_matches`, `jackedin_expect` fixture
 - Ansible collection `jackedin.terminal` in the portable zip; CI and unattended recipes
 - Python guide: https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md

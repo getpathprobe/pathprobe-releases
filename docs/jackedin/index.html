@@ -99,14 +99,17 @@ $ jackedin license status</pre>
 <div class="card"><h3>Commit confirmed</h3><b>Why:</b> a change that cuts off your access rolls itself back instead of needing a truck roll.<br><b>How:</b> <code>jackedin change junos --minutes 5</code> prints the commit-confirmed, confirm and rollback steps. In Python, <code>send_config_set([...], commit=True)</code> uses <code>configure exclusive</code> and <code>commit confirmed</code> on Junos. Without <code>commit=True</code> nothing is committed. Cisco gets <code>configure replace</code> guidance.</div>
 <div class="card"><h3>Expect rules</h3><b>Why:</b> a run should fail when the output is wrong, not just when the connection drops.<br><b>How:</b> a YAML file of <code>command</code>, <code>expect_match</code> and <code>expect_no_match</code>, passed with <code>--expect-file checks.yml</code> or <code>expect=</code> in Python.</div>
 <div class="card"><h3>Enable mode</h3><b>Why:</b> Cisco consoles often land at <code>router&gt;</code>, and <code>show startup-config</code>, <code>write</code> or <code>copy</code> need privilege.<br><b>How:</b> on the command line, add <code>--cmd enable</code> first and pass the secret with <code>--enable-password-env VAR</code>. In Python, pass <code>enable=</code> and the library sends <code>enable</code> once at the start for you. The secret never goes on the command line or into a log.</div>
-<div class="card"><h3>Python client</h3><b>Why:</b> network automation already speaks Python. Keep JackedIN's prompt handling, paging and login safety instead of writing your own.<br><b>How:</b> <code>pip install</code> the wheel below, then <code>Jackedin("192.0.2.10").run(["show version"])</code>. <code>JackedinDevice</code> has Netmiko-style <code>send_command</code> and <code>send_config_set</code>.</div>
+<div class="card"><h3>Python client</h3><b>Why:</b> network automation already speaks Python. Keep JackedIN's prompt handling, paging and login safety instead of writing your own.<br><b>How:</b> <code>pip install jackedin</code>, then <code>Jackedin("192.0.2.10").run(["show version"])</code>. <code>JackedinDevice</code> has Netmiko-style <code>send_command</code> and <code>send_config_set</code>.</div>
 <div class="card"><h3>Nornir plugin</h3><b>Why:</b> keep your Nornir inventory and run JackedIN on every host.<br><b>How:</b> install <code>nornir-jackedin</code>, then <code>nr.run(task=jackedin_send_command, command="show version")</code>. Tasks for config and the commit plan are included.</div>
 <div class="card"><h3>pytest helpers</h3><b>Why:</b> test a captured config in CI without dialing a device.<br><b>How:</b> <code>assert_matches(captured, rules)</code> or the <code>jackedin_expect</code> fixture (needs <code>pip install pytest</code>).</div>
 <div class="card"><h3>Ansible collection</h3><b>Why:</b> keep your playbooks and inventories.<br><b>How:</b> the <code>jackedin.terminal</code> collection is in the <code>ansible/</code> folder of the portable zip, with <code>jackedin_exec</code> and <code>jackedin_fleet</code>. Put the password reference in <code>JACKEDIN_CREDENTIAL</code>, not in the playbook.</div>
 <div class="card"><h3>CI and unattended runs</h3><b>Why:</b> dry-run every change in a pipeline before it runs for real.<br><b>How:</b> <code>--accept-eula</code>, a pre-seeded <code>JACKEDIN_KNOWN_HOSTS</code>, and <code>JACKEDIN_CRED_&lt;NAME&gt;</code> or a password manager (1Password, Bitwarden, Vault, OS keychain). A changed host key is always refused and a rejected password is never resent.</div>
 </div>
-<pre>$ pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/jackedin-1.2.0-py3-none-any.whl
-$ pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/nornir_jackedin-1.2.0-py3-none-any.whl   # optional, for Nornir
+<pre>$ pip install jackedin
+$ pip install nornir-jackedin   # optional, for Nornir
+# or the same wheels from the 1.2.0 release:
+$ pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/jackedin-1.2.0-py3-none-any.whl
+$ pip install https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.0/nornir_jackedin-1.2.0-py3-none-any.whl
 
 from jackedin import Jackedin
 device = Jackedin("192.0.2.10", username="netops")   # password from JACKEDIN_PASSWORD
@@ -143,7 +146,7 @@ report = device.run(["show version"], expect=[{"command": "show version", "expec
 <p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. An installer is also available: <code>JackedIN_1.2.0_x64-setup.exe</code>. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
 <b>Linux:</b> <code>sudo apt install ./JackedIN_1.2.0_amd64.deb</code><br>
 <b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.2.0_arm64.deb</code><br>
-<b>Python:</b> <code>pip install</code> the wheel URL shown under <a href="#automation">Automation</a>. Not on PyPI yet.<br>
+<b>Python:</b> <code>pip install jackedin</code> (or the wheel URL under <a href="#automation">Automation</a>).<br>
 Every release includes <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a>. All files are also on <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest">GitHub Releases</a>.</p></section>
 
 <section id="pricing"><h2>Pricing</h2>
