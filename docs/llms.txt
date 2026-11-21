@@ -31,10 +31,8 @@ Every release includes SHA-256 checksums (SHA256SUMS).
 
 ## Pricing
 
-- Free: $0. All core commands (DHCP, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target). DHCP simulation up to 5 clients, none or a single 802.1Q tag, packet capture (pcapng), core RFC/IEEE standards checks, JSON output on interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status, and the examples command.
-- Pro: $9.99 USD, one-time purchase. Everything in Free, plus up to 1,000 simulated DHCP clients, QinQ (stacked VLAN tags), saved profiles with export, and extra standards checks. 1 license = 1 computer, non-transferable. A license key is emailed after purchase and activated online once.
-- Coming in 1.2 (Pro): JSON on dhcp run, target, static, dhcp release/stop, and profiles; automatic run log; MCP server (use PathProbe from an AI agent); scheduled profile runs with webhook alerts.
-- Coming in 1.2 (Free and Pro): tab completion and typo suggestions, copy a run as a command, and clearer error messages.
+- Free: $0. All core commands (DHCP, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target). DHCP simulation up to 5 clients, none or a single 802.1Q tag, packet capture (pcapng), core RFC/IEEE standards checks, JSON output on interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status, the dhcp run final JSON summary, the automatic run log, NetBox/Nautobot inventory, tab completion and typo suggestions, copy a run as a command, clearer error messages, and the examples command.
+- Pro: $9.99 USD, one-time purchase. Everything in Free, plus up to 1,000 simulated DHCP clients, QinQ (stacked VLAN tags), saved profiles with export, extra standards checks, live dhcp run --json events, --json on target, static, dhcp release/stop, and profiles, MCP server (use PathProbe from an AI agent), and scheduled profile runs with webhook alerts. 1 license = 1 computer, non-transferable. A license key is emailed after purchase and activated online once.
 
 Checkout is handled by Paddle, the merchant of record. See https://getpathprobe.com/#pricing for the full comparison.
 

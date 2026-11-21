@@ -45,7 +45,7 @@
       "name": "Pro",
       "price": "9.99",
       "priceCurrency": "USD",
-      "description": "One-time purchase. 1 license = 1 computer, non-transferable. Up to 1000 simulated DHCP clients, QinQ, saved profiles with export, and extra standards checks. Coming in 1.2: JSON on dhcp run, target, static, dhcp release/stop, and profiles; automatic run log; MCP server (use PathProbe from an AI agent); scheduled profile runs with webhook alerts. Also coming in 1.2 for Free and Pro: tab completion and typo suggestions, copy a run as a command, and clearer error messages.",
+      "description": "One-time purchase. 1 license = 1 computer, non-transferable. Up to 1000 simulated DHCP clients, QinQ, saved profiles with export, and extra standards checks. Also includes live dhcp run --json events; --json on target, static, dhcp release/stop, and profiles; MCP server (use PathProbe from an AI agent); and scheduled profile runs with webhook alerts. Free and Pro include the dhcp run final JSON summary, the automatic run log, NetBox/Nautobot inventory, tab completion and typo suggestions, copy a run as a command, and clearer error messages.",
       "url": "https://getpathprobe.com/#pricing"
     }
   ]
@@ -89,7 +89,7 @@ $ pathprobe traceroute example.com</pre>
 <a class="btn" id="buy-pro" href="#pricing">Buy Pro — $9.99</a></div></div>
 <div class="compare-wrap">
 <h3 id="compare">Free vs Pro</h3>
-<p class="compare-legend">A <span class="coming">Coming in 1.2</span> label means the feature is planned for PathProbe 1.2 and is not in the current 1.1.3 download.</p>
+<p class="compare-legend">This table describes the current PathProbe 1.2.1 download.</p>
 <table class="compare">
   <caption class="visually-hidden">PathProbe Free and Pro feature comparison</caption>
   <thead>
@@ -100,7 +100,7 @@ $ pathprobe traceroute example.com</pre>
     </tr>
   </thead>
   <tbody>
-    <tr class="group"><th scope="colgroup" colspan="3">Available now (v1.1.3)</th></tr>
+    <tr class="group"><th scope="colgroup" colspan="3">Available now (v1.2.1)</th></tr>
     <tr>
       <th scope="row">Price</th>
       <td class="col-free" data-label="Free">$0</td>
@@ -132,7 +132,7 @@ $ pathprobe traceroute example.com</pre>
       <td class="col-pro" data-label="Pro">Core checks, plus extra Pro checks</td>
     </tr>
     <tr>
-      <th scope="row">JSON output for scripts<span class="feature-note">On interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status</span></th>
+      <th scope="row">JSON output for scripts<span class="feature-note">On interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status. Free also includes the final JSON summary from dhcp run.</span></th>
       <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
       <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
@@ -156,41 +156,51 @@ $ pathprobe traceroute example.com</pre>
       <td class="col-free" data-label="Free">New Free versions are always downloadable</td>
       <td class="col-pro" data-label="Pro">Includes updates for all 1.x releases. A future 2.0 may need a new license.</td>
     </tr>
-    <tr class="group"><th scope="colgroup" colspan="3">Coming in 1.2</th></tr>
+    <tr class="group"><th scope="colgroup" colspan="3">New in 1.2</th></tr>
     <tr>
-      <th scope="row">JSON on dhcp run, target, static, dhcp release/stop, and profiles</th>
+      <th scope="row">Live dhcp run --json events<span class="feature-note">Streaming client started, offered, bound, or failed events. The final dhcp run JSON summary is included on Free.</span></th>
       <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
-      <th scope="row">Automatic run log<span class="feature-note">Logs each run (command, time, exit code, and output). License keys are redacted. Turn off with --no-log.</span></th>
+      <th scope="row">--json on target, static, dhcp release/stop, and profiles</th>
       <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">Automatic run log<span class="feature-note">Logs each run (command, time, exit code, and output). License keys, tokens, passwords, and webhook or ntfy URLs are redacted. Free includes pathprobe log share for a scrubbed copy. Turn off with --no-log.</span></th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
       <th scope="row">MCP server<span class="feature-note">Use PathProbe from an AI agent</span></th>
       <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
-      <th scope="row">Scheduled profile runs with webhook alerts</th>
+      <th scope="row">Scheduled profile runs with webhook alerts<span class="feature-note">ntfy and webhook alerts. Bare ntfy topics are accepted.</span></th>
       <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">NetBox and Nautobot inventory<span class="feature-note">pathprobe target --from netbox or --from nautobot. Inventory JSON is included on Free.</span></th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
       <th scope="row">Tab completion and typo suggestions</th>
-      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
-      <th scope="row">Copy a run as a command</th>
-      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <th scope="row">Copy a run as a command<span class="feature-note">pathprobe last and profile show --as-command. --copy tries the clipboard.</span></th>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
     <tr>
       <th scope="row">Clearer error messages</th>
-      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
-      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes <span class="coming">Coming in 1.2</span></td>
+      <td class="col-free yes" data-label="Free"><span aria-hidden="true">✓</span> Yes</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
     </tr>
   </tbody>
 </table>
