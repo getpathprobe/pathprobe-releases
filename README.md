@@ -57,6 +57,7 @@ Buy Pro at https://getpathprobe.com/#pricing (Paddle checkout).
 
 ## Documentation
 `README` and `EXAMPLES` are included in each download and installed with the packages.
+Watch the tutorials on YouTube: https://www.youtube.com/@BeenThere.BuiltThat
 
 ## Responsible use
 Only use PathProbe on networks you own or are authorized to test.
