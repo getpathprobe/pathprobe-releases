@@ -34,7 +34,7 @@
   "description": "An SSH, Telnet and serial terminal with a desktop window, a full command line and a local automation API, for Windows and Linux. Free 3-day trial, then $19 USD one-time.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.1.1",
+  "softwareVersion": "1.2.0",
   "downloadUrl": "https://getpathprobe.com/jackedin/#download",
   "offers": {
     "@type": "Offer",
@@ -59,7 +59,7 @@
 <!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
 <a class="btn ghost" id="buy-top" href="#pricing">Buy — $19 launch price</a><br>
 <small>Every feature unlocked for 3 days. No card, no sign-up.</small><br>
-<span class="mac">🍎 <b>Mac version coming soon.</b> Windows 10/11, Ubuntu/Debian and Raspberry Pi OS (64-bit) available now.</span></div></section>
+<span class="mac">🍎 <b>No macOS build yet.</b> Windows 10/11, Ubuntu/Debian and Raspberry Pi OS (64-bit) available now.</span></div></section>
 
 <section id="video"><h2>See JackedIN™ in 50 seconds</h2>
 <video controls preload="none" playsinline poster="../media/jackedin-promo-poster.jpg" width="1280" height="720" style="width:100%;height:auto;border-radius:10px;border:2px solid #00ff00;background:#000;box-shadow:0 0 24px rgba(0,255,0,.25)"><source src="/media/jackedin-promo.mp4" type="video/mp4"><track kind="captions" src="/media/jackedin-promo.en.vtt" srclang="en" label="English">Your browser can't play this video. <a href="/media/jackedin-promo.mp4">Download the MP4</a>.</video>
@@ -89,31 +89,33 @@ $ jackedin license status</pre>
 <div class="card"><h3>Wireshark capture</h3>Start a dumpcap capture on connect, including loopback filtered to the session port.</div>
 <div class="card"><h3>Local API</h3>Automate open, send, scan, ping, traceroute and events from your own scripts on the same machine.</div>
 </div>
-<p><small>SFTP file transfer is not in this release. Only scan devices you own or are allowed to test.</small></p></section>
+<p><small>SFTP file transfer is included. Only scan devices you own or are allowed to test.</small></p></section>
 
 <section id="download"><h2>Download</h2>
-<p class="note">JackedIN 1.1.1 is here, now on Raspberry Pi (64-bit) too. Smoother Windows sign-in and fixes across the board. Free 3-day trial.</p>
-<h3>What's new in 1.1.1</h3>
+<p class="note">JackedIN 1.2.0 is here. Import sessions, fleet, backup of a running-config, SFTP, and more — still a free 3-day trial. No macOS build yet.</p>
+<h3>What's new in 1.2.0</h3>
 <ul>
-<li><b>New: Raspberry Pi OS 64-bit (arm64).</b> <a href="#dl-pi">Download for Raspberry Pi</a>: a <code>.deb</code>, a portable zip, or the portable binary on its own.</li>
-<li>Older SSH devices can connect. A notice names any legacy algorithms in use; <code>--no-legacy-ssh</code> turns them off.</li>
-<li>First-connect host-key dialog with <b>Trust and connect</b>, <b>Connect once</b>, and <b>Cancel</b>. A changed host key is refused with a warning.</li>
-<li>Sign-in takes the password right away, even after the host-key dialog was left open. Cancel on sign-in does not send a password.</li>
-<li>Clearer help for a silent serial port, cleaner session logs (<code>--raw</code> keeps everything), and a correct console password still works after a wrong one.</li>
-<li>F11 full screen returns to the normal window, and large output no longer freezes the terminal.</li>
-<li>Tested on real Cisco IOS and Juniper Junos switches. One license is still one computer, non-transferable.</li>
+<li>Import saved sessions from PuTTY, SecureCRT, MobaXterm, and SSH config.</li>
+<li>Dry-run and commit-confirm with expect rules, plus <code>fleet</code> to run the same command across a device list.</li>
+<li>An Ansible collection, a CI guide, and a credential store.</li>
+<li><code>backup</code> pulls the running-config from Cisco IOS and Juniper Junos, with auto-detect, and <code>diff</code> compares backups.</li>
+<li>SFTP, NetBox and Nautobot sync, and password-manager logins, included at no extra charge.</li>
+<li>Shell completions, <code>update-check</code>, an MCP server for AI assistants, and a PathProbe hand-off that picks the interface with the default route.</li>
+<li>Windows now has a setup installer as well as the portable zip. Raspberry Pi OS 64-bit (arm64) builds remain: a <code>.deb</code>, a portable tarball, or the portable binary on its own. <a href="#dl-pi">Download for Raspberry Pi</a>.</li>
+<li>Tested on real Cisco IOS and Juniper Junos switches. One license is still one computer, non-transferable. The trial is 72 hours.</li>
 </ul>
 <table><tr><th>Platform</th><th>File</th></tr>
-<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Windows_x64.zip"><code>JackedIN_1.1.1_Windows_x64.zip</code></a></td></tr>
-<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Linux_x64.zip"><code>JackedIN_1.1.1_Linux_x64.zip</code></a></td></tr>
-<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_amd64.deb"><code>JackedIN_1.1.1_amd64.deb</code></a></td></tr>
-<tr id="dl-pi"><td>Raspberry Pi OS 64-bit (arm64)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_arm64.deb"><code>JackedIN_1.1.1_arm64.deb</code></a></td></tr>
-<tr><td>Raspberry Pi OS 64-bit — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.1.1_Linux_arm64.zip"><code>JackedIN_1.1.1_Linux_arm64.zip</code></a></td></tr>
-<tr><td>Raspberry Pi OS 64-bit — binary only</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.1.1_linux_arm64"><code>jackedin_1.1.1_linux_arm64</code></a></td></tr>
-<tr><td>macOS</td><td>Coming soon</td></tr></table>
-<p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. Prefer an installer? The <a href="https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.0.33">1.0.33 installer</a> is still available. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
-<b>Linux:</b> <code>sudo apt install ./JackedIN_1.1.1_amd64.deb</code><br>
-<b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.1.1_arm64.deb</code><br>
+<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.0_windows_x64.zip"><code>jackedin_1.2.0_windows_x64.zip</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.0_x64-setup.exe"><code>JackedIN_1.2.0_x64-setup.exe</code></a></td></tr>
+<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.0_linux_x64.zip"><code>jackedin_1.2.0_linux_x64.zip</code></a></td></tr>
+<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.0_amd64.deb"><code>JackedIN_1.2.0_amd64.deb</code></a></td></tr>
+<tr id="dl-pi"><td>Raspberry Pi OS 64-bit (arm64)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.0_arm64.deb"><code>JackedIN_1.2.0_arm64.deb</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.0_linux_arm64.tar.gz"><code>jackedin_1.2.0_linux_arm64.tar.gz</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — binary only</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.0_linux_arm64"><code>jackedin_1.2.0_linux_arm64</code></a></td></tr>
+<tr><td>macOS</td><td>No macOS build yet</td></tr></table>
+<p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. An installer is also available: <code>JackedIN_1.2.0_x64-setup.exe</code>. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
+<b>Linux:</b> <code>sudo apt install ./JackedIN_1.2.0_amd64.deb</code><br>
+<b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.2.0_arm64.deb</code><br>
 Every release includes <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a>. All files are also on <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest">GitHub Releases</a>.</p></section>
 
 <section id="pricing"><h2>Pricing</h2>
