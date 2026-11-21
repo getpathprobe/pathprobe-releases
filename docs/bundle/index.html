@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab Bundle — PathProbe Pro + JackedIN, $24.99</title>
+<meta name="description" content="The Lab Bundle: PathProbe Pro and JackedIN, $24.99 one-time. Two license keys, one computer each. Linux, Windows, and Raspberry Pi.">
+<link rel="canonical" href="https://getpathprobe.com/bundle/">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header><strong><a href="/" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="/#pricing">Pricing</a><a href="/bundle/">Lab Bundle</a><a href="/jackedin/">JackedIN</a><a href="mailto:service@getpathprobe.com">Support</a></header>
+<section id="bundle">
+<h1>The Lab Bundle: PathProbe Pro + JackedIN, $24.99</h1>
+<p>Two tools for the bench, one checkout.</p>
+<p><strong>PathProbe Pro</strong> tests what the network actually hands out: DHCP clients on tagged VLANs and QinQ, offers and options, pcapng captures for Wireshark, scheduled checks with alerts, and an MCP server for AI agents.</p>
+<p><strong>JackedIN</strong> gets you onto the gear: SSH, Telnet and serial console in one terminal. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more, plus a CLI and a token-protected localhost API for scripting.</p>
+<ul>
+<li>$24.99 one-time (separately $28.99 at JackedIN's launch price, $38.99 at regular price)</li>
+<li>PathProbe Pro: all 1.x updates. JackedIN: 1 year of updates, and the version you have keeps working.</li>
+<li>Linux, Windows and Raspberry Pi (arm64)</li>
+<li>Two license keys emailed within about 15 minutes. <strong>Each key activates on one computer</strong> (non-transferable). Use them on the same machine or on two different ones.</li>
+<li>Try first: PathProbe has a free tier and JackedIN has a 72-hour trial.</li>
+</ul>
+<p><a class="btn buy-bundle" id="buy-bundle" href="https://getpathprobe.com/?price_id=pri_01m7zv0x1kseffzmw4cn261bcn">Buy the Lab Bundle, $24.99</a></p>
+<p><em>Use only on networks you own or are authorized to test.</em></p>
+</section>
+<section id="edu">
+<h2>Students, teachers and CTF teams: 40% off</h2>
+<p>Learning networking or competing in CTFs? PathProbe Pro, JackedIN and the Lab Bundle are 40% off for students, class labs and registered CTF teams.</p>
+<p>Email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>:</p>
+<ul>
+<li><strong>Students:</strong> send from your school email address (or attach a student ID with the photo and ID number covered).</li>
+<li><strong>Teachers:</strong> your school email and the course name. We'll send one code for the class.</li>
+<li><strong>CTF teams:</strong> a link to your team's registration on a current event and your team size.</li>
+</ul>
+<p>We usually reply within one business day with a single-use code. Each license still activates on one computer.</p>
+<p>Prefer free? The PathProbe Free tier never expires.</p>
+</section>
+<p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
+<footer><span>© 2026 PathProbe</span><a href="/privacy.html">Privacy</a><a href="/refund.html">Refunds</a><a href="/terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer>
+<script>
+var SALES_ENABLED = true;
+if (SALES_ENABLED) {
+  var s = document.createElement("script");
+  s.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+  s.onload = function () {
+    var PRICES = {
+      pathprobe: "pri_01m73ekxcrj5517ar1aqrw71rg",
+      jackedin: "pri_01m73ekya7brknq24zg2jsntd0",
+      bundle: "pri_01m7zv0x1kseffzmw4cn261bcn"
+    };
+    var ALLOWED = {};
+    ALLOWED[PRICES.pathprobe] = true;
+    ALLOWED[PRICES.jackedin] = true;
+    ALLOWED[PRICES.bundle] = true;
+    Paddle.Initialize({ token: "live_9b8a5e5f51fc332803a10dc562e" });
+    function openCheckout(priceId, ev) {
+      if (ev) ev.preventDefault();
+      if (!ALLOWED[priceId]) return;
+      var code = new URLSearchParams(window.location.search).get("code");
+      var opts = {
+        items: [{ priceId: priceId, quantity: 1 }],
+        settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks-bundle.html" }
+      };
+      if (code) { opts.discountCode = code; }
+      Paddle.Checkout.open(opts);
+    }
+    document.querySelectorAll("#buy-bundle, a.buy-bundle").forEach(function (el) {
+      el.addEventListener("click", function (e) { openCheckout(PRICES.bundle, e); });
+    });
+    var q = new URLSearchParams(window.location.search);
+    if (!q.get("_ptxn")) {
+      var pid = q.get("price_id") || q.get("priceId");
+      if (pid && ALLOWED[pid]) openCheckout(pid);
+    }
+  };
+  document.head.appendChild(s);
+}
+</script>
+</body></html>
