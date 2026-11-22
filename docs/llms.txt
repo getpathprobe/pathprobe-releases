@@ -53,3 +53,5 @@ One license equals one computer and is non-transferable. Pro is activated online
 ## Related product
 
 JackedIN is a separate product: an SSH, Telnet and serial terminal with a desktop window, a command line and a local API. Free 3-day trial, then $19 USD one-time. https://getjackedin.com/ (product page: https://getpathprobe.com/jackedin/)
+
+Tech Radio Pass is a $9 one-time study kit for the US amateur radio Technician exam (2026-2030 question pool): all 409 questions explained, practice exams, an offline quiz app and an Anki deck. https://getpathprobe.com/techradiopass/
