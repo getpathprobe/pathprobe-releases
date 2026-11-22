@@ -11,72 +11,102 @@
 <meta property="og:image" content="https://getpathprobe.com/techradiopass/media/TechRadioPass-cover-1280x720.png">
 <meta property="og:url" content="https://getpathprobe.com/techradiopass/">
 <link rel="stylesheet" href="/style.css">
-<style>
-.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
-.shots figure{margin:0}.shots img{width:100%;height:auto;border:1px solid #d0d7de;border-radius:8px}
-.shots figcaption{font-size:.85em;color:#444}
-.inside td,.inside th{border-bottom:1px solid #d0d7de;padding:8px 10px;text-align:left;vertical-align:top}
-.inside{border-collapse:collapse;width:100%}
-</style>
+<link rel="stylesheet" href="/techradiopass/trp.css">
+<link rel="preload" as="image" href="media/hero-radio.webp" type="image/webp">
 </head>
-<body>
-<header><strong><a href="/" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="/blog/">Blog</a><a href="/#pricing">Pricing</a><a href="/bundle/">Lab Bundle</a><a href="/jackedin/">JackedIN</a><a href="/techradiopass/">Tech Radio Pass</a><a href="mailto:service@getpathprobe.com">Support</a></header>
+<body class="trp">
+<div class="bar"><header class="site"><strong><a href="/" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="/blog/">Blog</a><a href="/#pricing">Pricing</a><a href="/bundle/">Lab Bundle</a><a href="/jackedin/">JackedIN</a><a href="/techradiopass/">Tech Radio Pass</a><a href="mailto:service@getpathprobe.com">Support</a></header></div>
 
-<section id="top">
-<h1>Tech Radio Pass: Technician exam prep kit, $9</h1>
-<p>A complete study kit for the US amateur radio <strong>Technician (FCC Element 2)</strong> exam, built on the current <strong>NCVEC 2026-2030 question pool</strong> (409 questions, valid for exams July 1, 2026 through June 30, 2030, including the February 19, 2026 errata).</p>
-<p><a class="btn buy-trp" id="buy-trp" href="/techradiopass/?price_id=pri_01m81zdb0tsf7v20w28tk14erc">Buy Tech Radio Pass, $9</a></p>
-<p>One-time purchase. Your download link and quiz-app license key arrive by email, usually within about 15 minutes. No account, no subscription.</p>
-</section>
-
-<section id="exam">
-<h2>How the real exam works</h2>
-<p>The Technician exam is 35 multiple-choice questions, one drawn from each of the 35 question groups in the pool. You need 26 correct (about 74%) to pass. Every practice exam in this kit is built the same way, one question per group, so you practice the test as it is actually given.</p>
-</section>
-
-<section id="inside">
-<h2>What's inside</h2>
-<table class="inside">
-<tr><th>Study Guide (PDF, 81 pages)</th><td>All 409 pool questions by subelement (T1 to T0) and group, the correct answer highlighted, and a short plain-English explanation for every question. Includes the three pool schematic figures.</td></tr>
-<tr><th>Cheat Sheets (PDF, 5 pages)</th><td>Technician band privileges (checked against FCC Part 97), Ohm's law and power formulas, wavelength, decibels, metric prefixes, Q-codes, phonetic alphabet, key numbers and schematic symbols.</td></tr>
-<tr><th>12 Practice Exams (PDF)</th><td>35 questions each, one per group like the real test, with answer sheets, answer keys and explanations.</td></tr>
-<tr><th>45 Quick Quizzes (PDF)</th><td>10 questions each, covering every subelement, with answer keys and explanations.</td></tr>
-<tr><th>Offline Quiz App (one HTML file)</th><td>Runs in any modern browser on a phone, tablet or computer. Activate it once with your license key (needs internet once; 1 key = 1 device), then it works offline with no account. A free 10-question sample works without a key. Unlimited random 35-question practice exams scored PASS/FAIL at 26/35, subelement and group drills, a Flashcard Quiz where you answer A/B/C/D and get a PASS/FAIL percentage, review of missed questions, and a progress page. Progress stays on your device; the only network use is the one-time activation (key and a random device id, nothing else).</td></tr>
-<tr><th>Anki Deck (.apkg)</th><td>All 409 questions as flashcards, tagged by subelement and group, figures included.</td></tr>
-<tr><th>README</th><td>Setup steps for each part and a suggested 2 to 4 week study plan.</td></tr>
-</table>
-<p>Download: one zip file, about 1.1 MB (4 PDFs, 1 HTML app, 1 Anki deck, 1 README). Your link works 3 times, so save the zip. Files are stamped with your order number.</p>
-</section>
-
-<section id="screens">
-<h2>The offline quiz app</h2>
-<div class="shots">
-<figure><img src="media/quiz-home-mobile.png" alt="Quiz app home screen with practice exam, drills, flashcard quiz and review options" loading="lazy"><figcaption>Home screen</figcaption></figure>
-<figure><img src="media/quiz-feedback-mobile.png" alt="A Flashcard Quiz question answered with instant feedback and an explanation" loading="lazy"><figcaption>Instant feedback with an explanation</figcaption></figure>
-<figure><img src="media/quiz-result-mobile.png" alt="Practice exam result screen showing a score out of 35 and PASS or FAIL" loading="lazy"><figcaption>Scored against the 26/35 pass mark</figcaption></figure>
+<section class="hero" id="top">
+<div class="wrap">
+<div>
+<p class="eyebrow">Ham radio · FCC Element 2</p>
+<h1>Tech Radio Pass</h1>
+<p class="sub">Everything you need to pass the US Technician exam.</p>
+<span class="pill">2026–2030 pool · all 409 questions</span>
+<ul class="ticks">
+<li>Plain-English explanation for every question</li>
+<li>12 practice exams + 45 quick quizzes</li>
+<li>Offline quiz app, scored like the real test</li>
+<li>Cheat sheets + Anki flashcard deck</li>
+</ul>
+<div class="buy">
+<div class="price">$9<small>one-time · no subscription</small></div>
+<a class="btn buy-trp" id="buy-trp" href="/techradiopass/?price_id=pri_01m81zdb0tsf7v20w28tk14erc">Buy Tech Radio Pass, $9</a>
+</div>
+<p class="fine">Key and download link by email, usually within 15 minutes. All sales final, see the <a href="/refund.html">Refund Policy</a>.</p>
+</div>
+<div class="hero-art"><img src="media/hero-radio.webp" width="800" height="600" alt="Illustration of a handheld ham radio sending radio waves toward an antenna tower" fetchpriority="high"></div>
 </div>
 </section>
 
-<section id="notes">
+<div class="stats" id="exam"><div class="wrap">
+<div class="stat"><b>35</b><span>questions on the exam</span></div>
+<div class="stat"><b>26</b><span>correct to pass (74%)</span></div>
+<div class="stat"><b>409</b><span>pool questions covered</span></div>
+<div class="stat"><b>12</b><span>full practice exams, built like the real test</span></div>
+</div></div>
+
+<section id="inside"><div class="wrap">
+<p class="eyebrow">What's inside</p>
+<h2>One kit, seven study tools</h2>
+<div class="cards">
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5"/><path d="M9 8h6M9 12h6"/></svg></div><h3>Study Guide</h3><p>81-page PDF. All 409 questions with the answer and a short explanation. Pool figures included.</p></div>
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3>Cheat Sheets</h3><p>5 pages: band privileges, Ohm's law, decibels, Q-codes, phonetics, schematic symbols.</p></div>
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12l2 2 4-4"/></svg></div><h3>12 Practice Exams</h3><p>35 questions each, one per group, with answer keys and explanations.</p></div>
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg></div><h3>45 Quick Quizzes</h3><p>10 questions each, covering every subelement.</p></div>
+<div class="kit star"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/><path d="M10 9l1.5 1.5L14 8"/></svg></div><h3>Offline Quiz App</h3><p>Unlimited random exams scored PASS/FAIL, drills, flashcard quiz, missed-question review. Works offline on phone or computer.</p></div>
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="13" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v11"/></svg></div><h3>Anki Deck</h3><p>All 409 questions as tagged flashcards, figures included.</p></div>
+<div class="kit"><div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M12 13v5M10 16l2 2 2-2"/></svg></div><h3>README + study plan</h3><p>Setup steps and a 2 to 4 week plan. One 1.1 MB zip.</p></div>
+</div>
+</div></section>
+
+<section class="dark" id="screens"><div class="wrap">
+<p class="eyebrow">The offline quiz app</p>
+<h2>Practice the real test, anywhere</h2>
+<p><span class="free">Try 10 sample questions free, no key needed</span></p>
+<div class="shots">
+<figure><img src="media/quiz-home.webp" width="520" height="1040" alt="Quiz app home screen with practice exam, drills, flashcard quiz and review options" loading="lazy"><figcaption>Pick a mode</figcaption></figure>
+<figure><img src="media/quiz-feedback.webp" width="520" height="1040" alt="A Flashcard Quiz question answered with instant feedback and an explanation" loading="lazy"><figcaption>Instant feedback + why</figcaption></figure>
+<figure><img src="media/quiz-result.webp" width="520" height="1040" alt="Practice exam result screen showing a score out of 35 and PASS or FAIL" loading="lazy"><figcaption>Scored at 26/35</figcaption></figure>
+</div>
+</div></section>
+
+<section id="how"><div class="wrap">
+<p class="eyebrow">How it works</p>
+<h2>Three steps to your license</h2>
+<div class="steps">
+<div class="step"><h3>Buy</h3><p>$9 one-time checkout. No account needed.</p></div>
+<div class="step"><h3>Get your key and link</h3><p>Both arrive by email, usually within 15 minutes.</p></div>
+<div class="step"><h3>Study and pass</h3><p>Drill until you score 26/35 or better, then book your exam.</p></div>
+</div>
+</div></section>
+
+<section id="notes" style="padding-top:0"><div class="wrap">
 <h2>Good to know</h2>
-<ul>
-<li>Question text and answer keys come straight from the public-domain NCVEC pool. Explanations, cheat sheets, quizzes and the app are original to Tech Radio Pass.</li>
-<li>Answer choices appear in pool order. Your exam session may shuffle them, so learn the answer, not the letter.</li>
-<li>This is a study aid. It does not guarantee a passing score.</li>
-<li>Rules and band plans can change. Always confirm with the FCC (47 CFR Part 97), ncvec.org and your volunteer examiner team.</li>
-<li>Files are for the purchaser's personal study use and are stamped with your order number. Please don't share or resell them.</li>
-<li>The quiz-app key activates on one device, in the browser you activate it in. Clearing that browser's site data or using a private window counts as a new device. Got a new device? Email service@getpathprobe.com with your order number.</li>
+<ul class="know">
+<li>1 key = 1 device (one browser). Activates once online, then works offline. New device? Email us your order number.</li>
+<li>Your download link works 3 times, so save the zip. Files are stamped with your order number.</li>
+<li>Questions and answer keys are from the public-domain NCVEC pool. Explanations, quizzes and the app are original.</li>
+<li>Exams may shuffle choices: learn the answer, not the letter.</li>
+<li>For personal study only. Please don't share or resell.</li>
+<li>A study aid, not a pass guarantee. Confirm rules with the FCC (Part 97), ncvec.org and your VE team.</li>
 </ul>
-<p><a class="btn buy-trp" href="/techradiopass/?price_id=pri_01m81zdb0tsf7v20w28tk14erc">Buy Tech Radio Pass, $9</a></p>
-</section>
+</div></section>
 
-<section id="refunds">
-<h2>Refunds</h2>
-<p>Tech Radio Pass is a digital download. Please review the contents list and screenshots above before you buy. All sales are final, no refunds except where required by law. If your download link or key doesn't arrive, a file won't open, or you need your key moved to a new device, email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a> and we will help. See our <a href="/refund.html">Refund Policy</a>.</p>
-</section>
+<section class="cta" id="refunds"><div class="wrap">
+<h2>Ready to get on the air?</h2>
+<div class="buy">
+<div class="price">$9<small>one-time</small></div>
+<a class="btn buy-trp" href="/techradiopass/?price_id=pri_01m81zdb0tsf7v20w28tk14erc">Buy Tech Radio Pass, $9</a>
+</div>
+<p class="fine">Digital download: all sales are final, no refunds except where required by law. Link or key missing, or a file won't open? Email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a> and we'll help. See our <a href="/refund.html">Refund Policy</a>.</p>
+</div></section>
 
+<div class="wrap legal">
 <p><em>Tech Radio Pass is independent and is not affiliated with, endorsed by, or sponsored by the FCC, the ARRL or the NCVEC.</em></p>
 <p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
+</div>
 <footer><span>© 2026 PathProbe</span><a href="/blog/">Blog</a><a href="/privacy.html">Privacy</a><a href="/refund.html">Refunds</a><a href="/terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer>
 <script>
 // Live: Jack approved going live on Nov 22, 2026.
