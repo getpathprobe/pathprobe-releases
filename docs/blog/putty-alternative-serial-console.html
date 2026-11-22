@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A PuTTY Alternative for Serial Console and Network Gear — PathProbe</title>
+<meta name="description" content="What to look for in a PuTTY alternative when you need SSH, Telnet, and a serial console for network gear — including session import and pacing for slow devices.">
+<link rel="canonical" href="https://getpathprobe.com/blog/putty-alternative-serial-console.html">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PathProbe">
+<meta property="og:title" content="A PuTTY Alternative for Serial Console and Network Gear">
+<meta property="og:description" content="What to look for in a PuTTY alternative when you need SSH, Telnet, and a serial console for network gear — including session import and pacing for slow devices.">
+<meta property="og:url" content="https://getpathprobe.com/blog/putty-alternative-serial-console.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A PuTTY Alternative for Serial Console and Network Gear">
+<meta name="twitter:description" content="What to look for in a PuTTY alternative when you need SSH, Telnet, and a serial console for network gear — including session import and pacing for slow devices.">
+<meta name="keywords" content="PuTTY alternative, serial console Windows, SSH Telnet serial terminal, SecureCRT alternative, MobaXterm alternative, network gear console">
+</head>
+<body>
+<header><strong><a href="../index.html" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="index.html">Blog</a><a href="../index.html#features">Features</a><a href="../index.html#pricing">Pricing</a><a href="../bundle/">Lab Bundle</a><a href="../index.html#download">Download</a><a href="../jackedin/">JackedIN</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a><a href="../feedback/?product=pathprobe">Feedback</a><a href="mailto:service@getpathprobe.com">Support</a></header>
+<article>
+<h1>A PuTTY Alternative for Serial Console and Network Gear</h1>
+<p>PuTTY has been the default SSH and serial client on a lot of Windows lab laptops for a long time, and for a simple SSH session it still works. The friction shows up when the same person also needs a serial console, a pile of saved sessions, and a way to talk to slow network gear without overrunning the prompt.</p>
+<p>This article is about what to look for in a PuTTY alternative if your day includes routers, switches, and USB-serial adapters — and how <a href="https://getpathprobe.com/jackedin/">JackedIN</a> approaches those jobs on Windows, Linux, and Raspberry Pi OS 64-bit. There is no macOS build yet.</p>
+<h2 id="what-console-work-actually-needs">What &quot;console work&quot; actually needs</h2>
+<p>A terminal for network gear is doing more than opening TCP port 22.</p>
+<ul>
+<li><strong>Serial</strong>, not just SSH. A factory-default switch, a botched management IP, or a boot loader still needs 9600 8N1 (or whatever the vendor documents) on a COM port or <code>/dev/ttyUSB0</code>. The tool should list the ports that are actually present, including common USB-serial chips (FTDI, Prolific, CH340, CP210x).</li>
+<li><strong>Telnet</strong> still appears on older lab gear and on some out-of-band paths. You may not want it on a production LAN, but a console tool that refuses Telnet will leave a gap.</li>
+<li><strong>Saved sessions</strong> you can find later, in folders, with the right protocol and line settings on each one.</li>
+<li><strong>A path off the window.</strong> If you already use scripts, Ansible, or a small Python library, a CLI and a local API are more useful than a GUI-only emulator.</li>
+<li><strong>Pacing that respects the device.</strong> Many routers and switches print slowly, raise a pager, or only accept a password after a <code>Password:</code> prompt. A tool that dumps the next line too early will fail in ways that look like a &quot;bad script.&quot;</li>
+</ul>
+<p>None of that requires you to throw PuTTY out tomorrow. It does mean that &quot;opens an SSH window&quot; is a low bar.</p>
+<h2 id="honest-options-you-may-already-have">Honest options you may already have</h2>
+<p>Plenty of capable tools sit next to PuTTY, and the right one depends on what you actually do.</p>
+<ul>
+<li><strong>Windows Terminal and OpenSSH</strong> are fine for SSH to a Linux box or a modern device with a stable management address. They are not a serial console for a COM port.</li>
+<li><strong>Tera Term</strong> is a long-standing free Windows emulator with SSH and serial. It is a reasonable PuTTY alternative if you want a simple window and you live on Windows.</li>
+<li><strong>MobaXterm</strong> is popular when you want many SSH tabs, an X server, and a toolbox in one Windows installer. The free edition is enough for a lot of people; serial and session layout are stronger than stock PuTTY.</li>
+<li><strong>SecureCRT</strong> is a paid, mature client with a large installed base in network teams. If your workplace already standardizes on it, an alternative has to import those sessions cleanly or it will not stick.</li>
+<li><strong>minicom</strong>, <strong>screen</strong>, or <strong>tio</strong> on Linux will drive a USB-serial adapter with no fuss. They do not try to be a session manager for SSH, Telnet, and serial together.</li>
+</ul>
+<p>If one of those already fits, use it. The rest of this article is for the case where you want SSH, Telnet, and serial in one program, on Windows or Linux, with a way to import the sessions you already have.</p>
+<h2 id="import-the-sessions-you-already-saved">Import the sessions you already saved</h2>
+<p>A new terminal that cannot read your old session list is a hobby, not a migration. JackedIN can import from PuTTY, SecureCRT, MobaXterm, and SSH config. A dry run is worth doing first so you can see what will come across. Passwords in an imported file are not saved (they can be offered to the vault):</p>
+<pre>jackedin import --from putty --path FILE --dry-run
+jackedin import --from ssh --path FILE --dry-run
+jackedin import --from securecrt --path FILE --dry-run
+jackedin import --from mobaxterm --path FILE --dry-run</pre>
+<p>Leave off <code>--dry-run</code> when the preview looks right. After import, you should have the same hosts in the sidebar, ready to open as SSH, Telnet, or serial, instead of retyping them.</p>
+<h2 id="serial-console-from-the-window-or-the-command-line">Serial console, from the window or the command line</h2>
+<p>On launch, JackedIN lists COM and tty ports and preselects an external USB-serial adapter when one is present. <code>jackedin ports</code> prints the same names, with the USB product name when the operating system provides it. On Windows, ports the enumerator does not report as present are omitted unless you pass <code>--all</code>.</p>
+<p>A typical 9600 8N1 session on Windows, COM5:</p>
+<pre>jackedin connect --protocol serial --host COM5 --port 9600</pre>
+<p>On Linux:</p>
+<pre>jackedin connect --protocol serial --serial /dev/ttyUSB0 --baud 9600 --data-bits 8 --parity none --stop-bits 1 --flow none</pre>
+<p><code>--host COM5 --port 9600</code> and <code>--serial /dev/ttyUSB0 --baud 9600</code> are the same kind of session, and <code>--protocol serial</code> can be left off when the host looks like a device path. A by-id path is a good idea on Linux if you plug in more than one adapter.</p>
+<p>From the window, the status bar shows the protocol, the device, and the line settings (<code>9600 8N1 no flow</code>). Send Break is available from the session menu (or Ctrl+Break) when you need to interrupt a boot sequence. Session logs are cleaned into readable text — including the CR CR LF pattern a Junos console can send — without changing what you see in the live terminal.</p>
+<h2 id="prompt-aware-pacing-for-slow-gear">Prompt-aware pacing for slow gear</h2>
+<p>This is the part a generic SSH client often gets wrong on real network equipment.</p>
+<p>On a serial session, JackedIN sends a password only after a <code>Password:</code> prompt has gone quiet. It will not type that password at a <code>login:</code> prompt or at a shell prompt. A serial console also gets one carriage return after a short silence, unless you pass <code>--no-wake</code>, so a sleeping console has a chance to print a prompt before the first command.</p>
+<p>For scripted commands, <code>--line-delay</code> waits between lines and <code>--char-delay</code> waits between characters. Serial <code>exec</code> uses a 100 ms line delay when <code>--line-delay</code> is omitted. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more can be selected with <code>--vendor</code>, or picked up from the prompt or the banner, including pager and error strings. JackedIN has been tested on real Juniper hardware.</p>
+<p>If you are moving over from <code>plink</code>, the same sessions can be driven from the command line or from the local automation API, and there is an Ansible collection in the portable zip. That is a later step. Getting a reliable serial or SSH session, with pacing the device can survive, is the first one.</p>
+<h2 id="try-the-full-product-before-you-buy">Try the full product before you buy</h2>
+<p>JackedIN is a paid app with a full 72-hour (3-day) trial. For those three days the window, the command line, and the local API all work, with every feature on, and no card or sign-up. A banner shows the time left. After that, paste the license key in the app or run:</p>
+<pre>jackedin license activate &#x27;PASTE-THE-KEY&#x27;
+jackedin license status</pre>
+<p>The launch price is $19 USD, one-time (regular price $29). One license activates one computer and is non-transferable. A purchase includes one year of updates; the version you have keeps working afterward. Because the trial is complete, sales are final, except where required by law. Please confirm it works with your gear before you buy.</p>
+<p>Downloads and the user&#x27;s guide are on <a href="https://getpathprobe.com/jackedin/">https://getpathprobe.com/jackedin/</a>. Builds are available for Windows 10/11 x64, Linux x86_64, Ubuntu/Debian, and Raspberry Pi OS 64-bit. There is no macOS build yet.</p>
+<p>If you also want a CLI DHCP and VLAN tester, PathProbe Pro plus JackedIN is $24.99 as the <a href="https://getpathprobe.com/bundle/">Lab Bundle</a>. Students, classes, and CTF teams can email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a> about 40% off.</p>
+</article>
+
+<footer><span>© 2026 PathProbe</span><a href="index.html">Blog</a><a href="../privacy.html">Privacy</a><a href="../refund.html">Refunds</a><a href="../terms.html">Terms</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Watch the tutorials on YouTube</a><a href="../feedback/?product=pathprobe">Leave feedback / Report a problem</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer>
+</body>
+</html>

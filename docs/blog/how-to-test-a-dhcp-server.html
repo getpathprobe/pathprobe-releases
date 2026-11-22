@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Test a DHCP Server from Linux or Windows — PathProbe</title>
+<meta name="description" content="Practical ways to test a DHCP server on Linux and Windows — from ipconfig, dhclient, and Wireshark to a free CLI that simulates several clients and a VLAN tag.">
+<link rel="canonical" href="https://getpathprobe.com/blog/how-to-test-a-dhcp-server.html">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="PathProbe">
+<meta property="og:title" content="How to Test a DHCP Server from Linux or Windows">
+<meta property="og:description" content="Practical ways to test a DHCP server on Linux and Windows — from ipconfig, dhclient, and Wireshark to a free CLI that simulates several clients and a VLAN tag.">
+<meta property="og:url" content="https://getpathprobe.com/blog/how-to-test-a-dhcp-server.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Test a DHCP Server from Linux or Windows">
+<meta name="twitter:description" content="Practical ways to test a DHCP server on Linux and Windows — from ipconfig, dhclient, and Wireshark to a free CLI that simulates several clients and a VLAN tag.">
+<meta name="keywords" content="how to test a DHCP server, test DHCP server Linux, test DHCP server Windows, DHCP DORA, dhcpdump, Wireshark DHCP, VLAN DHCP test">
+</head>
+<body>
+<header><strong><a href="../index.html" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="index.html">Blog</a><a href="../index.html#features">Features</a><a href="../index.html#pricing">Pricing</a><a href="../bundle/">Lab Bundle</a><a href="../index.html#download">Download</a><a href="../jackedin/">JackedIN</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a><a href="../feedback/?product=pathprobe">Feedback</a><a href="mailto:service@getpathprobe.com">Support</a></header>
+<article>
+<h1>How to Test a DHCP Server from Linux or Windows</h1>
+<p>A DHCP server can look fine in its own UI and still fail the only test that matters: a client on the right segment, or the right VLAN, getting a lease with the options you intended. This guide covers practical ways to run that test from Linux or Windows, starting with tools you may already have.</p>
+<p>Only test a network you own or are authorized to test. Simulating many clients can exhaust a server&#x27;s address pool.</p>
+<h2 id="what-a-passing-test-actually-checks">What a passing test actually checks</h2>
+<p>&quot;The PC got an address&quot; is a start, not the whole story. A useful DHCP test answers all of these:</p>
+<ul>
+<li>The client completes the DHCPv4 exchange (Discover, Offer, Request, ACK — often remembered as DORA).</li>
+<li>The offered address is in the scope you meant, not a leftover server or a guest network.</li>
+<li>The mask, default gateway, DNS, and lease time are the values you configured.</li>
+<li>The same thing still works on the VLAN or relay path the production clients will use.</li>
+</ul>
+<p>On IPv6 the message names change, but the idea is the same: confirm the server answers, and confirm the options. Examples below use 192.0.2.0/24, names such as <code>eth0</code> and <code>&quot;Ethernet 2&quot;</code>, and locally administered MACs such as <code>02:00:00:00:00:a1</code>. Replace them with the names on your computer.</p>
+<h2 id="first-checks-you-can-run-with-one-real-client">First checks you can run with one real client</h2>
+<p>If you already have a laptop or VM on the same layer-2 segment as the server, start there.</p>
+<p><strong>On Windows,</strong> in Command Prompt or PowerShell:</p>
+<pre>ipconfig /release
+ipconfig /renew
+ipconfig /all</pre>
+<p>Look at IPv4 Address, Subnet Mask, Default Gateway, DHCP Server, and DNS Servers. A 169.254.x.x address (APIPA) usually means the client broadcast a Discover and never got a usable Offer.</p>
+<p><strong>On Linux,</strong> a temporary <code>dhclient</code> test on <code>eth0</code> can disrupt the current address, so prefer a spare interface or a lab box:</p>
+<pre>sudo dhclient -v eth0
+ip -4 addr show dev eth0</pre>
+<p>Then check the server log or lease list (ISC dhcpd, Kea, Windows DHCP, or the appliance UI). You should see a new entry for the test client.</p>
+<p>These checks are honest, and limited. You get one client per NIC. A different VLAN often means recabling, retagging a port, or building a VM with a tagged interface. A small pool needs more than one client to test.</p>
+<h2 id="watch-the-packets-tcpdump-wireshark-dhcpdump">Watch the packets: tcpdump, Wireshark, dhcpdump</h2>
+<p>When a renew fails, the next question is whether the Discover left the client, whether an Offer came back, and whether a relay or a second DHCP server is involved.</p>
+<p>On Linux, a typical capture on the client (or on a span/mirror port) looks like this:</p>
+<pre>sudo tcpdump -i eth0 -n -w dhcp-test.pcapng udp port 67 or udp port 68</pre>
+<p>Open the file in Wireshark and filter on <code>bootp</code> or <code>dhcp</code>. You want to see Discover and Offer, then Request and ACK, and you want to inspect option 3 (router), option 6 (DNS), option 51 (lease time), and the server identifier. If you are testing a relay, option 82 and the GIADDR field are the first things to look at.</p>
+<p><code>dhcpdump</code> is a concise alternative if you already have it; <code>dhcping</code> can send a request toward a named server. Both help on a lab NIC. Neither one replaces several concurrent clients, or an 802.1Q tag, without extra setup.</p>
+<p>On Windows, Wireshark with Npcap can capture the same conversation. Start the capture before you run <code>ipconfig /renew</code>.</p>
+<h2 id="a-faster-lab-check-simulate-several-clients-from-one-terminal">A faster lab check: simulate several clients from one terminal</h2>
+<p><a href="https://getpathprobe.com">PathProbe</a> is a command-line network test tool for Linux, Windows, and Raspberry Pi arm64. It has no graphical interface. The free tier, which does not expire, can simulate up to five DHCPv4 or DHCPv6 clients, optionally with a single 802.1Q tag, and can write a pcapng file you later open in Wireshark.</p>
+<p>On Debian or Ubuntu, install the <code>.deb</code>. On other Linux systems, unpack the <code>.tar.gz</code> and, if you want to avoid <code>sudo</code> on every run, give the binary the two capabilities it needs, then confirm the install:</p>
+<pre>pathprobe --version
+pathprobe interfaces</pre>
+<p>On Windows 10 or 11, install Npcap, then run PathProbe from an Administrator Command Prompt or PowerShell. Quote interface names that contain spaces. <code>--iface</code> also accepts a MAC address and ignores letter case.</p>
+<p><code>dhcp run</code> will not start unless you add <code>--i-am-authorized</code> (or the shorter <code>--authorized</code>). That flag is how you confirm you may test the network. You also have to pass <code>--count</code>.</p>
+<p>A short five-client run on Linux, 30 seconds, then a clean release:</p>
+<pre>sudo pathprobe dhcp run --iface eth0 --count 5 --duration 30s --i-am-authorized</pre>
+<p>The same idea on Windows:</p>
+<pre>C:\&gt; pathprobe dhcp run --iface &quot;Ethernet 2&quot; --count 5 --duration 30s --i-am-authorized</pre>
+<p>A real three-client run against a server on the same segment looks like this (addresses replaced with documentation values):</p>
+<pre>interface eth0 ifindex=2
+DHCP session started on eth0
+tier free, up to 5 clients; control socket /run/pathprobe/control.sock
+Ctrl-C or dhcp stop releases leases and exits. --duration stops on its own.
+client 3 DHCPv4 bound 192.0.2.101
+client 1 DHCPv4 bound 192.0.2.100
+client 2 DHCPv4 bound 192.0.2.102
+bound v4=3 v6=0 tx=6 txerr=0 rx=6 arp=0 ndp=0 icmp=0 dropped=0
+client 3 DHCPv4 released 192.0.2.101
+client 1 DHCPv4 released 192.0.2.100
+client 2 DHCPv4 released 192.0.2.102
+stopped</pre>
+<p>If you want to inspect a live session from a second terminal, use the same privileges as the run:</p>
+<pre>sudo pathprobe dhcp status
+sudo pathprobe dhcp stop</pre>
+<p><code>dhcp status</code> prints each client, its MAC, the bound address, and the VLAN mode. With no session running it prints <code>no active PathProbe session</code> and exits 1.</p>
+<p>To keep a capture for Wireshark (PathProbe only writes the file; it does not analyze it):</p>
+<pre>sudo pathprobe dhcp run --iface eth0 --count 3 --duration 20s --capture lab.pcapng --capture-filter &quot;udp port 67 or udp port 68&quot; --authorized</pre>
+<p>On Windows, pass a path such as <code>--capture C:\Temp\lab.pcapng</code>.</p>
+<h2 id="testing-a-vlan-without-recabling-the-laptop">Testing a VLAN without recabling the laptop</h2>
+<p>Free includes none or a single 802.1Q tag. To ask for VLAN 100 on each simulated client:</p>
+<pre>sudo pathprobe dhcp run --iface eth0 --count 5 --vlan single --vlan-seed 100 --authorized</pre>
+<pre>C:\&gt; pathprobe dhcp run --iface &quot;Ethernet 2&quot; --count 5 --vlan single --vlan-seed 100 --authorized</pre>
+<p>If those clients bind addresses from the VLAN 100 scope, the server, the trunk, and the relay are doing their jobs. If they get nothing, or they get the untagged LAN scope, the tag is not landing where you think it is — which is exactly the kind of mistake a single untagged laptop will not show you.</p>
+<p>QinQ, more than five clients, saved profiles, and scheduled runs are Pro features. You do not need them for a first lab check. The free tier is how you try PathProbe; there is no separate trial.</p>
+<h2 id="how-to-read-a-failure">How to read a failure</h2>
+<ul>
+<li><strong>No Discover on the wire.</strong> Wrong interface, NIC down, or a local policy blocking DHCP. Confirm the name with <code>pathprobe interfaces</code> or <code>pathprobe link --iface eth0</code>.</li>
+<li><strong>Discover goes out, no Offer comes back.</strong> The server is off-segment, a relay or VLAN is wrong, or another device is absorbing broadcasts. Capture both sides if you can.</li>
+<li><strong>Offer arrives, Request or ACK does not.</strong> Check the offered address and the server identifier. Two DHCP servers on one VLAN often explain a messy trace.</li>
+<li><strong>A lease arrives, but the gateway or DNS is wrong.</strong> The handshake worked; the scope options did not.</li>
+<li><strong>169.254.x.x on a Windows NIC.</strong> Treat it as &quot;no usable Offer,&quot; then use a capture or a second test client to separate a client problem from a VLAN, relay, or server problem.</li>
+</ul>
+<h2 id="a-short-lab-checklist">A short lab checklist</h2>
+<ol>
+<li>Confirm you are allowed to test this network.</li>
+<li>Identify the interface with <code>pathprobe interfaces</code> (or <code>ip link</code> / <code>Get-NetAdapter</code>).</li>
+<li>Run a small, time-bounded test (<code>--count 3</code> or <code>--count 5</code>, <code>--duration 30s</code>).</li>
+<li>Compare the bound addresses and options with the scope you configured.</li>
+<li>Keep a pcapng and open it in Wireshark if anything looks off.</li>
+<li>If the production path is tagged, repeat the run with <code>--vlan single</code> and the VLAN ID you expect.</li>
+<li>Stop or let <code>--duration</code> expire so the test leases are released.</li>
+</ol>
+<h2 id="try-it-yourself">Try it yourself</h2>
+<p>PathProbe 1.2.1 is free to download for Linux, Windows (Npcap required), and Raspberry Pi arm64. The free tier never expires: core commands, up to five DHCP clients, a single 802.1Q tag, pcapng capture, and a run log.</p>
+<ul>
+<li>Site and downloads: <a href="https://getpathprobe.com">https://getpathprobe.com</a></li>
+<li>Release files: <a href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">https://github.com/getpathprobe/pathprobe-releases/releases/latest</a></li>
+</ul>
+<p>Pro is $9.99 USD, one-time, if you later need up to 1,000 clients, QinQ, saved profiles, live JSON events, an MCP server, or scheduled runs with alerts. One license activates one computer. Students, classes, and CTF teams can email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a> about 40% off.</p>
+</article>
+
+<footer><span>© 2026 PathProbe</span><a href="index.html">Blog</a><a href="../privacy.html">Privacy</a><a href="../refund.html">Refunds</a><a href="../terms.html">Terms</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Watch the tutorials on YouTube</a><a href="../feedback/?product=pathprobe">Leave feedback / Report a problem</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer>
+</body>
+</html>

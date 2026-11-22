@@ -16,6 +16,21 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://getpathprobe.com/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/blog/how-to-test-a-dhcp-server.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/blog/putty-alternative-serial-console.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://getpathprobe.com/terms.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
