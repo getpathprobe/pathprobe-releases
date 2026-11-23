@@ -37,7 +37,3 @@ body{font-family:system-ui,sans-serif;max-width:860px;margin:0 auto;padding:24px
 }
 
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-/* Launch weekend banner (remove Monday after Nov 22, 2026 11:59 PM EST) */
-.launch-banner{background:#fff8c5;border:1px solid #d4a72c;border-radius:6px;padding:10px 14px;margin:12px 0 16px;font-weight:600;text-align:center}
-.launch-banner code{font-weight:700}

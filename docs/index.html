@@ -75,11 +75,10 @@
 <body>
 
 <header><strong><a href="index.html" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="index.html#features">Features</a><a href="index.html#pricing">Pricing</a><a href="#bundle">Lab Bundle</a><a href="#download">Download</a><a href="jackedin/">JackedIN</a><a href="blog/">Blog</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a><a href="feedback/?product=pathprobe">Feedback</a><a href="mailto:service@getpathprobe.com">Support</a></header>
-<p class="launch-banner" role="status">Launch weekend: 30% off with code LAUNCH30 through Sunday.</p>
 
 <h1>PathProbe</h1><p>A command-line network test tool for Linux and Windows: DHCP client simulation, interface and link checks, subnet scans, traceroute and packet capture.</p>
 <p class="note"><strong>Command-line only.</strong> PathProbe has no graphical interface and no API. You run it from a terminal (Linux shell, or an Administrator Command Prompt/PowerShell on Windows).</p>
-<p><a class="btn" href="#download">Download v1.2.1</a> <a class="btn buy-pro" id="buy-hero" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg&code=LAUNCH30">Buy Pro — $9.99</a> <a href="#pricing">See pricing</a></p>
+<p><a class="btn" href="#download">Download v1.2.1</a> <a class="btn buy-pro" id="buy-hero" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg">Buy Pro — $9.99</a> <a href="#pricing">See pricing</a></p>
 <p class="edu-line"><small>Students, classes and CTF teams: 40% off, email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</small></p>
 <pre>$ sudo pathprobe dhcp run --iface eth0 --count 5 --authorized
 $ pathprobe interfaces
@@ -109,7 +108,7 @@ $ pathprobe traceroute example.com</pre>
 <h2 id="pricing">Pricing</h2><div class="grid">
 <div class="card"><h3>Free — $0</h3><ul><li>All core commands</li><li>DHCP simulation up to 5 IPs / clients, single 802.1Q tag</li><li>Scan, link speed, internet check, WAN whoami, traceroute, static addressing, packet capture</li></ul><a class="btn" href="#download">Download</a></div>
 <div class="card"><h3>Pro — $9.99 one-time</h3><ul><li>Up to 1000 simulated DHCP clients</li><li>QinQ (stacked VLAN tags)</li><li>Saved profiles with export</li><li>One-time license key, emailed after purchase</li><li>1 license = 1 computer, non-transferable (one-time online activation)</li></ul><!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
-<a class="btn" id="buy-pro" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg&code=LAUNCH30">Buy Pro — $9.99</a>
+<a class="btn" id="buy-pro" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg">Buy Pro — $9.99</a>
 <p class="edu-line"><small>Students, classes and CTF teams: 40% off, email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</small></p></div></div>
 <div class="compare-wrap">
 <h3 id="compare">Free vs Pro</h3>
@@ -229,7 +228,7 @@ $ pathprobe traceroute example.com</pre>
   </tbody>
 </table>
 <p class="compare-footnote">Pro is a one-time purchase. <strong>1 license = 1 computer, non-transferable.</strong> After purchase, a license key is emailed to you. Activate once online with <code>pathprobe license activate --key PP1....</code> Activating again on the same computer is allowed. Another computer needs its own license. There is no trial; the Free tier is the way to try PathProbe first. See the <a href="refund.html">Refund Policy</a>.</p>
-<p class="compare-cta"><a class="btn buy-pro" id="buy" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg&code=LAUNCH30">Buy Pro — $9.99</a></p>
+<p class="compare-cta"><a class="btn buy-pro" id="buy" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg">Buy Pro — $9.99</a></p>
 </div>
 <p>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. See <a href="https://www.paddle.com/legal/checkout-buyer-terms">Paddle's Checkout Buyer Terms</a>.</p>
 <section id="bundle">
@@ -245,7 +244,7 @@ $ pathprobe traceroute example.com</pre>
 <li>Two license keys emailed within about 15 minutes. <strong>Each key activates on one computer</strong> (non-transferable). Use them on the same machine or on two different ones.</li>
 <li>Try first: PathProbe has a free tier and JackedIN has a 72-hour trial.</li>
 </ul>
-<p><a class="btn buy-bundle" id="buy-bundle" href="https://getpathprobe.com/?price_id=pri_01m7zv0x1kseffzmw4cn261bcn&code=LAUNCH30">Buy the Lab Bundle, $24.99</a></p>
+<p><a class="btn buy-bundle" id="buy-bundle" href="https://getpathprobe.com/?price_id=pri_01m7zv0x1kseffzmw4cn261bcn">Buy the Lab Bundle, $24.99</a></p>
 <p><em>Use only on networks you own or are authorized to test.</em></p>
 </section>
 <section id="edu">
@@ -294,7 +293,7 @@ if (SALES_ENABLED) {
     function openCheckout(priceId, ev) {
       if (ev) ev.preventDefault();
       if (!ALLOWED[priceId]) return;
-      var code = new URLSearchParams(window.location.search).get("code") || "LAUNCH30";
+      var code = new URLSearchParams(window.location.search).get("code");
       var opts = {
         items: [{ priceId: priceId, quantity: 1 }],
         settings: { displayMode: "overlay", theme: "light", successUrl: successUrl(priceId) }

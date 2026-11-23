@@ -10,7 +10,6 @@
 </head>
 <body>
 <header><strong><a href="/" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="/blog/">Blog</a><a href="/#pricing">Pricing</a><a href="/bundle/">Lab Bundle</a><a href="/jackedin/">JackedIN</a><a href="mailto:service@getpathprobe.com">Support</a></header>
-<p class="launch-banner" role="status">Launch weekend: 30% off with code LAUNCH30 through Sunday.</p>
 
 <section id="bundle">
 <h1>The Lab Bundle: PathProbe Pro + JackedIN, $24.99</h1>
@@ -25,7 +24,7 @@
 <li>Two license keys emailed within about 15 minutes. <strong>Each key activates on one computer</strong> (non-transferable). Use them on the same machine or on two different ones.</li>
 <li>Try first: PathProbe has a free tier and JackedIN has a 72-hour trial.</li>
 </ul>
-<p><a class="btn buy-bundle" id="buy-bundle" href="https://getpathprobe.com/?price_id=pri_01m7zv0x1kseffzmw4cn261bcn&code=LAUNCH30">Buy the Lab Bundle, $24.99</a></p>
+<p><a class="btn buy-bundle" id="buy-bundle" href="https://getpathprobe.com/?price_id=pri_01m7zv0x1kseffzmw4cn261bcn">Buy the Lab Bundle, $24.99</a></p>
 <p><em>Use only on networks you own or are authorized to test.</em></p>
 </section>
 <section id="edu">
@@ -61,7 +60,7 @@ if (SALES_ENABLED) {
     function openCheckout(priceId, ev) {
       if (ev) ev.preventDefault();
       if (!ALLOWED[priceId]) return;
-      var code = new URLSearchParams(window.location.search).get("code") || "LAUNCH30";
+      var code = new URLSearchParams(window.location.search).get("code");
       var opts = {
         items: [{ priceId: priceId, quantity: 1 }],
         settings: { displayMode: "overlay", theme: "light", successUrl: "https://getpathprobe.com/thanks-bundle.html" }
