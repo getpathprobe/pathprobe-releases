@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Using JackedIN with AI agents | JackedIN</title>
+<meta name="description" content="How JackedIN waits for the device prompt, returns complete output over MCP, and — coming in the next release — requires human approval before any change.">
+<link rel="canonical" href="https://getpathprobe.com/jackedin/ai-agents/">
+<link rel="icon" href="/jackedin/favicon.png">
+<link rel="stylesheet" href="/jackedin/style.css">
+<link rel="describedby" href="/jackedin/llms.txt">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JackedIN">
+<meta property="og:title" content="Using JackedIN with AI agents">
+<meta property="og:description" content="How JackedIN waits for the device prompt, returns complete output over MCP, and — coming in the next release — requires human approval before any change.">
+<meta property="og:url" content="https://getpathprobe.com/jackedin/ai-agents/">
+<meta property="og:image" content="https://getpathprobe.com/media/jackedin-promo-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Using JackedIN with AI agents">
+<meta name="twitter:description" content="How JackedIN waits for the device prompt, returns complete output over MCP, and — coming in the next release — requires human approval before any change.">
+<meta name="twitter:image" content="https://getpathprobe.com/media/jackedin-promo-poster.jpg">
+</head>
+<body>
+<header class="top"><div class="wrap"><img src="/jackedin/jackedin-logo.png" alt=""><strong>JackedIN™</strong>
+<a href="/jackedin/">Product</a><a href="/jackedin/#features">Features</a><a href="/jackedin/#automation">Automation</a><a href="/jackedin/#trial">Free trial</a><a href="/jackedin/#pricing">Pricing</a><a href="/jackedin/#download">Download</a><a href="/jackedin/ai-agents/">AI agents</a><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">User's guide</a><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a><a href="/blog/">Blog</a><a href="/index.html">PathProbe</a><a href="/feedback/?product=jackedin">Feedback</a><a href="mailto:service@getpathprobe.com">Support</a></div></header>
+
+<main class="wrap">
+<article>
+<p class="note">This page describes JackedIN 1.2.1, plus a safety rule being built for the next release. Human approval before any change is not in 1.2.1 yet.</p>
+
+<h1>Using JackedIN with AI agents</h1>
+
+<p>JackedIN is an SSH, Telnet and serial terminal for Windows, Linux and Raspberry Pi. The same program is a desktop window, a command line, a local API, and a stdio MCP server. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more.</p>
+
+<p>Use it only on devices you own or are allowed to manage. Examples use <code>192.0.2.10</code> and <code>router1</code>. Keep passwords out of the command line; set <code>JACKEDIN_PASSWORD</code> or a credential reference instead.</p>
+
+<h2 id="human-approval">Human approval before any change (coming in the next release)</h2>
+
+<p>This is the safety rule being built for AI sessions, and it is not in JackedIN 1.2.1 yet:</p>
+<ul>
+<li>Show-type commands run freely.</li>
+<li>A command that changes something runs only after a human approves it.</li>
+<li>The agent can never approve itself.</li>
+</ul>
+<p>Until that ships, treat <code>exec</code> as able to send any command you allow it to run, and limit the agent by how you prompt it and which tools you enable.</p>
+
+<h2 id="the-problem">The problem agents hit</h2>
+
+<p>If you pipe a command into a raw SSH/serial session, end-of-file often ends the session while the device is still paging, or after it printed an error the agent never read. The agent moves on as if the change landed.</p>
+<p>JackedIN is built so that does not happen.</p>
+
+<h2 id="wait-for-the-prompt">Wait for the prompt, then read the complete output</h2>
+
+<p><code>jackedin exec</code> reads the whole command list first, sends one command, and waits until the device prompt is back before it sends the next. It pages through <code>--More--</code>, <code>---(more)---</code>, <code>---(more 100%)---</code>, and similar markers, then returns the complete output. A stdin pipe on <code>connect</code> also waits for the prompt after each line; after stdin ends, it waits for the prompt that follows the last line, then exits.</p>
+
+<p>There is no <code>--terminator</code> flag. The device prompt, and those pager markers, are how JackedIN knows a command has finished. <code>--prompt REGEX</code> replaces the prompt JackedIN detects. <code>--vendor NAME</code> forces a profile; omit it and the prompt or banner picks one.</p>
+
+<p>Pacing, when a slow console needs it:</p>
+<ul>
+<li><code>--line-delay MS</code> — gap between lines (serial defaults to 100 ms if you omit it)</li>
+<li><code>--char-delay MS</code> — pause between characters</li>
+<li><code>--wait-for-echo</code> — wait until the device echoes a line before sending the next</li>
+<li><code>!sleep 500</code> in a command list — wait 500 ms and send nothing</li>
+<li><code>--timeout SEC</code> — cap each wait; omit it and JackedIN waits as long as the device needs</li>
+</ul>
+<p>The same pacing fields on the API and MCP are <code>lineDelayMs</code>, <code>charDelayMs</code>, and <code>waitForEcho</code>.</p>
+<p><code>--dry-run</code> prints the plan and connects to nothing. Prefer <code>exec</code> over piping into <code>connect</code>.</p>
+<pre><code>jackedin exec --host 192.0.2.10 --user admin --trust-host-key \
+  --json --timeout 8 --cmd 'show version'
+</code></pre>
+
+<h2 id="json">JSON output</h2>
+
+<p><code>--json</code> and <code>--output json</code> are the same flag. <code>JACKEDIN_JSON=1</code> matches them. On <code>exec</code>, each command is returned as structured data: command, ok, output, prompt, matched_error, timed_out, duration_ms. <code>ok</code> is false if any command, timeout, or verify check failed. <code>fleet</code> and <code>inventory sync</code> also accept JSON output.</p>
+<p>On Windows, capture that output with <code>jackedin.com</code>, not <code>jackedin.exe</code>.</p>
+
+<h2 id="mcp">MCP server</h2>
+
+<p><code>jackedin mcp</code> is a stdio MCP server for the local API. It dials 127.0.0.1 only. It is not a public URL.</p>
+<ol class="steps">
+<li>Install JackedIN 1.2.1 from <a href="/jackedin/#download">the download section</a> (72-hour full trial; a license is needed after that).</li>
+<li>Turn the local API on in Settings. It stays off until you do. It listens on 127.0.0.1 only (port 47321 unless you change it) and requires a Bearer token.</li>
+<li>Leave the window open, or run <code>jackedin headless</code> (the API must still be enabled).</li>
+<li>Point the client at the stdio command:</li>
+</ol>
+<pre><code>{
+  "mcpServers": {
+    "jackedin": {
+      "command": "jackedin",
+      "args": ["mcp"],
+      "env": {
+        "JACKEDIN_API_TOKEN": "paste-the-token-from-settings",
+        "JACKEDIN_API_PORT": "47321"
+      }
+    }
+  }
+}
+</code></pre>
+<p>The packaged examples include this snippet for generic clients, Cursor, and Claude Desktop. The token is <code>JACKEDIN_API_TOKEN</code> if that variable is set, otherwise the token saved in Settings.</p>
+<p>Tools: <code>list_sessions</code>, <code>open_session</code>, <code>send_session</code>, <code>exec</code>, <code>send_break</code>, <code>read_session</code>, <code>close_session</code>, <code>wait_for_output</code>, <code>scan_ports</code>, <code>ping_host</code>, <code>trace_host</code>, <code>read_events</code>. Prefer <code>exec</code>. <code>exec</code> and <code>send_break</code> do not require the <code>automationApi</code> setting; wait, scan, ping, trace, and events do. <code>scan_ports</code> tells the caller to only scan devices they are allowed to test.</p>
+
+<h2 id="local-api">The local API, off by default</h2>
+
+<p>The same work is available over HTTP on the local machine: <code>POST /v1/exec</code>, <code>POST /v1/sessions/{id}/exec</code>, and the other routes in the packaged <code>docs/openapi.yaml</code>. The listener is off until you enable it, bound to 127.0.0.1, and token-protected. Do not expose it on a network.</p>
+
+<h2 id="safe-use">Safe use</h2>
+<ul>
+<li>Only connect to or scan devices you are allowed to test.</li>
+<li>Do not put secrets in argv, MCP config files you will share, or logs. Use environment variables and the credential store.</li>
+<li>Prefer <code>--dry-run</code> and <code>show</code> commands until you are sure of the plan.</li>
+<li>A changed SSH host key is refused in the background; <code>--trust-host-key</code> accepts a new key, not a changed one.</li>
+</ul>
+
+<h2 id="coming-next">Coming in the next release: human approval before any change</h2>
+<p>The same rule as the headline above. It is being built for the next release and is not in 1.2.1: in AI sessions, show-type commands run freely; a command that changes something waits for a human; the agent cannot approve its own change.</p>
+
+<h2 id="try-it">Try it</h2>
+<p>Download: <a href="/jackedin/#download">getpathprobe.com/jackedin/#download</a><br>
+Buy (launch price $19, after the 72-hour trial): <a href="/jackedin/#pricing">getpathprobe.com/jackedin/#pricing</a><br>
+Release and SHA256SUMS: <a href="https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1">JackedIN 1.2.1 on GitHub</a><br>
+User’s guide: <a href="https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md">JackedIN-Users-Guide.md</a></p>
+<p>We build JackedIN. This page describes the current 1.2.1 app, and marks human approval before any change as coming in the next release.</p>
+</article>
+</main>
+<footer><div class="wrap"><span>Copyright © 2026 JackedIN</span><a href="/jackedin/">JackedIN</a><a href="/blog/">Blog</a><a href="/techradiopass/">Tech Radio Pass (ham exam prep)</a><a href="https://www.youtube.com/@BeenThere.BuiltThat" rel="me noopener">YouTube: Been There, Built That</a><a href="/privacy.html">Privacy</a><a href="/refund.html">Refunds</a><a href="/terms.html">Terms</a><a href="https://site-events.getpathprobe.workers.dev/dl/EULA.txt">EULA</a><a href="/feedback/?product=jackedin">Leave feedback / Report a problem</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></div></footer>
+</body>
+</html>

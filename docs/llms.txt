@@ -1,58 +1,39 @@
-# PathProbe
+# JackedIN and PathProbe
 
-> A command-line network test tool for Linux and Windows.
+> JackedIN is an SSH, Telnet and serial terminal with a desktop window, a command line, a token-protected localhost API, and a stdio MCP server for AI agents. PathProbe is a separate command-line network test tool for Linux and Windows.
 
-PathProbe is a command-line network test tool. It has no graphical interface and no API. Every feature runs from a terminal: a Linux shell, or an Administrator Command Prompt or PowerShell on Windows.
-
-Official website: https://getpathprobe.com/
+Official site: https://getpathprobe.com/
+JackedIN product page: https://getpathprobe.com/jackedin/ (getjackedin.com redirects there)
 Support: service@getpathprobe.com
 
-## Features
+JackedIN runs the same engine from the window, the CLI, Python, Ansible, and MCP. `jackedin exec` (and the MCP `exec` tool) reads the command list first, waits until the device prompt returns, pages through `--More--` and similar markers, and can print JSON (`--json` or `--output json`, or `JACKEDIN_JSON=1`). Use it instead of piping into `jackedin connect`. Pacing flags are `--line-delay`, `--char-delay`, and `--wait-for-echo`. `--prompt REGEX` replaces the detected prompt; `--vendor NAME` forces a profile. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more.
 
-- DHCP client simulation (DHCPv4 and DHCPv6), with custom MACs and VLAN tags, to test servers and relays
-- Interface and link checks: list adapters, link speed and addresses; select an interface by name or MAC
-- Subnet scans (ARP / IPv6), internet check, WAN address lookup
-- ICMP traceroute bound to an interface
-- Packet capture
-- Flags results that break RFC/IEEE standards
-- JSON output for scripts
-- Static addressing
+The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app open with the local API turned on, or run `jackedin headless`. The local API is off by default, listens on 127.0.0.1 only (port 47321 unless changed), and requires a Bearer token (`JACKEDIN_API_TOKEN` or the token saved in Settings). Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events. A 72-hour full trial unlocks every feature; after that a $19 one-time license is required (one license, one computer). Coming in the next release (not in 1.2.1): in AI sessions, show-type commands run freely; a command that changes something runs only after a human approves it; the agent can never approve itself.
 
-Use PathProbe only on networks you own or are authorized to test.
+PathProbe is command-line only: no GUI and no API. `pathprobe mcp` is a Pro feature. Free remains available; Pro is $9.99 one-time.
 
-## Platforms
+Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.2.1 and PathProbe 1.2.1. There is no macOS build of JackedIN yet.
 
-- Debian and Ubuntu (.deb, amd64 and arm64)
-- Other Linux (.tar.gz, amd64 and arm64)
-- Windows 10 and 11 x64 (installer or portable zip; some features require Npcap)
-- macOS: coming soon
+## JackedIN
 
-Every release includes SHA-256 checksums (SHA256SUMS).
+- [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change (coming in the next release)
+- [Product page and download](https://getpathprobe.com/jackedin/): Windows, Linux, and Raspberry Pi (arm64) builds, 72-hour trial, pricing
+- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
+- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.html): same guide as HTML
+- [JackedIN 1.2.1 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1): release notes, installers, and portable zips
+- [SHA256SUMS (JackedIN 1.2.1)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS): checksums for every file in that release
+- [Python guide](https://github.com/getpathprobe/jackedin-releases/blob/main/JackedIN-Python-Guide.md): free `jackedin` and `nornir-jackedin` packages (the app trial or a license is still required)
 
-## Pricing
+## PathProbe
 
-- Free: $0. All core commands (DHCP, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target). DHCP simulation up to 5 clients, none or a single 802.1Q tag, packet capture (pcapng), core RFC/IEEE standards checks, JSON output on interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status, the dhcp run final JSON summary, the automatic run log, NetBox/Nautobot inventory, tab completion and typo suggestions, copy a run as a command, clearer error messages, and the examples command.
-- Pro: $9.99 USD, one-time purchase. Everything in Free, plus up to 1,000 simulated DHCP clients, QinQ (stacked VLAN tags), saved profiles with export, extra standards checks, live dhcp run --json events, --json on target, static, dhcp release/stop, and profiles, MCP server (use PathProbe from an AI agent), and scheduled profile runs with webhook alerts. 1 license = 1 computer, non-transferable. A license key is emailed after purchase and activated online once.
+- [Product page and download](https://getpathprobe.com/): Free and Pro builds
+- [PathProbe 1.2.1 release](https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.1): release notes and installers
+- [SHA256SUMS (PathProbe 1.2.1)](https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.1/SHA256SUMS): checksums for that release
 
-Checkout is handled by Paddle, the merchant of record. See https://getpathprobe.com/#pricing for the full comparison.
+## Optional
 
-## Licensing
-
-One license equals one computer and is non-transferable. Pro is activated online once with a license key emailed after purchase (`pathprobe license activate --key ...`).
-
-## Links
-
-- Website: https://getpathprobe.com/
-- Download (free and Pro installers): https://getpathprobe.com/#download
-- Buy Pro: https://getpathprobe.com/#pricing
-- Terms: https://getpathprobe.com/terms.html
-- Privacy: https://getpathprobe.com/privacy.html
-- Refunds: https://getpathprobe.com/refund.html
-- Support: service@getpathprobe.com
-- YouTube (Been There, Built That): https://www.youtube.com/@BeenThere.BuiltThat
-
-## Related product
-
-JackedIN is a separate product: an SSH, Telnet and serial terminal with a desktop window, a command line and a local API. Free 3-day trial, then $19 USD one-time. https://getjackedin.com/ (product page: https://getpathprobe.com/jackedin/)
-
-Tech Radio Pass is a $9 one-time study kit for the US amateur radio Technician exam (2026-2030 question pool): all 409 questions explained, practice exams, an offline quiz app and an Anki deck. https://getpathprobe.com/techradiopass/
+- [JackedIN path-level llms.txt](https://getpathprobe.com/jackedin/llms.txt): shorter JackedIN-only index already on the site
+- [Lab Bundle](https://getpathprobe.com/bundle/): PathProbe Pro + JackedIN, $24.99
+- [Terms](https://getpathprobe.com/terms.html)
+- [Privacy](https://getpathprobe.com/privacy.html)
+- [Refunds](https://getpathprobe.com/refund.html)

@@ -1,75 +1,34 @@
 # JackedIN
 
-> The terminal, evolved. An SSH, Telnet and serial terminal with a desktop window, a full command line and a local automation API, for Windows and Linux.
-
-JackedIN is a desktop terminal application. Run it with no arguments for the graphical window. Run it with a command and it stays in the terminal, prints a result, and exits, ready for scripts and pipes.
+> The SSH, Telnet and serial terminal built for AI agents. It waits for the device prompt and reads the complete output. A stdio MCP server and a token-protected localhost API (off by default) hook it into Cursor, Claude Desktop, and other MCP clients.
 
 Official website: https://getjackedin.com/
 The current product page is served at https://getpathprobe.com/jackedin/ (getjackedin.com redirects there).
 Support: service@getpathprobe.com
 
-## Features
+JackedIN runs the same engine from the window, the CLI, Python, Ansible, and MCP. `jackedin exec` (and the MCP `exec` tool) reads the command list first, waits until the device prompt returns, pages through `--More--` and similar markers, and can print JSON (`--json` or `--output json`, or `JACKEDIN_JSON=1`). Use it instead of piping into `jackedin connect`. Pacing flags are `--line-delay`, `--char-delay`, and `--wait-for-echo`. `--prompt REGEX` replaces the detected prompt; `--vendor NAME` forces a profile. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more.
 
-- SSH, Telnet and serial consoles in one desktop window
-- Full command-line interface (`jackedin ...`) for the same features
-- Local automation API (off by default, 127.0.0.1 only, Bearer token)
-- Serial consoles: DB9 RS-232 and RJ45-to-DB9 console cables; defaults to 9600 8N1; prefers common USB-serial adapters (FTDI, Prolific, CH340, CP210x)
-- SSH: passwords, one-time codes, OpenSSH and PuTTY keys, ssh-agent and ~/.ssh/config; host-key checks that always warn on a changed key
-- Source interface: pick the NIC or source IP for each outgoing connection
-- Clean, readable text logs (including from Junos-style CR CR LF consoles); raw mode when you need control codes
-- Tabs, split panes, a saved-session tree with search, recents, and reconnect after a dropped session
-- Network tools: port scan, session-limit test, other-sessions indicator after SSH login, ping and traceroute
-- Optional Wireshark/dumpcap capture on connect, including loopback filtered to the session port
+The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app open with the local API turned on, or run `jackedin headless`. The local API is off by default, listens on 127.0.0.1 only (port 47321 unless changed), and requires a Bearer token (`JACKEDIN_API_TOKEN` or the token saved in Settings). Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events. A 72-hour full trial unlocks every feature; after that a $19 one-time license is required (one license, one computer).
 
-- SFTP file transfer, session import (PuTTY, SecureCRT, MobaXterm, SSH config), fleet, backup and diff, NetBox and Nautobot sync, password-manager logins, an MCP server
+Coming in the next release (not in 1.2.1): in AI sessions, show-type commands run freely; a command that changes something runs only after a human approves it; the agent can never approve itself.
 
-## Automation
+Only use JackedIN on devices you own or are allowed to manage. Current release is JackedIN 1.2.1. There is no macOS build yet.
 
-- Dry-run: print the exact commands without connecting (`jackedin exec --dry-run`, `fleet --dry-run`)
-- Commit confirmed: `jackedin change junos --minutes 5` prints commit confirmed, confirm and rollback
-- Expect rules: YAML `command` / `expect_match` / `expect_no_match` checks with `--expect-file`
-- Enable mode: `--enable-password-env VAR`; the secret is never on the command line or logged
-- Python client `jackedin` and Nornir plugin `nornir-jackedin` (free; the app's trial or license is needed). Install: `pip install jackedin` (the same wheels are also on the v1.2.0 release)
-- pytest helpers: `assert_matches`, `jackedin_expect` fixture
-- Ansible collection `jackedin.terminal` in the portable zip; CI and unattended recipes
-- Python guide: https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md
+## Docs
 
-Only scan or connect to devices you own or are allowed to test.
+- [Product page and download](https://getpathprobe.com/jackedin/): Windows, Linux, and Raspberry Pi (arm64) builds, 72-hour trial, pricing
+- [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change (coming in the next release)
+- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
+- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.html): same guide as HTML
+- [JackedIN 1.2.1 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1): release notes, installers, and portable zips
+- [SHA256SUMS (JackedIN 1.2.1)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS): checksums for every file in that release
+- [Python guide](https://github.com/getpathprobe/jackedin-releases/blob/main/JackedIN-Python-Guide.md): free `jackedin` and `nornir-jackedin` packages (the app trial or a license is still required)
+- [Site-wide llms.txt](https://getpathprobe.com/llms.txt): JackedIN and PathProbe index
 
-## Platforms
+## Optional
 
-- Windows 10 and 11 x64: installer or portable zip
-- Ubuntu and Debian x86_64: .deb package
-- Linux x86_64: portable zip
-- Raspberry Pi OS 64-bit (arm64): .deb, portable tarball, or binary
-- macOS: no build yet
-
-Every release includes SHA-256 checksums (SHA256SUMS) and a user's guide.
-
-## Pricing
-
-- Free 3-day trial: every feature unlocked, no card and no sign-up required
-- License: $19 USD, one-time purchase. Includes 1 year of updates. Any version released in that year keeps working afterward.
-
-Checkout is handled by Paddle, the merchant of record. All sales are final, except where required by law.
-
-## Licensing
-
-One license equals one computer and one user, and is non-transferable (Windows or Linux). After purchase, a license key is emailed; paste it into the app or run `jackedin license activate`. The trial becomes a licensed copy with no reinstall.
-
-## Links
-
-- Website: https://getjackedin.com/
-- Product page: https://getpathprobe.com/jackedin/
-- Download (free 3-day trial): https://getpathprobe.com/jackedin/#download
-- User's guide: https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html
-- Buy: https://getpathprobe.com/jackedin/#pricing
-- Terms: https://getpathprobe.com/terms.html
-- Privacy: https://getpathprobe.com/privacy.html
-- Refunds: https://getpathprobe.com/refund.html
-- EULA: https://site-events.getpathprobe.workers.dev/dl/EULA.txt
-- Support: service@getpathprobe.com
-
-## Related product
-
-PathProbe is a separate product: a command-line network test tool for Linux and Windows. Free tier, plus Pro at $9.99 USD one-time. https://getpathprobe.com/
+- [Lab Bundle](https://getpathprobe.com/bundle/): PathProbe Pro + JackedIN, $24.99
+- [PathProbe](https://getpathprobe.com/): command-line network test tool; Free tier, Pro $9.99 one-time
+- [Terms](https://getpathprobe.com/terms.html)
+- [Privacy](https://getpathprobe.com/privacy.html)
+- [Refunds](https://getpathprobe.com/refund.html)

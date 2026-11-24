@@ -1,0 +1,127 @@
+# JackedIN and PathProbe — llms-full.txt
+
+> Extended agent context for getpathprobe.com. This file is a documentation-platform convention; it is not part of the llmstxt.org v2 specification. For a short index, use /llms.txt.
+
+Official site: https://getpathprobe.com/
+JackedIN: https://getpathprobe.com/jackedin/
+Support: service@getpathprobe.com
+Current versions: JackedIN 1.2.1, PathProbe 1.2.1.
+
+Use only on networks and devices you own or are authorized to test. Examples use 192.0.2.10 and router1. Do not put passwords on the command line; use JACKEDIN_PASSWORD or a credential reference.
+
+## JackedIN
+
+JackedIN is an SSH, Telnet and serial terminal for Windows 10/11 x64, Linux x86_64, and Raspberry Pi OS 64-bit (arm64). There is no macOS build yet. Run `jackedin` with no arguments for the desktop window. Run it with a command and it stays in the terminal, prints a result, and exits. On Windows, scripts should call `jackedin.com`, not `jackedin.exe`.
+
+Pricing: 72-hour full trial (window, command line, and local API, every feature on). After that, a $19 USD one-time license (launch price; regular $29) for one computer, non-transferable, with one year of updates. Activate with `jackedin license activate` or paste the key in the app. Checkout is handled by Paddle.
+
+Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more. `--vendor NAME` forces a profile; omit it and the prompt or banner picks one, including the pager and error strings.
+
+### Key CLI commands
+
+```
+jackedin                     open the window
+jackedin --help
+jackedin --version
+jackedin examples
+jackedin ports [--all]
+jackedin connect --host 192.0.2.10 --user admin
+jackedin connect --protocol telnet --host 192.0.2.10 --port 23
+jackedin connect --protocol serial --host COM5 --port 9600
+jackedin exec --host 192.0.2.10 --trust-host-key --json --cmd 'show version'
+jackedin fleet --inventory FILE [--cmd CMD] [--output json] [--dry-run]
+jackedin backup --host H [--vendor ios|junos]
+jackedin diff LEFT RIGHT
+jackedin scan --host H [--ports 22,80,443]
+jackedin ping --host H
+jackedin trace --host H
+jackedin mcp
+jackedin headless
+jackedin license status
+jackedin license activate KEY
+```
+
+`--output json` is the same as `--json`. `JACKEDIN_JSON=1` matches `--json`. `inventory sync` also accepts `--json`. `--template FILE` parses command output with a TextFSM-style template you supply.
+
+### Verified exec, pacing, and prompt detection
+
+Do not pipe commands into `jackedin connect` and assume the work finished. `connect` treats end-of-file on stdin as the end of the session; the device may still be paging.
+
+`jackedin exec` reads every command first (arguments, `--file`, or stdin), then drives one persistent session. It waits until the device prompt returns before sending the next command, and it pages through `--More--`, `---(more)---`, `---(more 57%)---`, `---(more 100%)---`, `---- More ----`, `Press any key`, and `Press <SPACE> to continue`. It reports a structured result. Each command is `{command, ok, output, prompt, matched_error, timed_out, duration_ms}`.
+
+Pacing:
+
+- `--line-delay MS` — gap between lines for exec, a stdin pipe on `connect`, and a multi-line paste. A serial session uses a 100 ms line delay when `--line-delay` is omitted.
+- `--char-delay MS` — pause between characters on a slow serial console.
+- `--wait-for-echo` — wait until the device echoes a line before sending the next one.
+- `!sleep 500` in a command list waits 500 milliseconds and sends nothing.
+- `--timeout SEC` limits each wait. Omit it and a line waits as long as the device needs.
+- The next exec command is never sent until the prompt returns.
+
+There is no `--terminator` flag. JackedIN treats the device prompt, and those pager markers, as the end of a command. `--prompt REGEX` replaces the prompt JackedIN detects. `--vendor NAME` forces a profile.
+
+On the API and MCP, the same pacing fields are `lineDelayMs`, `charDelayMs`, and `waitForEcho`.
+
+`--dry-run` prints the command plan and sends nothing. It does not connect.
+
+Example:
+
+```
+jackedin exec --host 192.0.2.10 --user admin --trust-host-key \
+  --json --timeout 8 --cmd 'show version'
+```
+
+The password is read from `JACKEDIN_PASSWORD` when `--password` is omitted.
+
+### Local API and MCP
+
+The local API is off until it is turned on in Settings. JackedIN listens on 127.0.0.1 only (port 47321 unless changed) and requires `Authorization: Bearer <token>`. Do not treat it as a network service to open up.
+
+`jackedin headless` serves the same API (it must still be enabled in Settings). Open, send, read, close, verified exec (`POST /v1/exec` and `POST /v1/sessions/{id}/exec`), and break (`POST /v1/sessions/{id}/break`) work without the `automationApi` setting. Scan, wait, ping, traceroute, and `GET /v1/events` follow `automationApi`.
+
+`jackedin mcp` is a stdio MCP server for that API. It dials 127.0.0.1 only. Leave JackedIN open with the API turned on. The token is `JACKEDIN_API_TOKEN` if set, otherwise the token saved in Settings. `JACKEDIN_API_PORT` overrides the port.
+
+Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events.
+
+`exec` and `send_break` use the local API token and do not require `automationApi`. wait, scan, ping, trace, and events follow `automationApi`. Prefer `exec` over piping. `scan_ports` tells the caller to only scan devices they are allowed to test.
+
+Client snippet (Cursor, Claude Desktop, and other stdio clients):
+
+```
+{
+  "mcpServers": {
+    "jackedin": {
+      "command": "jackedin",
+      "args": ["mcp"],
+      "env": {
+        "JACKEDIN_API_TOKEN": "paste-the-token-from-settings",
+        "JACKEDIN_API_PORT": "47321"
+      }
+    }
+  }
+}
+```
+
+Coming in the next release (not in 1.2.1): in AI sessions, show-type commands run freely. A command that changes something runs only after a human approves it. The agent can never approve itself. Treat “human approval before any change” as the headline; do not describe this as shipped.
+
+### Downloads and checksums
+
+Using JackedIN with AI agents: https://getpathprobe.com/jackedin/ai-agents/
+https://getpathprobe.com/jackedin/#download
+https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1
+SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS
+User's guide: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md
+
+## PathProbe
+
+PathProbe is a command-line network test tool for Linux and Windows. It has no graphical interface and no API. Commands include dhcp, interfaces, env, scan, link, internet, whoami, traceroute, static addressing, and target.
+
+JSON: Free includes `--json` on interfaces, env, link, internet, whoami, traceroute, scan, dhcp status, and license status, plus the dhcp run final JSON summary. Pro adds live `dhcp run --json` events and `--json` on target, static, dhcp release/stop, and profiles.
+
+`pathprobe mcp` is Pro. On Free it prints that the feature is Pro and exits 1. Tools: interfaces, link, scan, internet, traceroute, dhcp_run. Results use `pathprobe.v1`. `scan` and `dhcp_run` need `authorized` set to true.
+
+Pricing: Free is $0. Pro is $9.99 USD one-time, one license per computer, non-transferable, activated online with `pathprobe license activate --key ...`.
+
+Downloads: https://getpathprobe.com/#download
+Release: https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.1
+SHA256SUMS: https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.1/SHA256SUMS

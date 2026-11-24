@@ -24,3 +24,6 @@ table{width:100%;border-collapse:collapse}td,th{border:1px solid var(--g3);paddi
 footer{margin-top:56px;border-top:1px solid var(--g3);padding:18px 0;font-size:.9em;color:var(--mute)}footer .wrap{display:flex;gap:16px;flex-wrap:wrap}
 small{color:var(--mute)}
 @media(max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.hero img{width:180px;height:180px;margin:0 auto}.hero h1{font-size:2.3em}}
+
+article h1{color:var(--g);font-size:2.2em;line-height:1.15;margin:.4em 0 .5em}
+article p{max-width:70ch}
