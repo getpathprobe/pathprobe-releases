@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="420" viewBox="0 0 980 420" role="img" aria-labelledby="title desc">
+  <title id="title">PathProbe inline tap connection diagram</title>
+  <desc id="desc">Device 1 connects to USB NIC eth1 on a Raspberry Pi. The Pi bridges eth1 and eth2 as br-tap with no IP address. eth2, another USB NIC, connects to Device 2. The Pi built-in NIC eth0 is management only and is not bridged.</desc>
+  <rect width="980" height="420" fill="#0f1419"/>
+  <style>
+    .box { fill:#1b2430; stroke:#6ea8fe; stroke-width:2; rx:10; }
+    .pi { fill:#1b2430; stroke:#8bd450; stroke-width:2; rx:12; }
+    .mgmt { fill:#1b2430; stroke:#e6c07b; stroke-width:2; rx:10; }
+    .label { font-family: ui-sans-serif, Calibri, Helvetica, Arial, sans-serif; fill:#e8eef5; font-size:16px; }
+    .sub { font-family: ui-sans-serif, Calibri, Helvetica, Arial, sans-serif; fill:#9aa7b5; font-size:13px; }
+    .tiny { font-family: ui-sans-serif, Calibri, Helvetica, Arial, sans-serif; fill:#9aa7b5; font-size:12px; }
+    .wire { stroke:#d6deea; stroke-width:3; fill:none; }
+    .mgmtwire { stroke:#e6c07b; stroke-width:2.5; fill:none; stroke-dasharray:6 4; }
+    .title { font-family: ui-sans-serif, Calibri, Helvetica, Arial, sans-serif; fill:#e8eef5; font-size:22px; font-weight:700; }
+  </style>
+  <text x="40" y="36" class="title">PathProbe inline tap (Linux / Raspberry Pi, Pro)</text>
+
+  <!-- Device 1 -->
+  <rect class="box" x="30" y="150" width="150" height="90"/>
+  <text x="105" y="188" text-anchor="middle" class="label">Device 1</text>
+  <text x="105" y="210" text-anchor="middle" class="sub">endpoint</text>
+
+  <!-- USB NIC eth1 -->
+  <rect class="box" x="230" y="162" width="130" height="66"/>
+  <text x="295" y="190" text-anchor="middle" class="label">USB NIC</text>
+  <text x="295" y="210" text-anchor="middle" class="sub">eth1 upstream</text>
+
+  <!-- Pi + br-tap -->
+  <rect class="pi" x="410" y="80" width="250" height="230"/>
+  <text x="535" y="112" text-anchor="middle" class="label">Raspberry Pi</text>
+  <rect x="445" y="135" width="180" height="70" rx="8" fill="#243248" stroke="#8bd450" stroke-width="1.5"/>
+  <text x="535" y="166" text-anchor="middle" class="label">br-tap</text>
+  <text x="535" y="188" text-anchor="middle" class="sub">bridge, no IP address</text>
+  <rect class="mgmt" x="445" y="230" width="180" height="52"/>
+  <text x="535" y="252" text-anchor="middle" class="label">built-in NIC eth0</text>
+  <text x="535" y="270" text-anchor="middle" class="tiny">management only, never bridged</text>
+
+  <!-- USB NIC eth2 -->
+  <rect class="box" x="710" y="162" width="130" height="66"/>
+  <text x="775" y="190" text-anchor="middle" class="label">USB NIC</text>
+  <text x="775" y="210" text-anchor="middle" class="sub">eth2 downstream</text>
+
+  <!-- Device 2 -->
+  <rect class="box" x="800" y="150" width="150" height="90" opacity="0"/><!-- spacer -->
+  <rect class="box" x="800" y="150" width="150" height="90"/>
+  <text x="875" y="188" text-anchor="middle" class="label">Device 2</text>
+  <text x="875" y="210" text-anchor="middle" class="sub">endpoint</text>
+
+  <!-- Wires -->
+  <line class="wire" x1="180" y1="195" x2="230" y2="195"/>
+  <line class="wire" x1="360" y1="195" x2="410" y2="195"/>
+  <line class="wire" x1="660" y1="195" x2="710" y2="195"/>
+  <line class="wire" x1="840" y1="195" x2="800" y2="195"/>
+
+  <!-- Management LAN -->
+  <rect class="mgmt" x="410" y="340" width="250" height="50"/>
+  <text x="535" y="370" text-anchor="middle" class="label">Management network</text>
+  <line class="mgmtwire" x1="535" y1="282" x2="535" y2="340"/>
+
+  <text x="40" y="400" class="tiny">USB 3 adapters recommended. USB-C docks through USB-A converters often run at 480 Mbps. Capture uses dumpcap (Debian package wireshark-common).</text>
+</svg>

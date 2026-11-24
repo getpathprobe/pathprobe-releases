@@ -12,7 +12,7 @@ The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app
 
 PathProbe is command-line only: no GUI and no API. `pathprobe mcp` is a Pro feature. Free remains available; Pro is $9.99 one-time.
 
-Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.2.3 and PathProbe 1.2.1. New in 1.2.3: every shipped program (jackedin.exe, jackedin.com, jackedin, jackedin-cli) checks itself against a signed integrity manifest at startup; a modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Existing licenses are unaffected. Standalone Linux binaries ship with a <name>.integrity file to keep beside them. There is no macOS build of JackedIN yet.
+Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.2.3 and PathProbe 1.2.2. New in 1.2.3: every shipped program (jackedin.exe, jackedin.com, jackedin, jackedin-cli) checks itself against a signed integrity manifest at startup; a modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Existing licenses are unaffected. Standalone Linux binaries ship with a <name>.integrity file to keep beside them. There is no macOS build of JackedIN yet.
 
 ## JackedIN
 
@@ -28,8 +28,9 @@ Only use these tools on networks and devices you own or are authorized to test. 
 ## PathProbe
 
 - [Product page and download](https://getpathprobe.com/): Free and Pro builds
-- [PathProbe 1.2.1 release](https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.1): release notes and installers
-- [SHA256SUMS (PathProbe 1.2.1)](https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.1/SHA256SUMS): checksums for that release
+- [PathProbe 1.2.2 release](https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.2): release notes and installers
+- [SHA256SUMS (PathProbe 1.2.2)](https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.2/SHA256SUMS): checksums for that release
+- [Inline tap guide](https://getpathprobe.com/tap-guide.html): PathProbe 1.2.2 inline tap (Pro, Linux and Raspberry Pi only): connection diagram, capture commands, and manual tc netem impairment
 
 ## Optional
 

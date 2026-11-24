@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inline tap guide — PathProbe</title><meta name="description" content="PathProbe Pro inline tap for Linux and Raspberry Pi: connection diagram, capture and Wireshark commands, and optional Linux tc netem impairment."><link rel="stylesheet" href="style.css"></head><body>
+<header><strong><a href="index.html" style="color:inherit;text-decoration:none">PathProbe</a></strong><a href="index.html#features">Features</a><a href="index.html#pricing">Pricing</a><a href="index.html#download">Download</a><a href="blog/">Blog</a><a href="mailto:service@getpathprobe.com">Support</a></header>
+<h1>Inline tap guide</h1>
+<p>The inline tap is a <strong>Pro</strong> feature and is <strong>Linux only</strong> (including Raspberry Pi). It is not included in the Windows build. <code>tap status</code> and <code>tap reset</code> can be run on the Free tier so you can inspect or tear down a leftover bridge without a license; <code>tap bridge</code> and <code>tap capture</code> require Pro.</p>
+<p>This guide uses documentation addresses only (<code>192.0.2.0/24</code>). Do not copy real IPs, MAC addresses, or hostnames into examples or screenshots you share.</p>
+<h2>Connection diagram</h2>
+<p><img src="tap-guide.png" alt="Device 1 connects to USB NIC eth1 on a Raspberry Pi. The Pi bridges eth1 and eth2 as br-tap with no IP address. eth2 connects to Device 2. The built-in NIC eth0 is management only and is never bridged." width="980" height="420" style="max-width:100%;height:auto;background:#0f1419;border-radius:12px"></p>
+<p>Download the diagram: <a href="tap-guide.svg">SVG</a> · <a href="tap-guide.png">PNG</a> · <a href="TAP-GUIDE.md">Markdown copy</a></p>
+<h2>What it does</h2>
+<p>PathProbe builds a Linux bridge named <code>br-tap</code> between two member NICs and captures the traffic that passes through. The bridge itself has <strong>no IP address</strong>. Frames go through transparently: Device 1 and Device 2 keep talking as if they were connected to each other.</p>
+<ul>
+<li>Create the bridge (<code>tap bridge</code>)</li>
+<li>Capture to a pcapng file (<code>tap capture --file</code>)</li>
+<li>Stream live pcapng to stdout for Wireshark (<code>tap capture --stdout</code>)</li>
+<li>Inspect the setup (<code>tap status</code>, including <code>--json</code>)</li>
+<li>Tear the bridge down and restore each member NIC's pre-bridge flags, including promiscuous mode (<code>tap reset</code>)</li>
+</ul>
+<p>Capture uses <strong>dumpcap</strong> (Debian and Raspberry Pi OS package <code>wireshark-common</code>). Install it before the first capture. USB 3 adapters are recommended. USB-C NICs that only attach through USB-A converters often run at 480 Mbps; that is expected, not a PathProbe failure.</p>
+<p>The Pi (or other Linux host) built-in NIC is <strong>management only</strong>. Do not add it to the bridge. PathProbe refuses the default-route interface unless you pass <code>--allow-default-route</code>.</p>
+<p>Impairment with <code>tc netem</code> (delay, loss, and so on) is a <strong>manual Linux technique</strong>, not a PathProbe command yet. The examples below apply <code>tc</code> to the bridge <em>member</em> ports.</p>
+<h2>Commands</h2>
+<p>Activate a Pro license first on this computer, then:</p>
+<pre><code># Create the transparent bridge (Pro, Linux).
+sudo pathprobe tap bridge --upstream eth1 --downstream eth2 --mgmt eth0
+
+# Inspect (Free or Pro).
+pathprobe tap status
+pathprobe tap status --json
+
+# Capture to a file (Pro). Duration is a Go duration: 20s, not 20.
+sudo pathprobe tap capture --file pathprobe-tap.pcapng --duration 30s
+
+# Optional BPF filter (documentation address only).
+sudo pathprobe tap capture --file pathprobe-tap.pcapng --filter 'not host 192.0.2.10' --duration 30s
+
+# Live stream to Wireshark on the same computer (pcapng on stdout, logs on stderr).
+sudo pathprobe tap capture --stdout --duration 30s 2&gt;tap.log | wireshark -k -i -
+
+# Live stream over SSH to Wireshark on your workstation.
+# Use a documentation host (192.0.2.10) in examples; substitute your management address privately.
+ssh user@192.0.2.10 'sudo pathprobe tap capture --stdout --duration 30s' | wireshark -k -i -
+
+# Tear down the bridge and restore member NIC flags, including promiscuous mode.
+sudo pathprobe tap reset
+
+# If the bridge is already gone, reset is a no-op and does not need root.
+pathprobe tap reset
+</code></pre>
+<p><code>--stdout</code> and <code>--file -</code> are the same: pcapng on stdout. Do not combine <code>--stdout</code> with a real <code>--file</code> path.</p>
+<h2>Manual impairment with tc netem (not a PathProbe command)</h2>
+<p>These examples run on the Linux host that owns <code>br-tap</code>. They attach to a <strong>member port</strong> (<code>eth1</code> or <code>eth2</code>), not to <code>br-tap</code> itself. You need <code>iproute2</code> (<code>tc</code>). PathProbe does not add, show, or remove these rules for you.</p>
+<pre><code>tc qdisc show dev eth2
+
+# Delay and jitter (100 ms ± 20 ms)
+sudo tc qdisc add dev eth2 root netem delay 100ms 20ms
+sudo tc qdisc del dev eth2 root
+
+# Loss, duplicate, corrupt, reorder
+sudo tc qdisc add dev eth2 root netem loss 1%
+sudo tc qdisc add dev eth2 root netem duplicate 1%
+sudo tc qdisc add dev eth2 root netem corrupt 0.1%
+sudo tc qdisc add dev eth2 root netem delay 10ms reorder 5%
+sudo tc qdisc del dev eth2 root
+
+# Rate limit with Token Bucket Filter (tbf), 10 Mbit/s
+sudo tc qdisc add dev eth2 root tbf rate 10mbit burst 32kbit latency 50ms
+sudo tc qdisc del dev eth2 root
+</code></pre>
+<p>There can be only one <code>root</code> qdisc at a time; <code>tc qdisc del dev eth2 root</code> removes whatever you installed.</p>
+<h2>Optional Linux inspection</h2>
+<pre><code>ip -br link
+bridge link
+bridge fdb show br br-tap
+ip -br addr show br-tap
+sudo tcpdump -n -i br-tap -c 20 'icmp or arp'
+ip -br addr show eth0
+</code></pre>
+<h2>Reset and cleanup</h2>
+<p><code>pathprobe tap reset</code> deletes <code>br-tap</code> and restores saved pre-bridge flags on the member NICs. After reset, give NetworkManager (or your DHCP client) a chance to recover an address on a member NIC that should be used again. Do not add the management NIC to the bridge, and do not apply netem on the management NIC.</p>
+<p>Buy PathProbe Pro: <a href="https://getpathprobe.com/#pricing">https://getpathprobe.com/#pricing</a>. Download: <a href="index.html#download">PathProbe 1.2.2</a>.</p>
+<footer><span>© 2026 PathProbe. All rights reserved.</span><a href="blog/">Blog</a><a href="privacy.html">Privacy</a><a href="refund.html">Refunds</a><a href="terms.html">Terms</a><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></footer></body></html>

@@ -30,7 +30,7 @@
   "description": "A command-line network test tool for Linux and Windows: DHCP client simulation, interface and link checks, subnet scans, traceroute and packet capture.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.2.1",
+  "softwareVersion": "1.2.2",
   "downloadUrl": "https://getpathprobe.com/#download",
   "offers": [
     {
@@ -78,7 +78,7 @@
 
 <h1>PathProbe</h1><p>A command-line network test tool for Linux and Windows: DHCP client simulation, interface and link checks, subnet scans, traceroute and packet capture.</p>
 <p class="note"><strong>Command-line only.</strong> PathProbe has no graphical interface and no API. You run it from a terminal (Linux shell, or an Administrator Command Prompt/PowerShell on Windows).</p>
-<p><a class="btn" href="#download">Download v1.2.1</a> <a class="btn buy-pro" id="buy-hero" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg">Buy Pro — $9.99</a> <a href="#pricing">See pricing</a></p>
+<p><a class="btn" href="#download">Download v1.2.2</a> <a class="btn buy-pro" id="buy-hero" href="https://getpathprobe.com/?price_id=pri_01m73ekxcrj5517ar1aqrw71rg">Buy Pro — $9.99</a> <a href="#pricing">See pricing</a></p>
 <p class="note">License delivery may take up to 1 hour after purchase. Check your inbox and spam folder.</p>
 <p class="edu-line"><small>Students, classes and CTF teams: 40% off, email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</small></p>
 <pre>$ sudo pathprobe dhcp run --iface eth0 --count 5 --authorized
@@ -95,15 +95,16 @@ $ pathprobe traceroute example.com</pre>
 <div class="card"><h3>Standards checks &amp; JSON</h3>Flags results that break RFC/IEEE standards; JSON output and packet capture for scripts.</div></div>
 <h2>Platforms</h2><ul><li>Debian/Ubuntu (.deb, amd64 &amp; arm64)</li><li>Other Linux (.tar.gz, amd64 &amp; arm64)</li><li>Windows 10/11 x64 (installer or portable zip; requires <a href="https://npcap.com/#download">Npcap</a>)</li><li><strong>macOS: Mac version coming soon.</strong></li></ul>
 <p>Every release ships with SHA-256 checksums (<code>SHA256SUMS</code>).</p>
-<h2 id="download">Download v1.2.1</h2>
+<h2 id="download">Download v1.2.2</h2>
 <ul>
-<li>Debian/Ubuntu x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.1_amd64.deb"><code>pathprobe_1.2.1_amd64.deb</code></a></li>
-<li>Debian/Ubuntu arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.1_arm64.deb"><code>pathprobe_1.2.1_arm64.deb</code></a></li>
-<li>Other Linux x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.1-linux-amd64.tar.gz"><code>pathprobe-1.2.1-linux-amd64.tar.gz</code></a></li>
-<li>Other Linux arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.1-linux-arm64.tar.gz"><code>pathprobe-1.2.1-linux-arm64.tar.gz</code></a></li>
-<li>Windows 10/11 x64 (portable zip; requires <a href="https://npcap.com/#download">Npcap</a>) — <a href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.1-windows-amd64.zip"><code>PathProbe-1.2.1-windows-amd64.zip</code></a></li>
+<li>Debian/Ubuntu x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_amd64.deb"><code>pathprobe_1.2.2_amd64.deb</code></a></li>
+<li>Debian/Ubuntu arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_arm64.deb"><code>pathprobe_1.2.2_arm64.deb</code></a></li>
+<li>Other Linux x86_64 — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.2-linux-amd64.tar.gz"><code>pathprobe-1.2.2-linux-amd64.tar.gz</code></a></li>
+<li>Other Linux arm64 / Raspberry Pi — <a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe-1.2.2-linux-arm64.tar.gz"><code>pathprobe-1.2.2-linux-arm64.tar.gz</code></a></li>
+<li>Windows 10/11 x64 (portable zip; requires <a href="https://npcap.com/#download">Npcap</a>) — <a href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.2-windows-amd64.zip"><code>PathProbe-1.2.2-windows-amd64.zip</code></a></li>
 </ul>
-<p><strong>What's new in 1.2.1:</strong> the run log now keeps full MAC and IP addresses so you can see your own results later, and the new free <code>pathprobe log share</code> command writes a scrubbed copy (MACs and real IPs removed) for support tickets and forum posts. License keys, passwords, and webhook/ntfy URLs are never saved in the log, including webhook URLs passed to <code>schedule install</code>.</p>
+<p><strong>What's new in 1.2.2:</strong> <strong>inline tap</strong> (Pro, Linux and Raspberry Pi only; not in the Windows build). <code>pathprobe tap</code> bridges two USB NICs into a transparent bridge with no IP address, captures to a pcapng file or streams live to Wireshark, and <code>tap reset</code> tears it down and restores each NIC. The built-in NIC stays on management. See the <a href="tap-guide.html">inline tap guide</a> for the connection diagram, the capture commands, and manual Linux <code>tc netem</code> impairment (delay, jitter, loss, rate limit). <code>tap status</code> and <code>tap reset</code> also work on Free.</p>
+<p><strong>Also in 1.2.1:</strong> the run log now keeps full MAC and IP addresses so you can see your own results later, and the new free <code>pathprobe log share</code> command writes a scrubbed copy (MACs and real IPs removed) for support tickets and forum posts. License keys, passwords, and webhook/ntfy URLs are never saved in the log, including webhook URLs passed to <code>schedule install</code>.</p>
 <p><strong>Also in 1.2:</strong> <code>dhcp run</code> JSON/NDJSON output, a run log, an MCP server for AI agents, scheduled profile runs with ntfy and webhook alerts, NetBox/Nautobot inventory, and CLI polish. Pro includes live <code>dhcp run --json</code> events, the new <code>--json</code> on target/static/dhcp release/stop/profile, MCP, and scheduled alerts. Free includes the nine JSON commands from 1.1.3, the dhcp run final summary, the run log, and inventory. 1.1.3 seats stay Pro on the same computer; a 1.1.2 key needs a one-time online activation.</p>
 <p>SHA-256 checksums: <a href="https://site-events.getpathprobe.workers.dev/dl/SHA256SUMS"><code>SHA256SUMS</code></a>. All files are also on <a href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">GitHub Releases</a>.</p>
 <h2 id="pricing">Pricing</h2><div class="grid">
@@ -114,7 +115,7 @@ $ pathprobe traceroute example.com</pre>
 <p class="edu-line"><small>Students, classes and CTF teams: 40% off, email <a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a>.</small></p></div></div>
 <div class="compare-wrap">
 <h3 id="compare">Free vs Pro</h3>
-<p class="compare-legend">This table describes the current PathProbe 1.2.1 download.</p>
+<p class="compare-legend">This table describes the current PathProbe 1.2.2 download.</p>
 <table class="compare">
   <caption class="visually-hidden">PathProbe Free and Pro feature comparison</caption>
   <thead>
@@ -125,7 +126,7 @@ $ pathprobe traceroute example.com</pre>
     </tr>
   </thead>
   <tbody>
-    <tr class="group"><th scope="colgroup" colspan="3">Available now (v1.2.1)</th></tr>
+    <tr class="group"><th scope="colgroup" colspan="3">Available now (v1.2.2)</th></tr>
     <tr>
       <th scope="row">Price</th>
       <td class="col-free" data-label="Free">$0</td>
@@ -170,6 +171,11 @@ $ pathprobe traceroute example.com</pre>
       <th scope="row">Saved profiles with export</th>
       <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No</td>
       <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes</td>
+    </tr>
+    <tr>
+      <th scope="row">Inline tap<span class="feature-note">Transparent bridge between two USB NICs, pcapng capture or live Wireshark stream. Linux and Raspberry Pi only. <a href="tap-guide.html">Guide</a></span></th>
+      <td class="col-free no" data-label="Free"><span aria-hidden="true">—</span> No (tap status and tap reset only)</td>
+      <td class="col-pro yes" data-label="Pro"><span aria-hidden="true">✓</span> Yes (Linux and Raspberry Pi)</td>
     </tr>
     <tr>
       <th scope="row">License</th>

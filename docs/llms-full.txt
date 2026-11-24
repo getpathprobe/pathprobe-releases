@@ -5,7 +5,7 @@
 Official site: https://getpathprobe.com/
 JackedIN: https://getpathprobe.com/jackedin/
 Support: service@getpathprobe.com
-Current versions: JackedIN 1.2.3, PathProbe 1.2.1.
+Current versions: JackedIN 1.2.3, PathProbe 1.2.2.
 
 Use only on networks and devices you own or are authorized to test. Examples use 192.0.2.10 and router1. Do not put passwords on the command line; use JACKEDIN_PASSWORD or a credential reference.
 
@@ -134,9 +134,11 @@ JSON: Free includes `--json` on interfaces, env, link, internet, whoami, tracero
 
 Pricing: Free is $0. Pro is $9.99 USD one-time, one license per computer, non-transferable, activated online with `pathprobe license activate --key ...`.
 
+Inline tap (new in 1.2.2, Pro, Linux and Raspberry Pi only; not in the Windows build): `sudo pathprobe tap bridge --upstream eth1 --downstream eth2 --mgmt eth0` builds a transparent bridge (br-tap, no IP) between two USB NICs; `sudo pathprobe tap capture --file pathprobe-tap.pcapng --duration 30s` captures with dumpcap (package wireshark-common), `--stdout` streams live pcapng for Wireshark; `pathprobe tap status [--json]` and `pathprobe tap reset` work on Free too. The built-in NIC stays on management. Impairment with tc netem is a manual Linux technique, not a PathProbe command. Guide: https://getpathprobe.com/tap-guide.html
+
 Downloads: https://getpathprobe.com/#download
-Release: https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.1
-SHA256SUMS: https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.1/SHA256SUMS
+Release: https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.2
+SHA256SUMS: https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.2/SHA256SUMS
 
 ## Terms
 
