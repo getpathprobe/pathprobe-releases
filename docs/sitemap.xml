@@ -41,6 +41,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://getpathprobe.com/LICENSE</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/techradiopass/EULA.txt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://getpathprobe.com/terms.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

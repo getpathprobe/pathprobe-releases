@@ -1,0 +1,41 @@
+TECH RADIO PASS END USER LICENSE AGREEMENT
+
+Copyright © 2026 Tech Radio Pass. All rights reserved.
+
+This agreement is between you and the publisher of Tech Radio Pass (the "Kit"):
+the study guide, cheat sheets, practice quizzes, offline quiz app, and Anki deck.
+
+By downloading, unzipping, or using the Kit, you agree to this agreement. If you
+do not agree, do not use it and delete your copy.
+
+1. Personal license. A purchase gives you a personal, non-exclusive,
+   non-transferable license to use the Kit for your own study. The quiz-app
+   license key activates on one device. Activating again on the same device is
+   allowed. Another device needs its own purchase.
+
+2. Order stamp and downloads. Files are stamped with your order number. Your
+   download link works a limited number of times (currently 3) and expires
+   (currently after 90 days). Please save the zip. The stamp is not personal
+   information other than the order number.
+
+3. No redistribution. You may not copy, post, share, resell, or give the files
+   or the license key to anyone else, or include them in another product.
+
+4. No reverse engineering. You may not reverse engineer, decompile, or bypass
+   the quiz-app license or activation check, except where a statute expressly
+   forbids this limit.
+
+5. Public-domain questions. The Technician (Element 2) question text is a
+   public-domain work of the NCVEC Question Pool Committee. Explanations, cheat
+   sheets, practice compilations, quiz software, layout, and deck design are
+   original to Tech Radio Pass and are reserved.
+
+6. No affiliation or pass guarantee. Tech Radio Pass is an independent study
+   aid, not affiliated with the FCC, ARRL, or NCVEC, and does not guarantee a
+   passing score. Verify information with official sources before you test or
+   operate.
+
+7. No warranty; liability. The Kit is provided "as is." To the maximum extent
+   permitted by law, liability is limited to the amount you paid.
+
+8. Contact. service@getpathprobe.com

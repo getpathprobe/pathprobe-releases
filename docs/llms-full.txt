@@ -136,3 +136,14 @@ Pricing: Free is $0. Pro is $9.99 USD one-time, one license per computer, non-tr
 Downloads: https://getpathprobe.com/#download
 Release: https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.1
 SHA256SUMS: https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.1/SHA256SUMS
+
+## Terms
+
+PathProbe, JackedIN, and Tech Radio Pass are proprietary. Copyright 2026. All rights reserved. One license activates on one computer (re-activation on the same computer is allowed). Do not redistribute, resell, share license keys, or reverse engineer the software or study files, except where a statute forbids that limit. Use PathProbe only on networks you own or are authorized to test.
+
+- Terms: https://getpathprobe.com/terms.html
+- PathProbe EULA (v1.1): https://getpathprobe.com/LICENSE
+- JackedIN EULA: https://github.com/getpathprobe/jackedin-releases/blob/main/EULA.txt
+- Tech Radio Pass EULA: https://getpathprobe.com/techradiopass/EULA.txt
+- Privacy: https://getpathprobe.com/privacy.html
+- Refunds: https://getpathprobe.com/refund.html
