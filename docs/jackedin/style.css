@@ -22,6 +22,10 @@ pre,code{font-family:ui-monospace,Consolas,monospace;background:#031203;color:va
 table{width:100%;border-collapse:collapse}td,th{border:1px solid var(--g3);padding:8px;text-align:left}th{color:var(--g)}
 .xsell{display:flex;gap:16px;align-items:center}
 footer{margin-top:56px;border-top:1px solid var(--g3);padding:18px 0;font-size:.9em;color:var(--mute)}footer .wrap{display:flex;gap:16px;flex-wrap:wrap}
+.listings{margin:32px 0 0;padding:0}
+.listings a{display:inline-block;text-decoration:none;line-height:0}
+.listings a:hover{opacity:.9}
+.listings img{display:block;width:150px;height:50px;border:0}
 small{color:var(--mute)}
 @media(max-width:700px){.hero{grid-template-columns:1fr;text-align:center}.hero img{width:180px;height:180px;margin:0 auto}.hero h1{font-size:2.3em}}
 
