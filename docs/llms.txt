@@ -8,21 +8,21 @@ Support: service@getpathprobe.com
 
 JackedIN runs the same engine from the window, the CLI, Python, Ansible, and MCP. `jackedin exec` (and the MCP `exec` tool) reads the command list first, waits until the device prompt returns, pages through `--More--` and similar markers, and can print JSON (`--json` or `--output json`, or `JACKEDIN_JSON=1`). Use it instead of piping into `jackedin connect`. Pacing flags are `--line-delay`, `--char-delay`, and `--wait-for-echo`. `--prompt REGEX` replaces the detected prompt; `--vendor NAME` forces a profile. Built-in profiles for Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik and more.
 
-The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app open with the local API turned on, or run `jackedin headless`. The local API is off by default, listens on 127.0.0.1 only (port 47321 unless changed), and requires a Bearer token (`JACKEDIN_API_TOKEN` or the token saved in Settings). Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events. A 72-hour full trial unlocks every feature; after that a $19 one-time license is required (one license, one computer). Coming in the next release (not in 1.2.1): in AI sessions, show-type commands run freely; a command that changes something runs only after a human approves it; the agent can never approve itself.
+The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app open with the local API turned on, or run `jackedin headless`. The local API is off by default, listens on 127.0.0.1 only (port 47321 unless changed), and requires a Bearer token (`JACKEDIN_API_TOKEN` or the token saved in Settings). Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events. A 72-hour full trial unlocks every feature; after that a $19 one-time license is required (one license, one computer). New in 1.2.2: in AI sessions (MCP and the local API), show-type commands run freely; a command that changes something runs only after a person approves it in the window or on the jackedin headless terminal; a denial or 60 seconds with no answer means it is not sent; the agent can never approve itself.
 
 PathProbe is command-line only: no GUI and no API. `pathprobe mcp` is a Pro feature. Free remains available; Pro is $9.99 one-time.
 
-Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.2.1 and PathProbe 1.2.1. There is no macOS build of JackedIN yet.
+Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.2.2 and PathProbe 1.2.1. There is no macOS build of JackedIN yet.
 
 ## JackedIN
 
-- [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change (coming in the next release)
+- [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change
 - [Coming from plink?](https://getpathprobe.com/jackedin/ai-agents/#from-plink): jackedin exec waits for the device prompt; plink sends a command file or stdin in one block and remains a better tiny, free SSH transport for Git
 - [Product page and download](https://getpathprobe.com/jackedin/): Windows, Linux, and Raspberry Pi (arm64) builds, 72-hour trial, pricing
-- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
-- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.html): same guide as HTML
-- [JackedIN 1.2.1 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1): release notes, installers, and portable zips
-- [SHA256SUMS (JackedIN 1.2.1)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS): checksums for every file in that release
+- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
+- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.html): same guide as HTML
+- [JackedIN 1.2.2 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.2): release notes, installers, and portable zips
+- [SHA256SUMS (JackedIN 1.2.2)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/SHA256SUMS): checksums for every file in that release
 - [Python guide](https://github.com/getpathprobe/jackedin-releases/blob/main/JackedIN-Python-Guide.md): free `jackedin` and `nornir-jackedin` packages (the app trial or a license is still required)
 
 ## PathProbe

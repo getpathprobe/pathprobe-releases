@@ -34,7 +34,7 @@
   "description": "The SSH and serial terminal built for AI agents. It waits for the device prompt and reads the complete output. Free 3-day trial, then $19 USD one-time.",
   "operatingSystem": "Windows, Linux",
   "applicationCategory": "UtilitiesApplication",
-  "softwareVersion": "1.2.1",
+  "softwareVersion": "1.2.2",
   "downloadUrl": "https://getpathprobe.com/jackedin/#download",
   "offers": {
     "@type": "Offer",
@@ -57,7 +57,7 @@
 <h1>JackedIN™</h1>
 <p class="tag">The SSH and serial terminal built for AI agents.</p>
 <p>JackedIN waits for the device prompt and reads the complete output, so an agent knows whether a command finished. A built-in MCP server and a token-protected localhost API — off by default — hook it into Cursor, Claude Desktop, and other MCP clients.</p>
-<p class="note"><b>Human approval before any change</b> (coming in the next release): in AI sessions, show-type commands run freely. A command that changes something runs only after a human approves it. The agent can never approve itself.</p>
+<p class="note"><b>Human approval before any change</b> (new in 1.2.2): in AI sessions, show-type commands run freely. A command that changes something runs only after a person approves it. The agent can never approve itself.</p>
 <p>Try every feature free for 72 hours. <a href="/jackedin/ai-agents/">Using JackedIN with AI agents</a></p>
 <a class="btn primary" href="#download">Download free trial</a>
 <!-- Purchase CTA gated by SALES_ENABLED in the footer script. Set that flag to true to restore checkout. -->
@@ -121,10 +121,18 @@ from jackedin import Jackedin
 device = Jackedin("192.0.2.10", username="netops")   # password from JACKEDIN_PASSWORD
 print(device.dry_run(["show version"]).text)          # does not connect
 report = device.run(["show version"], expect=[{"command": "show version", "expect_match": "Version"}])</pre>
-<p>Full steps: the <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md">Python guide</a>, the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a> (Python, Automation and AI agents, Command reference), and the <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/jackedin-python-examples-1.2.0.zip">examples zip</a> (notebook, recipe, CI and credential recipes). JackedIN 1.2.1 answers a console that only asks for <code>Password:</code> even when <code>username</code> is set.</p></section>
+<p>Full steps: the <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md">Python guide</a>, the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a> (Python, Automation and AI agents, Command reference), and the <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/jackedin-python-examples-1.2.0.zip">examples zip</a> (notebook, recipe, CI and credential recipes). JackedIN answers a console that only asks for <code>Password:</code> even when <code>username</code> is set.</p></section>
 
 <section id="download"><h2>Download</h2>
-<p class="note">JackedIN 1.2.1 is here, with serial console login and <code>enable</code> fixes. Import sessions, fleet, backup of a running-config, SFTP, and more — still a free 3-day trial. No macOS build yet.</p>
+<p class="note">JackedIN 1.2.2 is here: AI agents are read-only until a person approves a change, a new plink mode, and clearer license checks. Import sessions, fleet, backup of a running-config, SFTP, and more — still a free 3-day trial. No macOS build yet.</p>
+<h3>What's new in 1.2.2</h3>
+<ul>
+<li><b>Read-only AI by default.</b> Over MCP and the local API, <code>show</code>, <code>display</code>, <code>get</code>, <code>ping</code> and <code>traceroute</code> run. A command that would change the device waits until a person approves it in the window or, for <code>jackedin headless</code>, on the terminal. A denial, or 60 seconds with no answer, means it is not sent. The agent cannot approve it.</li>
+<li>Headless approval fix: after a prompt times out, the next <code>allow</code> or <code>deny</code> is read correctly, on Windows and Linux.</li>
+<li><b>plink mode:</b> <code>jackedin plink</code> takes the common PuTTY plink flags, and each line waits for the device prompt. <code>-batch</code> still refuses a changed host key. The local API also supports <code>hostKeyPolicy: accept-new</code>.</li>
+<li>A revoked license stops working on the next launch. Offline, a license or trial keeps working for 24 hours, then says it has to be checked online once.</li>
+<li>The portable <code>jackedin.exe</code> is the same file the installer writes, and <code>SHA256SUMS</code> lists it.</li>
+</ul>
 <h3>What's new in 1.2.1</h3>
 <ul>
 <li>A serial console that only shows <code>Password:</code> is answered even when a username is set.</li>
@@ -145,20 +153,20 @@ report = device.run(["show version"], expect=[{"command": "show version", "expec
 <li><b>New Nov 21:</b> a free Python client (<code>jackedin</code>), a Nornir plugin (<code>nornir-jackedin</code>) and pytest helpers, plus an examples zip. <a href="#automation">Why and how to use them</a>.</li>
 </ul>
 <table><tr><th>Platform</th><th>File</th></tr>
-<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.1_windows_x64.zip"><code>jackedin_1.2.1_windows_x64.zip</code></a></td></tr>
-<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.1_x64-setup.exe"><code>JackedIN_1.2.1_x64-setup.exe</code></a></td></tr>
-<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.1_linux_x64.zip"><code>jackedin_1.2.1_linux_x64.zip</code></a></td></tr>
-<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.1_amd64.deb"><code>JackedIN_1.2.1_amd64.deb</code></a></td></tr>
-<tr id="dl-pi"><td>Raspberry Pi OS 64-bit (arm64)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.1_arm64.deb"><code>JackedIN_1.2.1_arm64.deb</code></a></td></tr>
-<tr><td>Raspberry Pi OS 64-bit — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.1_linux_arm64.tar.gz"><code>jackedin_1.2.1_linux_arm64.tar.gz</code></a></td></tr>
-<tr><td>Raspberry Pi OS 64-bit — binary only</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.1_linux_arm64"><code>jackedin_1.2.1_linux_arm64</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.2_windows_x64.zip"><code>jackedin_1.2.2_windows_x64.zip</code></a></td></tr>
+<tr><td>Windows 10/11 x64 — installer</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.2_x64-setup.exe"><code>JackedIN_1.2.2_x64-setup.exe</code></a></td></tr>
+<tr><td>Linux x86_64 — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.2_linux_x64.zip"><code>jackedin_1.2.2_linux_x64.zip</code></a></td></tr>
+<tr><td>Ubuntu / Debian x86_64</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.2_amd64.deb"><code>JackedIN_1.2.2_amd64.deb</code></a></td></tr>
+<tr id="dl-pi"><td>Raspberry Pi OS 64-bit (arm64)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN_1.2.2_arm64.deb"><code>JackedIN_1.2.2_arm64.deb</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — portable</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.2_linux_arm64.tar.gz"><code>jackedin_1.2.2_linux_arm64.tar.gz</code></a></td></tr>
+<tr><td>Raspberry Pi OS 64-bit — binary only</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin_1.2.2_linux_arm64"><code>jackedin_1.2.2_linux_arm64</code></a></td></tr>
 <tr><td>Python client (any OS, Python 3.9+)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/jackedin-1.2.0-py3-none-any.whl"><code>jackedin-1.2.0-py3-none-any.whl</code></a></td></tr>
 <tr><td>Nornir plugin (Python 3.10+)</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/nornir_jackedin-1.2.0-py3-none-any.whl"><code>nornir_jackedin-1.2.0-py3-none-any.whl</code></a></td></tr>
 <tr><td>Python guide and examples</td><td><a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/JackedIN-Python-Guide.md"><code>JackedIN-Python-Guide.md</code></a>, <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/jackedin-python-examples-1.2.0.zip"><code>jackedin-python-examples-1.2.0.zip</code></a></td></tr>
 <tr><td>macOS</td><td>No macOS build yet</td></tr></table>
-<p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. An installer is also available: <code>JackedIN_1.2.1_x64-setup.exe</code>. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
-<b>Linux:</b> <code>sudo apt install ./JackedIN_1.2.1_amd64.deb</code><br>
-<b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.2.1_arm64.deb</code><br>
+<p><b>Windows:</b> unzip the portable zip and run <code>jackedin.exe</code>; scripts use <code>jackedin.com</code>. No admin rights needed. An installer is also available: <code>JackedIN_1.2.2_x64-setup.exe</code>. It is not code-signed yet, so SmartScreen may say “Windows protected your PC”. Choose <b>More info</b> → <b>Run anyway</b>.<br>
+<b>Linux:</b> <code>sudo apt install ./JackedIN_1.2.2_amd64.deb</code><br>
+<b>Raspberry Pi:</b> <code>sudo apt install ./JackedIN_1.2.2_arm64.deb</code><br>
 <b>Python:</b> <code>pip install jackedin</code> (or the wheel URL under <a href="#automation">Automation</a>).<br>
 Every release includes <a href="https://site-events.getpathprobe.workers.dev/dl/jackedin/SHA256SUMS"><code>SHA256SUMS</code></a> and the <a href="https://site-events.getpathprobe.workers.dev/dl/JackedIN-Users-Guide.html">user's guide</a>. All files are also on <a href="https://github.com/getpathprobe/jackedin-releases/releases/latest">GitHub Releases</a>.</p></section>
 

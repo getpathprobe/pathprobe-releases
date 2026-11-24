@@ -5,7 +5,7 @@
 Official site: https://getpathprobe.com/
 JackedIN: https://getpathprobe.com/jackedin/
 Support: service@getpathprobe.com
-Current versions: JackedIN 1.2.1, PathProbe 1.2.1.
+Current versions: JackedIN 1.2.2, PathProbe 1.2.1.
 
 Use only on networks and devices you own or are authorized to test. Examples use 192.0.2.10 and router1. Do not put passwords on the command line; use JACKEDIN_PASSWORD or a credential reference.
 
@@ -81,7 +81,7 @@ The PuTTY manual documents `plink -m` as reading a command file, and says that m
 
 `jackedin exec` (and the MCP `exec` tool) sends one command, waits until the prompt on `router1` is back, then sends the next. Optional `--json` reports whether each command succeeded. If you already have PuTTY sessions, JackedIN can import them.
 
-Keep plink for Git and for a single remote command on a Unix server. Use JackedIN for device CLI, serial consoles, and agents. Coming in the next release: human approval before any change (show-type commands run freely; the agent cannot approve a change itself).
+Keep plink for Git and for a single remote command on a Unix server. Use JackedIN for device CLI, serial consoles, and agents. Since 1.2.2: human approval before any change (show-type commands run freely; the agent cannot approve a change itself), and jackedin plink accepts the common PuTTY plink flags.
 
 ### Local API and MCP
 
@@ -112,16 +112,16 @@ Client snippet (Cursor, Claude Desktop, and other stdio clients):
 }
 ```
 
-Coming in the next release (not in 1.2.1): in AI sessions, show-type commands run freely. A command that changes something runs only after a human approves it. The agent can never approve itself. Treat “human approval before any change” as the headline; do not describe this as shipped.
+Shipped in 1.2.2: in AI sessions (MCP and the local API), show-type commands run freely. A command that changes something runs only after a person approves it in the window or on the jackedin headless terminal. A denial or 60 seconds with no answer means it is not sent. The agent can never approve itself. Treat “human approval before any change” as the headline.
 
 ### Downloads and checksums
 
 Using JackedIN with AI agents: https://getpathprobe.com/jackedin/ai-agents/
 Coming from plink?: https://getpathprobe.com/jackedin/ai-agents/#from-plink
 https://getpathprobe.com/jackedin/#download
-https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1
-SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS
-User's guide: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md
+https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.2
+SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/SHA256SUMS
+User's guide: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.md
 
 ## PathProbe
 
