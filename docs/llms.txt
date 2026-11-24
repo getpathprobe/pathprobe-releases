@@ -17,6 +17,7 @@ Only use these tools on networks and devices you own or are authorized to test. 
 ## JackedIN
 
 - [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change (coming in the next release)
+- [Coming from plink?](https://getpathprobe.com/jackedin/ai-agents/#from-plink): jackedin exec waits for the device prompt; plink sends a command file or stdin in one block and remains a better tiny, free SSH transport for Git
 - [Product page and download](https://getpathprobe.com/jackedin/): Windows, Linux, and Raspberry Pi (arm64) builds, 72-hour trial, pricing
 - [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
 - [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/JackedIN-Users-Guide.html): same guide as HTML

@@ -73,6 +73,16 @@ jackedin exec --host 192.0.2.10 --user admin --trust-host-key \
 
 The password is read from `JACKEDIN_PASSWORD` when `--password` is omitted.
 
+### Coming from plink?
+
+Plink is a fine, free SSH command-line tool. It is the wrong shape for an AI agent talking to a switch.
+
+The PuTTY manual documents `plink -m` as reading a command file, and says that multi-line files are known not to work with certain embedded servers, such as Cisco routers. Plink can also take commands on stdin. In both cases it does not wait for the device prompt or page through `--More--`. The usual workaround is `timeout`, `pause`, or `sleep` between lines.
+
+`jackedin exec` (and the MCP `exec` tool) sends one command, waits until the prompt on `router1` is back, then sends the next. Optional `--json` reports whether each command succeeded. If you already have PuTTY sessions, JackedIN can import them.
+
+Keep plink for Git and for a single remote command on a Unix server. Use JackedIN for device CLI, serial consoles, and agents. Coming in the next release: human approval before any change (show-type commands run freely; the agent cannot approve a change itself).
+
 ### Local API and MCP
 
 The local API is off until it is turned on in Settings. JackedIN listens on 127.0.0.1 only (port 47321 unless changed) and requires `Authorization: Bearer <token>`. Do not treat it as a network service to open up.
@@ -107,6 +117,7 @@ Coming in the next release (not in 1.2.1): in AI sessions, show-type commands ru
 ### Downloads and checksums
 
 Using JackedIN with AI agents: https://getpathprobe.com/jackedin/ai-agents/
+Coming from plink?: https://getpathprobe.com/jackedin/ai-agents/#from-plink
 https://getpathprobe.com/jackedin/#download
 https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.1
 SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.1/SHA256SUMS

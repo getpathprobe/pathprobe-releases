@@ -69,6 +69,12 @@
   --json --timeout 8 --cmd 'show version'
 </code></pre>
 
+<h2 id="from-plink">Coming from plink?</h2>
+<p>Plink is a fine, free SSH command-line tool. It is the wrong shape for an AI agent talking to a switch.</p>
+<p>The PuTTY manual documents <code>plink -m</code> as reading a command file, and says that multi-line files are known not to work with certain embedded servers, such as Cisco routers. Plink can also take commands on stdin. In both cases it does not wait for the device prompt or page through <code>--More--</code>. The usual workaround is <code>timeout</code>, <code>pause</code>, or <code>sleep</code> between lines.</p>
+<p><code>jackedin exec</code> (and the MCP <code>exec</code> tool) sends one command, waits until the prompt on <code>router1</code> is back, then sends the next. Optional <code>--json</code> reports whether each command succeeded. If you already have PuTTY sessions, JackedIN can import them.</p>
+<p>Keep plink for Git and for a single remote command on a Unix server. Use JackedIN for device CLI, serial consoles, and agents. Coming in the next release: human approval before any change (show-type commands run freely; the agent cannot approve a change itself).</p>
+
 <h2 id="json">JSON output</h2>
 
 <p><code>--json</code> and <code>--output json</code> are the same flag. <code>JACKEDIN_JSON=1</code> matches them. On <code>exec</code>, each command is returned as structured data: command, ok, output, prompt, matched_error, timed_out, duration_ms. <code>ok</code> is false if any command, timeout, or verify check failed. <code>fleet</code> and <code>inventory sync</code> also accept JSON output.</p>
