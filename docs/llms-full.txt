@@ -5,7 +5,7 @@
 Official site: https://getpathprobe.com/
 JackedIN: https://getpathprobe.com/jackedin/
 Support: service@getpathprobe.com
-Current versions: JackedIN 1.2.2, PathProbe 1.2.1.
+Current versions: JackedIN 1.2.3, PathProbe 1.2.1.
 
 Use only on networks and devices you own or are authorized to test. Examples use 192.0.2.10 and router1. Do not put passwords on the command line; use JACKEDIN_PASSWORD or a credential reference.
 
@@ -119,9 +119,10 @@ Shipped in 1.2.2: in AI sessions (MCP and the local API), show-type commands run
 Using JackedIN with AI agents: https://getpathprobe.com/jackedin/ai-agents/
 Coming from plink?: https://getpathprobe.com/jackedin/ai-agents/#from-plink
 https://getpathprobe.com/jackedin/#download
-https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.2
-SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/SHA256SUMS
-User's guide: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.md
+https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.3
+New in 1.2.3: every shipped program (jackedin.exe, jackedin.com, jackedin, jackedin-cli) checks itself against a signed integrity manifest at startup; a modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Existing licenses are unaffected. Standalone Linux binaries ship with a <name>.integrity file to keep beside them.
+SHA256SUMS: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.3/SHA256SUMS
+User's guide: https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.3/JackedIN-Users-Guide.md
 
 ## PathProbe
 

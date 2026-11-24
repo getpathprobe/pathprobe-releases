@@ -10,19 +10,21 @@ JackedIN runs the same engine from the window, the CLI, Python, Ansible, and MCP
 
 The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app open with the local API turned on, or run `jackedin headless`. The local API is off by default, listens on 127.0.0.1 only (port 47321 unless changed), and requires a Bearer token (`JACKEDIN_API_TOKEN` or the token saved in Settings). Tools: list_sessions, open_session, send_session, exec, send_break, read_session, close_session, wait_for_output, scan_ports, ping_host, trace_host, read_events. A 72-hour full trial unlocks every feature; after that a $19 one-time license is required (one license, one computer).
 
-New in 1.2.2: In AI sessions (MCP and the local API), show-type commands run freely; a command that changes something runs only after a person approves it in the window or on the jackedin headless terminal; a denial or 60 seconds with no answer means it is not sent; the agent can never approve itself. jackedin plink accepts the common PuTTY plink flags.
+Since 1.2.2: In AI sessions (MCP and the local API), show-type commands run freely; a command that changes something runs only after a person approves it in the window or on the jackedin headless terminal; a denial or 60 seconds with no answer means it is not sent; the agent can never approve itself. jackedin plink accepts the common PuTTY plink flags.
 
-Only use JackedIN on devices you own or are allowed to manage. Current release is JackedIN 1.2.2. There is no macOS build yet.
+Only use JackedIN on devices you own or are allowed to manage. Current release is JackedIN 1.2.3. There is no macOS build yet.
+
+New in 1.2.3: every shipped program (jackedin.exe, jackedin.com, jackedin, jackedin-cli) checks itself against a signed integrity manifest at startup; a modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Existing licenses are unaffected. Standalone Linux binaries ship with a <name>.integrity file to keep beside them.
 
 ## Docs
 
 - [Product page and download](https://getpathprobe.com/jackedin/): Windows, Linux, and Raspberry Pi (arm64) builds, 72-hour trial, pricing
 - [Using JackedIN with AI agents](https://getpathprobe.com/jackedin/ai-agents/): MCP setup, verified exec, and human approval before any change
 - [Coming from plink?](https://getpathprobe.com/jackedin/ai-agents/#from-plink): jackedin exec waits for the device prompt; plink sends a command file or stdin in one block and remains a better tiny, free SSH transport for Git
-- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
-- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/JackedIN-Users-Guide.html): same guide as HTML
-- [JackedIN 1.2.2 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.2): release notes, installers, and portable zips
-- [SHA256SUMS (JackedIN 1.2.2)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.2/SHA256SUMS): checksums for every file in that release
+- [User's guide (Markdown)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.3/JackedIN-Users-Guide.md): CLI, verified exec, local API, and MCP
+- [User's guide (HTML)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.3/JackedIN-Users-Guide.html): same guide as HTML
+- [JackedIN 1.2.3 release](https://github.com/getpathprobe/jackedin-releases/releases/tag/v1.2.3): release notes, installers, packages, and standalone binaries
+- [SHA256SUMS (JackedIN 1.2.3)](https://github.com/getpathprobe/jackedin-releases/releases/download/v1.2.3/SHA256SUMS): checksums for every file in that release
 - [Python guide](https://github.com/getpathprobe/jackedin-releases/blob/main/JackedIN-Python-Guide.md): free `jackedin` and `nornir-jackedin` packages (the app trial or a license is still required)
 - [Site-wide llms.txt](https://getpathprobe.com/llms.txt): JackedIN and PathProbe index
 
