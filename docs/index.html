@@ -559,6 +559,7 @@ bridge br-tap removed; eth1 and eth2 restored</pre>
 <span class="eyebrow">Download</span>
 <h2 id="download-h">Download v1.2.2</h2>
 <p class="lead">Free download. Upgrade to Pro any time with a license key, no reinstall.</p>
+<div class="dlbox" id="pp-dlbox"><a class="btn btn-primary dl-main" id="pp-dl-main" data-os="windows" href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.2-windows-amd64.zip"><svg aria-hidden="true"><use href="#i-down"/></svg><span class="dl-txt"><span class="dl-title">Download PathProbe Free</span><span class="dl-for">Windows 10/11 x64 · portable zip · v1.2.2</span></span></a><p class="dl-sub">No account needed.</p><p class="dl-hint">Windows needs Npcap (free, from npcap.com). Unzip and run pathprobe.exe from an Administrator terminal.</p><details id="pp-dl-all"><summary>Other platforms and checksums</summary>
 <ul class="dl">
 <li><a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_amd64.deb"><svg aria-hidden="true"><use href="#i-linux"/></svg><span><b>Debian / Ubuntu x86_64</b><code>pathprobe_1.2.2_amd64.deb</code></span></a></li>
 <li><a href="https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_arm64.deb"><svg aria-hidden="true"><use href="#i-pi"/></svg><span><b>Debian / Ubuntu arm64 · Raspberry Pi</b><code>pathprobe_1.2.2_arm64.deb</code></span></a></li>
@@ -567,6 +568,7 @@ bridge br-tap removed; eth1 and eth2 restored</pre>
 <li><a href="https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.2-windows-amd64.zip"><svg aria-hidden="true"><use href="#i-win"/></svg><span><b>Windows 10/11 x64 (portable zip)</b><code>PathProbe-1.2.2-windows-amd64.zip</code><span class="req">Requires Npcap</span></span></a></li>
 </ul>
 <p class="small">Windows needs <a href="https://npcap.com/#download">Npcap</a>. macOS: Mac version coming soon. SHA-256 checksums: <a href="https://site-events.getpathprobe.workers.dev/dl/SHA256SUMS"><code>SHA256SUMS</code></a>. All files are also on <a href="https://github.com/getpathprobe/pathprobe-releases/releases/latest">GitHub Releases</a>.</p>
+</details></div>
 <div class="news">
 <p class="hl"><strong>What's new in 1.2.2:</strong> <strong>inline tap</strong> (Pro, Linux and Raspberry Pi only; not in the Windows build). <code>pathprobe tap</code> bridges two USB NICs into a transparent bridge with no IP address, captures to a pcapng file or streams live to Wireshark, and <code>tap reset</code> tears it down and restores each NIC. The built-in NIC stays on management. See the <a href="tap-guide.html">inline tap guide</a> for the connection diagram, the capture commands, and manual Linux <code>tc netem</code> impairment (delay, jitter, loss, rate limit). <code>tap status</code> and <code>tap reset</code> also work on Free.</p>
 <p><strong>Also in 1.2.1:</strong> the run log now keeps full MAC and IP addresses so you can see your own results later, and the new free <code>pathprobe log share</code> command writes a scrubbed copy (MACs and real IPs removed) for support tickets and forum posts. License keys, passwords, and webhook/ntfy URLs are never saved in the log, including webhook URLs passed to <code>schedule install</code>.</p>
@@ -574,6 +576,28 @@ bridge br-tap removed; eth1 and eth2 restored</pre>
 </div>
 </div>
 </section>
+<script>
+(function () {
+  // Pick the right download for this computer. Without JavaScript the button stays on the Windows file.
+  var box = document.getElementById("pp-dlbox"); if (!box) return;
+  var a = box.querySelector(".dl-main"), forEl = box.querySelector(".dl-for"), hint = box.querySelector(".dl-hint"), all = box.querySelector("details");
+  var F = {"windows": {"href": "https://site-events.getpathprobe.workers.dev/dl/PathProbe-1.2.2-windows-amd64.zip", "label": "Windows 10/11 x64 · portable zip · v1.2.2", "hint": "Windows needs Npcap (free, from npcap.com). Unzip and run pathprobe.exe from an Administrator terminal.", "other": "Linux, Raspberry Pi and checksums are in the list below."}, "amd64": {"href": "https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_amd64.deb", "label": "Debian / Ubuntu x86_64 · .deb · v1.2.2", "hint": "Install with: sudo apt install ./pathprobe_1.2.2_amd64.deb"}, "arm64": {"href": "https://site-events.getpathprobe.workers.dev/dl/pathprobe_1.2.2_arm64.deb", "label": "Debian / Ubuntu arm64 · Raspberry Pi · .deb · v1.2.2", "hint": "Install with: sudo apt install ./pathprobe_1.2.2_arm64.deb"}};
+  var ua = navigator.userAgent || "", plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  var s = ua + " " + plat;
+  function pick(k) { var f = F[k]; a.href = f.href; a.setAttribute("data-os", k); forEl.textContent = f.label; hint.textContent = f.hint; a.removeAttribute("aria-controls"); a.onclick = null; }
+  function chooser(msg) { a.href = "#" + all.id; a.setAttribute("data-os", "choose"); forEl.textContent = msg; hint.textContent = F.windows.other;
+    a.setAttribute("aria-controls", all.id); a.onclick = function (e) { e.preventDefault(); all.open = true; all.scrollIntoView({ block: "nearest" }); all.querySelector("summary").focus(); }; }
+  if (/Android|iPhone|iPad|iPod/i.test(ua)) { chooser("Runs on Windows, Linux and Raspberry Pi: pick a file"); return; }
+  if (/Win/i.test(s)) { pick("windows"); return; }
+  if (/Mac/i.test(s)) { chooser("No macOS build yet: pick Windows or Linux"); return; }
+  if (/Linux|X11|CrOS/i.test(s)) {
+    pick(/aarch64|arm64|armv8|armv7|\barm/i.test(s) ? "arm64" : "amd64");
+    if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+      navigator.userAgentData.getHighEntropyValues(["architecture"]).then(function (v) { if (v && v.architecture === "arm") pick("arm64"); else if (v && v.architecture === "x86") pick("amd64"); }).catch(function () {});
+    }
+  }
+})();
+</script>
 
 <section class="alt" id="bundle" aria-labelledby="bundle-h">
 <div class="wrap bundle">

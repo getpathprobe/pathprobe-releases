@@ -31,3 +31,14 @@ small{color:var(--mute)}
 
 article h1{color:var(--g);font-size:2.2em;line-height:1.15;margin:.4em 0 .5em}
 article p{max-width:70ch}
+
+/* One-button download */
+.dlbox{background:var(--panel);border:1px solid var(--g2);border-radius:14px;padding:22px;margin:18px 0 26px;text-align:center;box-shadow:0 0 40px rgba(0,255,0,.12)}
+.dl-main{display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:18px 34px;font-size:1.35em;border-radius:12px;margin:0;max-width:100%}
+.dl-main .dl-for{font-size:.6em;font-weight:600;opacity:.85}
+.dl-sub{margin:12px 0 2px;color:var(--g);font-weight:700}
+.dl-hint{margin:0 auto 6px;color:var(--mute);font-size:.92em;max-width:62ch}
+.dlbox details{text-align:left;margin-top:14px;border-top:1px solid var(--g3);padding-top:10px}
+.dlbox summary{cursor:pointer;color:var(--g);font-weight:700;padding:6px 0;text-align:center}
+.dlbox details table{margin:10px 0}
+@media(max-width:700px){.dl-main{display:flex;padding:16px 18px;font-size:1.15em}.dlbox{padding:16px}.dlbox details table{display:block;overflow-x:auto}}

@@ -172,3 +172,15 @@ table.compare{width:100%;border-collapse:collapse;font-size:.95rem}
 .newpill b{white-space:nowrap}
 
 .price ul{align-content:start}
+/* One-button download */
+.dlbox{margin-top:26px;background:var(--panel);border:1px solid #23506e;border-radius:18px;padding:26px;text-align:center;box-shadow:0 30px 60px -30px rgba(76,195,255,.35)}
+.dl-main{font-size:1.25rem;padding:18px 34px;border-radius:14px}
+.dl-main svg{width:26px;height:26px}
+.dl-txt{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
+.dl-for{font-size:.78rem;font-weight:600;opacity:.8}
+.dl-sub{margin:14px 0 2px;color:var(--accent);font-weight:700}
+.dl-hint{margin:0 auto;color:var(--muted);font-size:.92rem;max-width:62ch}
+.dlbox details{text-align:left;margin-top:16px;border-top:1px solid var(--line);padding-top:10px}
+.dlbox summary{cursor:pointer;color:var(--accent2);font-weight:700;padding:8px 0;text-align:center}
+.dlbox details .dl{margin-top:12px}
+@media (max-width:640px){.dl-main{font-size:1.08rem;padding:16px 18px}.dlbox{padding:18px}}
