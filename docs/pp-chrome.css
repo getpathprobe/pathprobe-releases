@@ -1,0 +1,32 @@
+/* Shared PathProbe header + footer (all PathProbe pages, homepage included). Mirrors the JackedIN layout with the PathProbe cyan accent. */
+:root{--p:#4cc3ff;--p2:#1f9fd8;--p3:#123247;--mint:#3ee08f;--chrome-bg:#000;--chrome-ink:#dbeefa;--chrome-mute:#8fa9bf}
+header.top{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--p3)}
+header.top .bar{max-width:1160px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:18px;min-height:60px}
+header.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;white-space:nowrap}
+header.top .brand img{width:34px;height:34px;border-radius:8px;box-shadow:0 0 18px rgba(76,195,255,.35)}
+header.top .brand strong{color:var(--p);font-size:1.2rem;letter-spacing:.3px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+header.top ul{list-style:none;margin:0 0 0 auto;padding:0;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none}
+header.top ul::-webkit-scrollbar{display:none}
+header.top li a{display:block;padding:8px 10px;border-radius:8px;color:var(--p);text-decoration:none;font:500 .95rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;white-space:nowrap}
+header.top li a:hover{text-decoration:underline;background:rgba(76,195,255,.08)}
+header.top li a[aria-current=page]{background:rgba(76,195,255,.14)}
+header.top .tagnew{display:inline-block;font:700 .62rem/1 ui-monospace,Consolas,monospace;text-transform:uppercase;padding:3px 6px;border-radius:999px;background:var(--mint);color:#04120a;margin-left:4px;vertical-align:middle}
+header.top a.cta{background:var(--p);color:#001018;font-weight:700;border:2px solid var(--p);padding:7px 14px}
+header.top a.cta:hover{filter:brightness(1.12);text-decoration:none;background:var(--p)}
+footer.site{margin-top:56px;border-top:1px solid var(--p3);background:#000;color:var(--chrome-mute);font:.9rem/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding:40px 0 24px}
+footer.site .inner{max-width:1160px;margin:0 auto;padding:0 24px}
+footer.site .cols{display:grid;gap:24px;grid-template-columns:2fr repeat(3,1fr)}
+footer.site .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+footer.site .brand strong{color:var(--p);font-size:1.1rem}
+footer.site .brand img{width:28px;height:28px;border-radius:7px}
+footer.site h4{margin:0 0 10px;color:var(--p);font-size:.9rem}
+footer.site ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+footer.site a{color:var(--chrome-mute);text-decoration:none}footer.site a:hover{color:var(--p);text-decoration:underline}
+footer.site .legal{margin-top:28px;padding-top:18px;border-top:1px solid var(--p3);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+@media (max-width:900px){footer.site .cols{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){header.top .bar{gap:8px;padding:8px 14px}header.top li:not(.keep){display:none}header.top li a{padding:7px 8px}header.top .brand strong{font-size:1.05rem}header.top .brand img{width:28px;height:28px}}
+header.top .brand{flex:none}
+header.top nav{margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+header.top nav::-webkit-scrollbar{display:none}
+header.top ul{margin:0}
+header.top li a{padding:8px 9px;font-size:.92rem}
