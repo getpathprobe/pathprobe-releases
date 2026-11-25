@@ -347,12 +347,36 @@ bridge br-tap removed; eth1 and eth2 restored</pre>
 </div>
 </section>
 
+<section id="port-security" aria-labelledby="port-security-h">
+<div class="wrap">
+<span class="eyebrow">Use case</span>
+<h2 id="port-security-h">Test port-security limits</h2>
+<p class="lead">Some switches only allow a set number of MAC addresses on a port — Cisco <code>switchport port-security maximum 2</code>, for example, or Juniper <code>mac-limit</code>. PathProbe can test that from the cable. It runs several DHCP clients, each with its own MAC, and the number that get a lease is the effective limit.</p>
+<p>Free includes up to 5 clients, enough for the usual lab limits of 1–4. Pro goes to 1,000. Unique MACs are automatic; you only need <code>--mac-seed</code> if you want the addresses to follow a sequence. Watching the bind count on screen, or <code>dhcp status</code>, is Free. Live <code>dhcp run --json</code> events are Pro.</p>
+<div class="term" role="img" aria-label="Five PathProbe DHCP clients started; two bind, so the effective port-security limit is 2">
+<div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>linux — pathprobe dhcp</span></div>
+<pre><span class="p">$</span> sudo pathprobe dhcp run --iface eth0 --count 5 --duration 30s --authorized
+interface eth0 ifindex=2
+DHCP session started on eth0
+tier free, up to 5 clients; control socket /run/pathprobe/control.sock
+Ctrl-C or dhcp stop releases leases and exits. --duration stops on its own.
+client 1 DHCPv4 bound 192.0.2.100
+client 2 DHCPv4 bound 192.0.2.101
+bound v4=2 v6=0 tx=6 txerr=0 rx=6 arp=0 ndp=0 icmp=0 dropped=0</pre>
+</div>
+<p>Request more clients than the port should allow. If 5 start and 2 bind, the effective limit is 2. In a second terminal you can also run <code>sudo pathprobe dhcp status</code> and count the clients marked <code>v4=bound</code>. Give the run enough time: at least <code>count × 4 s + 10 s</code> (30s for 5 clients). On a tagged VLAN, add <code>--vlan single --vlan-seed 100</code>.</p>
+<p>The switch may also log a security violation, or show the port as err-disabled.</p>
+<p><strong>Before you run this.</strong> On Cisco, the default violation mode is shutdown. Exceeding the limit error-disables the port until someone resets it (<code>shutdown</code> then <code>no shutdown</code> on the interface, or <code>errdisable recovery cause psecure-violation</code>). For a cleaner count, use <code>protect</code> or <code>restrict</code>, or run the test in a lab or a maintenance window. Juniper <code>mac-limit</code> defaults to dropping extra MACs rather than shutting the port, but a <code>shutdown</code> action can still take it down. The same idea applies to similar MAC-per-port limits on other vendors. The test computer's own NIC MAC can also count toward the limit, and a small DHCP pool can look similar if the port stays up and some clients never bind.</p>
+<p>Only use this on a network you own or are authorized to test. <code>dhcp run</code> will not start without <code>--authorized</code> (or <code>--i-am-authorized</code>).</p>
+</div>
+</section>
+
 <section class="alt" id="use-cases" aria-labelledby="uc-h">
 <div class="wrap">
 <span class="eyebrow">Who it's for</span>
 <h2 id="uc-h">Built for the bench, the lab and the truck.</h2>
 <div class="uc">
-<div class="card"><h3><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-cap"/></svg></span>CCNA &amp; CompTIA labs</h3><p>See DORA happen, tag VLANs, break a relay and watch the capture. Turn Network+ and CCNA theory into packets you can open. Classes get 40% off.</p></div>
+<div class="card"><h3><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-cap"/></svg></span>CCNA &amp; CompTIA labs</h3><p>See DORA happen, tag VLANs, break a relay, test a port-security MAC limit, and watch the capture. Turn Network+ and CCNA theory into packets you can open. Classes get 40% off.</p></div>
 <div class="card"><h3><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-flag"/></svg></span>CTF &amp; security practice</h3><p>Drop the tap inline on a practice range and stream everything to Wireshark. Scripted JSON output fits straight into your notes. Teams get 40% off.</p></div>
 <div class="card"><h3><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-home"/></svg></span>Home lab</h3><p>Stress your Pi-hole, pfSense or OPNsense DHCP with hundreds of clients, check every VLAN on the trunk, and watch your IoT gear phone home.</p></div>
 <div class="card"><h3><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-wrench"/></svg></span>Field troubleshooting</h3><p>"Is it the network?" Answer in minutes from a laptop or Pi: link, DHCP, internet, traceroute and a capture to hand the customer.</p></div>
@@ -651,6 +675,7 @@ bridge br-tap removed; eth1 and eth2 restored</pre>
 <details><summary>Who processes my payment?</summary><p>Paddle.com is our online reseller and Merchant of Record. Paddle handles checkout, payment, sales tax and receipts.</p></details>
 <details><summary>Is there a Mac version?</summary><p>Not yet. A Mac version is coming soon. Today PathProbe runs on Linux (amd64 and arm64, including Raspberry Pi) and Windows 10/11 x64.</p></details>
 <details><summary>Is it legal to use?</summary><p>Only test networks you own or are authorized to test. <code>dhcp run</code> requires the <code>--authorized</code> flag to confirm that.</p></details>
+<details><summary>Can PathProbe test a port-security MAC limit?</summary><p>Yes. Run more <code>dhcp run</code> clients than the port should allow, each with its own MAC, and count how many get a lease. Free does up to 5 clients; Pro does up to 1,000. Example: <code>sudo pathprobe dhcp run --iface eth0 --count 5 --duration 30s --authorized</code>. On Cisco, the default violation mode is shutdown, so the port can err-disable until it is reset. Use protect or restrict, or a lab / maintenance window. Only on a network you own or are authorized to test.</p></details>
 </div>
 </div>
 </section>
