@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inline tap hardware kit — PathProbe</title>
+<meta name="description" content="PathProbe Pro inline tap kit: 1 Gb ports, in-line testing, traffic impairment, and remote management. Raspberry Pi or Ubuntu PC shopping list.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="/pp-chrome.css">
+<link rel="stylesheet" href="/pp.css">
+<link rel="stylesheet" href="/tap-kit.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="bar"><a class="brand" href="/"><img src="/favicon.svg" alt="" width="34" height="34"><strong>PathProbe</strong></a><nav aria-label="Main"><ul><li class="keep"><a href="/#tap">Inline tap <span class="tagnew">New</span></a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/bundle/">Lab Bundle</a></li><li><a href="/jackedin/">JackedIN</a></li><li><a href="/blog/">Blog</a></li><li><a href="/tools/">Tools</a></li><li><a href="/compare/">Compare</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a></li><li><a href="/feedback/?product=pathprobe">Feedback</a></li><li><a href="mailto:service@getpathprobe.com">Support</a></li><li class="keep"><a href="/#pricing" class="cta">Buy Pro</a></li></ul></nav></div></header>
+<main id="main" class="wrap">
+<p class="muted"><a href="https://getpathprobe.com/tap-guide.html">Inline tap guide</a> · Hardware kit</p>
+<h1>Inline tap hardware kit</h1>
+<ul class="feature-list">
+<li>
+  <strong class="feat">Inline tap</strong>
+  <p>PathProbe Pro builds a transparent bridge between two 1 Gb ports. The bridge itself has no IP address, so the two devices keep talking as if they were cabled to each other.</p>
+</li>
+<li>
+  <strong class="feat">1 Gb ports</strong>
+  <p>The tap NICs are 1 Gb ports. On a Raspberry Pi, real throughput over USB is typically a few hundred Mbps, not a full gigabit. We measured 415–588 Mbps on internet downloads through the tap. That is not a LAN line-rate test. For full gigabit, use an Ubuntu PC with a dual-port Intel NIC.</p>
+</li>
+<li>
+  <strong class="feat">Placed in line for testing</strong>
+  <p>The box sits on the cable between two devices so you can capture and inspect the traffic that actually crosses that link.</p>
+</li>
+<li>
+  <strong class="feat">Traffic impairment <span class="badge badge-coming">Coming to PathProbe Pro</span></strong>
+  <p>Built-in <code>tap impair</code> is coming to PathProbe Pro. Today you can add delay, loss, and rate limits with Linux <code>tc netem</code> on the member ports, as shown in the <a href="https://getpathprobe.com/tap-guide.html">inline tap guide</a>.</p>
+</li>
+<li>
+  <strong class="feat">Remotely managed</strong>
+  <p>The separate management port stays off the bridge. Use it for SSH, status, capture control, and a live stream into Wireshark on another computer.</p>
+</li>
+</ul>
+<p>This page is the shopping list for that kit, on a Raspberry Pi or an Ubuntu PC. Wiring and commands live on the <a href="https://getpathprobe.com/tap-guide.html">inline tap guide</a>.</p>
+<aside id="affiliate-disclosure" hidden>
+<p><strong>Affiliate disclosure.</strong> Some links are affiliate links. If you buy through them, we may earn a commission, at no extra cost to you. As an Amazon Associate we earn from qualifying purchases.</p>
+</aside>
+<div class="note">
+<p><strong>What we have actually run.</strong> Our lab tap box is a <strong>Raspberry Pi 4 Model B (4 GB)</strong> on Raspberry Pi OS 64-bit, with two <strong>Amazon Basics USB 3.0 to 10/100/1000 Gigabit Ethernet</strong> adapters (model U3-GE-1P) plugged straight into the blue USB 3 ports — not a hub. We confirmed USB 3 at 5 Gbps, a gigabit link on both tap ports, DHCP passthrough, and a full DORA exchange in a PathProbe tap capture with 0 drops. Internet downloads through the tap measured 415–588 Mbps. That is not a LAN line-rate test. Current units of this adapter ship as AX88179A and use Linux's built-in <code>cdc_ncm</code> driver, which works but reports duplex as unknown.</p>
+</div>
+<p>The inline tap is a <strong>Pro</strong> feature and is <strong>Linux only</strong> (including Raspberry Pi). It is not in the Windows build. PathProbe Pro is $9.99 one-time and is not part of the hardware totals below. Only use a tap on a network you own or are authorized to test.</p>
+
+<h2>Recommended Pi 4 kit</h2>
+<p>This is the same board we test on (4 GB). Buy two identical USB 3 gigabit adapters. The adapter we use is the Amazon Basics USB 3.0 model below. Current units ship as AX88179A and use Linux's built-in <code>cdc_ncm</code> driver, which works but reports duplex as unknown. Realtek RTL8153 / RTL8153B (in-kernel <code>r8152</code>) is still a strong alternative if you are buying a different brand.</p>
+<div class="status-key">
+<span><span class="badge badge-tested">Tested by us</span> same model we run, or a part we have used in the lab</span>
+<span><span class="badge badge-recommended">Recommended</span> not yet lab-tested as this exact retail SKU</span>
+</div>
+<table>
+<thead>
+<tr><th>Item</th><th>What to buy</th><th>Buy link and price</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td>Board</td>
+  <td>Raspberry Pi 4 Model B, 4 GB RAM (SC0194 / SC0193). 2 GB is the documented minimum; 4 GB is what we use.</td>
+  <td>
+    <a href="https://www.pishop.us/product/raspberry-pi-4-model-b-4gb/">PiShop.us — $100.00</a>, in stock<br>
+    <a href="https://www.canakit.com/raspberry-pi-4-4gb.html">CanaKit board only — $100.00</a><br>
+    <a href="https://www.adafruit.com/product/4296">Adafruit — $120.00</a>, in stock<br>
+    <a href="https://www.microcenter.com/product/637834/raspberry-pi-4-model-b-4gb-ddr4">Micro Center — $99.99</a> (page showed shipping not available; treat as in-store)
+  </td>
+  <td><span class="badge badge-tested">Tested by us</span><br><span class="muted">Same model. This is not a test of a particular seller's unit.</span></td>
+</tr>
+<tr>
+  <td>Power supply</td>
+  <td>Official Raspberry Pi 15 W USB-C supply, 5.1 V / 3 A, US plug. Phone chargers are a common cause of brownouts once two USB NICs are attached.</td>
+  <td>
+    <a href="https://www.adafruit.com/product/4298">Adafruit official 15 W — $8.74</a>, in stock<br>
+    <a href="https://www.pishop.us/product/raspberry-pi-15w-power-supply-us-black/">PiShop.us official 15 W black — $8.80</a>, in stock
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr>
+  <td>Case with cooling</td>
+  <td>Official Raspberry Pi 4 case, plus the official case fan and heatsink if you will capture or impair for long stretches.</td>
+  <td>
+    <a href="https://www.adafruit.com/product/4301">Adafruit official Pi 4 case (red/white) — $6.50</a>, in stock<br>
+    <a href="https://www.adafruit.com/product/4794">Adafruit official case fan + heatsink — $7.25</a>, 71 in stock
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr>
+  <td>microSD card</td>
+  <td>32 GB or larger. Flash <strong>Raspberry Pi OS 64-bit</strong> with Raspberry Pi Imager (that is what we run). The official blank 32 GB A2 card is currently out of stock at Adafruit and PiShop.</td>
+  <td>
+    <a href="https://www.pishop.us/product/class-10-microsd-card-with-raspberry-pi-os-raspbian-32gb/">PiShop SanDisk 32 GB (32-bit image preloaded) — $14.95</a>, in stock. Re-image to 64-bit before use.<br>
+    <a href="https://www.pishop.us/product/raspberry-pi-sd-card-32gb/">Official Raspberry Pi 32 GB A2 blank — $19.95</a>, out of stock<br>
+    <a href="https://www.adafruit.com/product/6010">Adafruit official 32 GB A2 blank — $13.69</a>, no longer stocked
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr>
+  <td>USB 3 gigabit adapters (buy two, same model)</td>
+  <td>The adapter we use: Amazon Basics USB 3.0 to 10/100/1000 Gigabit Ethernet Internet Adapter, Compatible with Windows and macOS, Black (model U3-GE-1P). Label them upstream and downstream. After plugging in, <code>lsusb -t</code> should show 5000M on each adapter, not 480M. Current units ship as AX88179A and use Linux's built-in <code>cdc_ncm</code> driver, which works but reports duplex as unknown.</td>
+  <td>
+    <a href="https://www.amazon.com/AmazonBasics-1000-Gigabit-Ethernet-Adapter/dp/B00M77HMU0" data-affiliate-merchant="amazon">Amazon — Amazon Basics USB 3.0 to 10/100/1000 Gigabit Ethernet Internet Adapter, Black — $12.07 each</a> ($24.14 for two). In stock, sold by Amazon.com, 18% off a $14.80 typical price. Buy two of this exact listing (ASIN B00M77HMU0).<br>
+    Alternatives, if this listing is gone: <a href="https://www.amazon.com/Cable-Matters-Ethernet-Adapter-1000Mbps/dp/B0BNW48VCJ" data-affiliate-merchant="amazon">Cable Matters USB 3.0 Gigabit 2-pack — $25.99</a>, in stock, sold by Cable Matters (202013 family, RTL8153). Confirm the chipset if the listing changes. · <a href="https://www.cablematters.com/pc-447-138-usb-30-to-gigabit-ethernet-adapter.aspx">Cable Matters product page</a>.<br>
+    Documented RTL8153: <a href="https://www.startech.com/en-us/networking-io/usb31000s2">StarTech USB31000S2</a> · <a href="https://www.cdw.com/product/startech-usb-3.0-to-gigabit-ethernet-network-adapter-gbe-nic-dongle-usb-t/6800069">CDW — $32.99 each</a> advertised ($27.99 sign-in price). Buy two.<br>
+    Another AX88179 option: <a href="https://www.amazon.com/dp/B09GRL3VCN" data-affiliate-merchant="amazon">TP-Link UE306 — $9.29</a> each, in stock. Buy two.
+  </td>
+  <td><span class="badge badge-tested">Tested by us</span><br><span class="muted">USB 3 at 5 Gbps, gigabit link, DHCP passthrough, and a full DORA capture with 0 drops. Internet downloads through the tap measured 415–588 Mbps; that is not a LAN line-rate test. Current units ship as AX88179A and use <code>cdc_ncm</code>, which works but reports duplex as unknown.</span></td>
+</tr>
+<tr>
+  <td>Short patch cables</td>
+  <td>Three short Cat6 (or Cat5e) cables: management, upstream, and downstream. Short cables put less strain on USB NICs. A 5-pack leaves spares.</td>
+  <td>
+    <a href="https://www.amazon.com/NewYork-Cables-Ethernet-Snagless-Enterprise/dp/B09GH82GD7" data-affiliate-merchant="amazon">Amazon — NewYork Cables Cat6 1 ft, 5-pack, black — $6.30</a>, in stock (marketplace seller NewYork Cables)
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr class="total-row">
+  <th>Estimated kit total</th>
+  <td colspan="3">About <strong>$167.88</strong> before tax and shipping, using the PiShop 4 GB board ($100), Adafruit official 15 W supply ($8.74), official case ($6.50), official fan ($7.25), PiShop SanDisk 32 GB ($14.95), two Amazon Basics adapters ($12.07 each, $24.14), and the 1 ft 5-pack ($6.30). Prices as shown on 25 Nov 2026 (America/New_York). Black Friday weekend can move the Amazon figures.</td>
+</tr>
+</tbody>
+</table>
+<p class="price-note">These are individual product pages, not a pre-boxed PathProbe bundle. Shipping, tax, and in-store pickup rules are set by each seller.</p>
+
+<h2>Ready-made board kits</h2>
+<p>If you would rather buy the Pi, power supply, case, cooling, and SD card together, add the two USB adapters and the short cables on top. These kits do not include the tap NICs.</p>
+<ul>
+  <li><a href="https://www.canakit.com/raspberry-pi-4-starter-kit.html">CanaKit Raspberry Pi 4 Starter Kit, 4 GB (PI4-4GB-STR32F-C4-BLK) — $169.95</a>. Includes the 4 GB board, CanaKit 3.5 A USB-C supply, case, fan, heatsinks, SanDisk 32 GB card, Micro-HDMI cable, and card reader. Plus two Amazon Basics adapters and cables: about <strong>$200.39</strong> before tax and shipping.</li>
+  <li><a href="https://www.pishop.us/product/raspberry-pi-4b-starter-kit/">PiShop Raspberry Pi 4B Starter Kit — from $114.25</a>, in stock. That price is the 2 GB option as shown. Choose 4 GB on the same page (the 4 GB price was not shown until the option is selected). Includes a HighPi case, 5.1 V / 3 A USB-C supply, 32 GB SanDisk card, heatsinks, HDMI cable, and reader. Still add two USB 3 adapters and short cables.</li>
+</ul>
+
+<h2>Raspberry Pi 5 (recommended if you are buying a new board)</h2>
+<p>We have not lab-tested the inline tap on a Pi 5 yet. The Pi 5 has two independent USB 3 ports and more CPU headroom, so it is the better new-buy if you do not already have a Pi 4. Use the official 27 W (5 V / 5 A) USB-C PD supply, not the Pi 4 15 W supply. Use a Pi 5 case; a Pi 4 case will not fit. Official active cooling is the right match for capture and impairment.</p>
+<table>
+<thead>
+<tr><th>Item</th><th>Buy link and price</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td>Raspberry Pi 5, 4 GB</td>
+  <td>
+    <a href="https://www.adafruit.com/product/5812">Adafruit — $130.00</a>, 44 in stock (max 2 per customer)<br>
+    <a href="https://www.pishop.us/product/raspberry-pi-5-4gb/">PiShop.us — $110.00</a>, out of stock
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr>
+  <td>Official 27 W USB-C PD supply</td>
+  <td>
+    <a href="https://www.adafruit.com/product/5814">Adafruit official 27 W — $14.04</a>, in stock<br>
+    <a href="https://www.pishop.us/product/usb-c-pd-power-supply-for-raspberry-pi-5-27w-etl-listed/">PiShop 27 W ETL-listed — $11.95</a>, in stock (this one is not the official Raspberry Pi supply)
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr>
+  <td>Official Pi 5 case and active cooler</td>
+  <td>
+    <a href="https://www.adafruit.com/product/5816">Adafruit official Pi 5 case — $12.00</a>, in stock<br>
+    <a href="https://www.adafruit.com/product/5815">Adafruit official Active Cooler — $13.50</a>, in stock
+  </td>
+  <td><span class="badge badge-recommended">Recommended</span></td>
+</tr>
+<tr class="total-row">
+  <th>Estimated Pi 5 kit total</th>
+  <td colspan="2">About <strong>$214.93</strong> before tax and shipping, using Adafruit's in-stock Pi 5 4 GB ($130), official 27 W supply ($14.04), official case ($12), official Active Cooler ($13.50), the same SanDisk 32 GB ($14.95), two Amazon Basics adapters ($12.07 each, $24.14), and Cat6 5-pack ($6.30).</td>
+</tr>
+</tbody>
+</table>
+<p>Raspberry Pi 3 and earlier are not supported for this job. Their USB ports share a single USB 2 bus.</p>
+
+<h2>Ubuntu PC alternative</h2>
+<p>The same PathProbe Linux build runs on an x86 Ubuntu PC or laptop. This is the path to full gigabit: a dual-port Intel PCIe NIC is the better tap pair for line-rate in both directions: Intel I350-T2 (<code>igb</code>), or I210 / I226 (<code>igb</code> / <code>igc</code>). The built-in NIC, or Wi-Fi on a laptop, stays on management. A laptop used as the tap box still needs two USB NICs for the two sides of the cable.</p>
+<ul>
+  <li>Optional, not lab-tested by us: <a href="https://www.amazon.com/dp/B005ATA16Y" data-affiliate-merchant="amazon">Amazon — Intel Ethernet Server Adapter I350-T2 (I350T2BLK) — $74.99</a>, in stock, listed as 12% off a $84.99 typical price. Sold by marketplace seller oddpricecom, not Amazon itself. Prefer a seller you trust, or a new unit from a computer parts retailer, if you are putting this in a lab PC.</li>
+</ul>
+
+<h2>Setup notes</h2>
+<ul>
+  <li>Plug both USB adapters into the Pi's <strong>blue USB 3 ports</strong>, one per port. Do not put them on a hub. A USB 2 hub holds both adapters at 480 Mbps.</li>
+  <li>Leave the built-in Ethernet port for management. Do not add it to the bridge. PathProbe refuses the default-route interface unless you pass <code>--allow-default-route</code>.</li>
+  <li>Install <code>dumpcap</code> before the first capture (Debian and Raspberry Pi OS package <code>wireshark-common</code>).</li>
+  <li>Check the adapters: <code>lsusb -t</code> should show 5000M on each one. On the Amazon Basics units we use, <code>ethtool -i</code> shows the built-in <code>cdc_ncm</code> driver; for an RTL8153 alternative it should show <code>r8152</code>.</li>
+  <li>The tap NICs are 1 Gb ports, but this is not a promise of line-rate throughput on a Pi. Real throughput over USB is typically a few hundred Mbps. A Pi 4 shares one USB 3 controller between both ports, and the rate drops further when both directions are loaded, when you capture to the SD card, or when you add delay or loss. For full gigabit, use an Ubuntu PC with a dual-port Intel NIC.</li>
+  <li>The tap has no fail-open bypass. If the Pi loses power, the link in the middle goes down.</li>
+</ul>
+<p>Full commands and the connection diagram: <a href="https://getpathprobe.com/tap-guide.html">getpathprobe.com/tap-guide.html</a>.</p>
+</main>
+<footer class="site"><div class="inner"><div class="cols"><div><a class="brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28"><strong>PathProbe</strong></a><p>Command-line network testing for Linux, Windows and Raspberry Pi.</p></div><div><h4>Product</h4><ul><li><a href="/#tap">Inline tap</a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/tap-guide.html">Tap guide</a></li><li><a href="/tap-kit.html">Tap hardware kit</a></li><li><a href="/bundle/">Lab Bundle</a></li></ul></div><div><h4>Learn</h4><ul><li><a href="/blog/">Blog</a></li><li><a href="/tools/">Free DHCP tools</a></li><li><a href="/compare/">Compare</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat" rel="me noopener">YouTube: Been There, Built That</a></li><li><a href="/techradiopass/">Tech Radio Pass (ham exam prep)</a></li><li><a href="/jackedin/">JackedIN</a></li></ul></div><div><h4>Support</h4><ul><li><a href="/feedback/?product=pathprobe">Leave feedback / Report a problem</a></li><li><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/refund.html">Refunds</a></li><li><a href="/terms.html">Terms</a></li></ul></div></div><div class="legal"><span>&copy; 2026 PathProbe. All rights reserved.</span><span>Payments by Paddle.com, Merchant of Record.</span></div></div></footer>
+<script src="/affiliate-config.js"></script>
+</body>
+</html>

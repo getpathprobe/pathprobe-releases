@@ -1,0 +1,19 @@
+/* Draft-only extras for the tap kit page. Keep pp.css / pp-chrome.css unchanged. */
+table{display:table}
+.draft-banner{background:#3a2208;color:#ffd8a8;border-bottom:1px solid #8a5a20;padding:10px 24px;text-align:center;font:600 .95rem/1.4 system-ui,sans-serif}
+.badge{display:inline-block;font:700 .72rem/1.2 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.03em;padding:3px 7px;border-radius:999px;white-space:nowrap}
+.badge-tested{background:#3ee08f;color:#04120a}
+.badge-recommended{background:rgba(76,195,255,.18);color:#9fe3ff;border:1px solid #1f9fd8}
+.badge-pending{background:rgba(255,204,102,.15);color:#ffd27a;border:1px solid #8a6a20}
+.badge-retest{background:#ffcc66;color:#2a1a00;border:1px solid #8a6a20}
+.badge-optional{background:rgba(143,169,191,.15);color:#c5d6e4;border:1px solid #345}
+.total-row th,.total-row td{background:#041a24;color:#f0f8ff;font-weight:700}
+#affiliate-disclosure{border:1px solid var(--p2);background:rgba(76,195,255,.07);padding:12px 14px;border-radius:8px;margin:16px 0}
+.status-key{display:flex;flex-wrap:wrap;gap:10px 16px;margin:8px 0 16px}
+.price-note{color:var(--mute);font-size:.92rem}
+
+.feature-list{list-style:none;padding:0;margin:18px 0 22px;display:grid;gap:10px}
+.feature-list li{background:var(--panel);border:1px solid var(--p3);border-radius:10px;padding:14px 16px}
+.feature-list li p{margin:.35em 0 0;max-width:75ch}
+.feature-list .feat{color:var(--p);font-size:1.05rem}
+.badge-coming{background:var(--mint);color:#04120a;margin-left:6px;vertical-align:middle}
