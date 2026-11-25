@@ -1,0 +1,54 @@
+/* Free 35-question practice exam (loaded after /style.css and /techradiopass/trp.css) */
+.trp .practice-hero{background:radial-gradient(circle at 78% 40%,#0f9395 0%,#0b6d74 45%,#083d45 100%);color:#fff;padding:40px 0 44px}
+.trp .practice-hero h1{font-size:2.4em;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
+.trp .practice-hero .sub{font-size:1.15em;margin:0 0 16px;color:#e3f6f6;max-width:40em}
+.trp .practice-hero .pill{margin-right:8px}
+.trp .practice-main{padding:36px 0 56px}
+.trp .exam-card{background:#fff;border:1px solid #d7e5e6;border-radius:16px;padding:24px 26px;box-shadow:0 2px 8px rgba(11,74,82,.06)}
+.trp .exam-meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;margin:0 0 16px;color:#3b4d56;font-size:.95em}
+.trp .progress{flex:1 1 180px;height:8px;background:#d7e5e6;border-radius:999px;overflow:hidden}
+.trp .progress>span{display:block;height:100%;background:#0e7c86;width:0}
+.trp .qid{font-size:.85em;color:#3b4d56;font-weight:600;letter-spacing:.04em}
+.trp .qtext{font-size:1.2em;font-weight:700;margin:8px 0 16px;line-height:1.35}
+.trp .fig{display:block;max-width:min(100%,520px);height:auto;background:#fff;border:1px solid #d7e5e6;border-radius:8px;margin:0 0 16px}
+.trp .choices{list-style:none;padding:0;margin:0}
+.trp .choices li{margin:0 0 10px}
+.trp .choices button{
+  width:100%;text-align:left;font:inherit;color:#14232b;background:#fff;
+  border:2px solid #d7e5e6;border-radius:10px;padding:12px 14px;cursor:pointer;
+}
+.trp .choices button:hover{border-color:#0e7c86}
+.trp .choices button:focus{outline:3px solid #0e7c86;outline-offset:1px}
+.trp .choices button[aria-pressed="true"]{background:#e7f6f6;border-color:#0e7c86;font-weight:600}
+.trp .choices button.ok{background:#e2f5e7;border-color:#1b7f3b}
+.trp .choices button.bad{background:#fbe4e2;border-color:#b3261e}
+.trp .choices .letter{display:inline-flex;width:1.6em;font-weight:800;color:#0e7c86}
+.trp .nav{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+.trp .nav button,.trp .exam-card .btn{
+  font:inherit;cursor:pointer;border-radius:10px;padding:12px 18px;border:2px solid #0e7c86;
+}
+.trp .nav .pri,.trp .exam-card a.btn.pri{
+  background:#0e7c86;color:#fff;font-weight:700;border-color:#0e7c86;text-decoration:none;display:inline-block
+}
+.trp .nav .pri:hover,.trp .exam-card a.btn.pri:hover{background:#0b6d74}
+.trp .nav .sec{background:#fff;color:#0e7c86;font-weight:600}
+.trp .nav button:disabled{opacity:.45;cursor:default}
+.trp .score-big{font-size:3em;font-weight:800;line-height:1;margin:8px 0}
+.trp .pass{color:#1b7f3b}.trp .fail{color:#b3261e}
+.trp .cta-box{margin:22px 0 0;padding:20px;border-radius:14px;background:#083d45;color:#fff}
+.trp .cta-box h2{margin:0 0 8px;color:#fff;font-size:1.35em}
+.trp .cta-box p{margin:0 0 14px;color:#e3f6f6}
+.trp .cta-box .btn.buy-trp{background:#ffd54a;color:#14232b;font-weight:800;text-decoration:none;display:inline-block;padding:12px 22px;border-radius:10px}
+.trp .cta-box .btn.buy-trp:hover{background:#ffe27a}
+.trp .review{margin-top:28px}
+.trp .review h2{margin:0 0 12px}
+.trp .rev-item{border-top:1px solid #d7e5e6;padding:16px 0}
+.trp .rev-item .mark{font-weight:800;font-size:.9em}
+.trp .notes{margin-top:28px;font-size:.92em;color:#3b4d56}
+.trp .notes ul{padding-left:1.2em}
+.trp .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .trp .practice-hero h1{font-size:1.85em}
+  .trp .exam-card{padding:16px}
+  .trp .qtext{font-size:1.08em}
+}
