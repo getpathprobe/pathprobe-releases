@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JackedIN vs PuTTY, SuperPuTTY, SecureCRT, and MobaXterm</title>
+<meta name="description" content="An honest comparison of JackedIN with PuTTY, plink, SuperPuTTY, SecureCRT, and MobaXterm: where each one wins, and how to try JackedIN for 3 days with no card.">
+<link rel="canonical" href="https://getpathprobe.com/compare/jackedin-vs-terminals/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="/pp-chrome.css">
+<link rel="stylesheet" href="/pp.css">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PathProbe">
+<meta property="og:title" content="JackedIN vs PuTTY, SuperPuTTY, SecureCRT, and MobaXterm">
+<meta property="og:description" content="An honest comparison of JackedIN with PuTTY, plink, SuperPuTTY, SecureCRT, and MobaXterm: where each one wins, and how to try JackedIN for 3 days with no card.">
+<meta property="og:url" content="https://getpathprobe.com/compare/jackedin-vs-terminals/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JackedIN vs PuTTY, SuperPuTTY, SecureCRT, and MobaXterm">
+<meta name="twitter:description" content="An honest comparison of JackedIN with PuTTY, plink, SuperPuTTY, SecureCRT, and MobaXterm: where each one wins, and how to try JackedIN for 3 days with no card.">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="bar"><a class="brand" href="/"><img src="/favicon.svg" alt="" width="34" height="34"><strong>PathProbe</strong></a><nav aria-label="Main"><ul><li class="keep"><a href="/#tap">Inline tap <span class="tagnew">New</span></a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/bundle/">Lab Bundle</a></li><li><a href="/jackedin/">JackedIN</a></li><li><a href="/blog/">Blog</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a></li><li><a href="/feedback/?product=pathprobe">Feedback</a></li><li><a href="mailto:service@getpathprobe.com">Support</a></li><li class="keep"><a href="/#pricing" class="cta">Buy Pro</a></li></ul></nav></div></header>
+<main id="main" class="wrap">
+
+<article>
+<p class="muted"><a href="/">PathProbe</a> · <a href="/compare/">Compare</a></p>
+<h1>JackedIN vs PuTTY, SuperPuTTY, SecureCRT, and MobaXterm</h1>
+<p><strong>We built JackedIN.</strong> Read the “where they win” section before the sales line. This page describes JackedIN 1.2.3 as it is documented on the <a href="/jackedin/">product page</a>, and the other tools as their official sites describe them. We do not invent competitor prices.</p>
+
+<h2>Short version</h2>
+<table>
+<thead>
+<tr><th></th><th>PuTTY / plink</th><th>SuperPuTTY</th><th>SecureCRT</th><th>MobaXterm</th><th>JackedIN</th></tr>
+</thead>
+<tbody>
+<tr><th>What it is</th><td>A classic SSH, Telnet, and serial client, plus a command-line companion (plink).</td><td>A Windows window manager that embeds PuTTY sessions in tabs and layouts. It is not itself an SSH stack.</td><td>A commercial terminal and session manager from VanDyke Software.</td><td>A Windows toolbox terminal: SSH and much more, including an X server, with a free Home Edition and a paid Professional Edition.</td><td>An SSH, Telnet, and serial terminal with a desktop window, a prompt-gated CLI, and a local automation API.</td></tr>
+<tr><th>Platforms</th><td>Windows, and an official Unix port from the PuTTY site.</td><td>Windows only. It depends on PuTTY.</td><td>See VanDyke’s current product page for supported platforms.</td><td>Windows (Home and Professional editions are distributed by Mobatek).</td><td>Windows 10/11, Linux, and Raspberry Pi OS (64-bit). No macOS build yet.</td></tr>
+<tr><th>Price</th><td>Free (open source).</td><td>Free (<a href="https://github.com/jimradford/superputty">MIT, official repo</a>).</td><td>Commercial. See <a href="https://www.vandyke.com/purchase/index.html">VanDyke’s purchase page</a> for current pricing and licensing.</td><td>Free Home Edition; paid Professional Edition (support and Customizer). See <a href="https://mobaxterm.mobatek.net/download-home-edition.html">Mobatek’s download page</a>.</td><td>$19 one-time launch price, 3-day (72-hour) trial with every feature, no card. One license = one computer. All sales final except where required by law.</td></tr>
+<tr><th>Serial console</th><td>Yes, in PuTTY.</td><td>Not a first-class SuperPuTTY feature in the official docs we reviewed — SuperPuTTY’s job is to host PuTTY (and optional other tools).</td><td>Yes, as part of the commercial client.</td><td>Yes, as part of the Windows toolbox.</td><td>Built-in serial (COM / <code>/dev/tty*</code>), defaults 9600 8N1, plus <code>jackedin ports</code>.</td></tr>
+<tr><th>Tabs / sessions</th><td>One window per session in classic PuTTY.</td><td>Tabs, docking layouts, session import/export.</td><td>Mature session management — a common reason shops already pay for it.</td><td>Session management plus a large set of extra tools.</td><td>Tabs, split panes, a saved-session tree, recents, reconnect. Can import PuTTY, SecureCRT, MobaXterm, and SSH-config sessions.</td></tr>
+<tr><th>Sending commands</th><td>plink can send a command or a file. On a slow console, a whole file can land faster than the device can swallow it.</td><td>A command bar and script editor pass keystrokes or a list through to the embedded session. Official docs do not describe wait-for-prompt.</td><td>Long-standing commercial scripting.</td><td>Macros and a broad Windows feature set.</td><td>Prompt-gated: send a command, wait until the device prompt is back, then send the next. Line/character delays, pager handling, vendor profiles (Junos, Cisco IOS/NX-OS, Arista, Nokia, MikroTik, and more).</td></tr>
+<tr><th>Automation</th><td>plink in scripts.</td><td>A simple scripting language for basic tasks.</td><td>Commercial scripting and support.</td><td>Macros and tooling on Windows.</td><td>CLI with JSON, fleet (with dry-run), backup/diff, SFTP, a token-protected localhost API (off by default), an MCP server, a Python client, and a Nornir plugin. In AI sessions, a command that changes something runs only after a person approves it.</td></tr>
+<tr><th>Extra protocols</th><td>SSH, Telnet, serial, plus related PuTTY tools.</td><td>Can also host RDP and, optionally, VNC, MinTTY, PowerShell, or KiTTY.</td><td>See VanDyke’s feature list.</td><td>SSH, Telnet, RDP, VNC, X11, and more on Windows.</td><td>SSH, Telnet, serial, and SFTP. No RDP, VNC, or X server.</td></tr>
+</tbody>
+</table>
+
+<h2>Where the others win</h2>
+<ul>
+<li><strong>PuTTY wins</strong> if you want a free, ubiquitous client with muscle memory already on the bench. For many people it is the right tool, and we will not pretend otherwise. Start with <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">the official PuTTY site</a>.</li>
+<li><strong>plink wins</strong> for a quick one-shot command in a shop that already standardizes on PuTTY.</li>
+<li><strong>SuperPuTTY wins</strong> if you want to keep PuTTY itself and add tabs, docking layouts, and optionally RDP or VNC, still for $0, on Windows. The official project is <a href="https://github.com/jimradford/superputty">jimradford/superputty</a>. We do not call it abandoned: the latest official release we checked is 1.5.0.0 (29 January 2023), and the repository was still receiving merges after that.</li>
+<li><strong>SecureCRT wins</strong> in a lot of enterprise environments that already pay VanDyke for support, session management, and mature scripting. If that is your standard, stay on it unless you have a reason to try something else. Product page: <a href="https://www.vandyke.com/products/securecrt/">SecureCRT</a>.</li>
+<li><strong>MobaXterm wins</strong> if you want a Swiss-army <em>Windows</em> terminal: X11, RDP, VNC, and a free Home Edition, with a Professional Edition for company use, support, and the Customizer. JackedIN does not try to be that toolbox. Start at <a href="https://mobaxterm.mobatek.net/">Mobatek</a>.</li>
+</ul>
+
+<h2>Where JackedIN is the better fit</h2>
+<ul>
+<li>You want one app for SSH, Telnet, and serial on <strong>Windows, Linux, and Raspberry Pi</strong>, without installing PuTTY first.</li>
+<li>You want <strong>prompt-gated</strong> command sending and pacing, so a slow console is not blasted with a whole file.</li>
+<li>You want <strong>fleet, backup/diff, a CLI, a local API, or a Nornir plugin</strong> in the same product you already type into.</li>
+<li>You already have PuTTY, SecureCRT, or MobaXterm sessions and want to <strong>import them and try 3 days with no card</strong> before paying $19 once.</li>
+</ul>
+<p>JackedIN has been tested on real Cisco IOS and Juniper Junos switches, as stated on the product page. A Mac version is coming; it is not available today.</p>
+
+<h2>Try it</h2>
+<p>The trial unlocks every feature for 3 days. No card and no sign-up. One license later is one computer, non-transferable.</p>
+<p><a class="btn" href="/jackedin/#download">Start the JackedIN 3-day trial</a> <a class="btn ghost" href="/jackedin/">JackedIN product page</a></p>
+<p class="muted">Also see <a href="/blog/putty-alternative-serial-console.html">A PuTTY alternative for serial console and network gear</a>.</p>
+</article>
+
+</main>
+<footer class="site"><div class="inner"><div class="cols"><div><a class="brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28"><strong>PathProbe</strong></a><p>Command-line network testing for Linux, Windows and Raspberry Pi.</p></div><div><h4>Product</h4><ul><li><a href="/#tap">Inline tap</a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/tap-guide.html">Tap guide</a></li><li><a href="/bundle/">Lab Bundle</a></li></ul></div><div><h4>Learn</h4><ul><li><a href="/blog/">Blog</a></li><li><a href="/tools/">Free DHCP tools</a></li><li><a href="/compare/">Compare</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat" rel="me noopener">YouTube: Been There, Built That</a></li><li><a href="/techradiopass/">Tech Radio Pass (ham exam prep)</a></li><li><a href="/jackedin/">JackedIN</a></li></ul></div><div><h4>Support</h4><ul><li><a href="/feedback/?product=pathprobe">Leave feedback / Report a problem</a></li><li><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/refund.html">Refunds</a></li><li><a href="/terms.html">Terms</a></li></ul></div></div><div class="legal"><span>© 2026 PathProbe. All rights reserved.</span><span>Payments by Paddle.com, Merchant of Record.</span></div></div></footer>
+</body>
+</html>

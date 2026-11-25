@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DHCP option decoder — PathProbe</title>
+<meta name="description" content="Decode DHCP option hex in your browser: message type, lease time, routers, DNS, relay info, and more. Nothing is uploaded.">
+<link rel="canonical" href="https://getpathprobe.com/tools/dhcp-option-decoder/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="/pp-chrome.css">
+<link rel="stylesheet" href="/pp.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PathProbe">
+<meta property="og:title" content="DHCP option decoder — PathProbe">
+<meta property="og:description" content="Decode DHCP option hex in your browser: message type, lease time, routers, DNS, relay info, and more. Nothing is uploaded.">
+<meta property="og:url" content="https://getpathprobe.com/tools/dhcp-option-decoder/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DHCP option decoder — PathProbe">
+<meta name="twitter:description" content="Decode DHCP option hex in your browser: message type, lease time, routers, DNS, relay info, and more. Nothing is uploaded.">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="bar"><a class="brand" href="/"><img src="/favicon.svg" alt="" width="34" height="34"><strong>PathProbe</strong></a><nav aria-label="Main"><ul><li class="keep"><a href="/#tap">Inline tap <span class="tagnew">New</span></a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/bundle/">Lab Bundle</a></li><li><a href="/jackedin/">JackedIN</a></li><li><a href="/blog/">Blog</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a></li><li><a href="/feedback/?product=pathprobe">Feedback</a></li><li><a href="mailto:service@getpathprobe.com">Support</a></li><li class="keep"><a href="/#pricing" class="cta">Buy Pro</a></li></ul></nav></div></header>
+<main id="main" class="wrap">
+
+<article>
+<p class="muted"><a href="/">PathProbe</a> · <a href="/tools/">Free tools</a></p>
+<h1>DHCP option decoder</h1>
+<p>Paste the options section of a DHCP message, or a full BOOTP/DHCP frame. If the magic cookie <code>63 82 53 63</code> is present, decoding starts after it. This page never uploads what you paste.</p>
+<p class="tool-note">Use documentation addresses in examples and write-ups. Do not paste captures that contain production MAC addresses or hostnames you are not allowed to share.</p>
+<form class="tool-form" id="decoder-form" action="#" method="get">
+<label>Hex dump
+<span class="hint">Spaces, colons, and 0x prefixes are fine.</span>
+<textarea id="hex" name="hex" spellcheck="false" placeholder="63 82 53 63 35 01 01 …"></textarea>
+</label>
+<div class="tool-actions">
+<button type="submit" class="btn">Decode</button>
+<button type="button" class="btn ghost" id="load-sample">Load a documentation sample</button>
+<button type="reset" class="btn ghost">Clear</button>
+</div>
+</form>
+<div id="decoder-out" class="result" hidden></div>
+<div class="cta-box">
+<p>Need to generate the clients and the pcap, not just decode options? <strong>PathProbe Free</strong> simulates five DHCP clients and never expires. A run requires <code>--authorized</code> — only test networks you own or are allowed to test.</p>
+<p><a class="btn" href="/#download">Download PathProbe Free</a> <a class="btn ghost" href="/tools/dhcp-wireshark-filter/">Build a Wireshark filter</a></p>
+</div>
+</article>
+
+</main>
+<footer class="site"><div class="inner"><div class="cols"><div><a class="brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28"><strong>PathProbe</strong></a><p>Command-line network testing for Linux, Windows and Raspberry Pi.</p></div><div><h4>Product</h4><ul><li><a href="/#tap">Inline tap</a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/tap-guide.html">Tap guide</a></li><li><a href="/bundle/">Lab Bundle</a></li></ul></div><div><h4>Learn</h4><ul><li><a href="/blog/">Blog</a></li><li><a href="/tools/">Free DHCP tools</a></li><li><a href="/compare/">Compare</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat" rel="me noopener">YouTube: Been There, Built That</a></li><li><a href="/techradiopass/">Tech Radio Pass (ham exam prep)</a></li><li><a href="/jackedin/">JackedIN</a></li></ul></div><div><h4>Support</h4><ul><li><a href="/feedback/?product=pathprobe">Leave feedback / Report a problem</a></li><li><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/refund.html">Refunds</a></li><li><a href="/terms.html">Terms</a></li></ul></div></div><div class="legal"><span>© 2026 PathProbe. All rights reserved.</span><span>Payments by Paddle.com, Merchant of Record.</span></div></div></footer>
+<script src="/tools/dhcp-tools.js"></script>
+<script>
+(function () {
+  var form = document.getElementById("decoder-form");
+  var out = document.getElementById("decoder-out");
+  var hex = document.getElementById("hex");
+  function render(result) {
+    var rows = result.options.map(function (o) {
+      return "<tr><td>" + o.code + "</td><td>" + o.name + "</td><td>" + (o.length == null ? "—" : o.length) + "</td><td>" + o.value + (o.hex ? " <small class=muted>" + o.hex + "</small>" : "") + "</td></tr>";
+    }).join("");
+    var meta = [];
+    if (result.usedCookie) meta.push("Found the DHCP magic cookie; ignored " + result.skippedBytes + " byte(s) before the options.");
+    else meta.push("No magic cookie found; the dump was treated as an options list from the first byte.");
+    if (result.ended) meta.push("Reached the End option (255).");
+    else meta.push("The dump ended without an End option (255).");
+    out.hidden = false;
+    out.innerHTML = "<h2>Decoded options</h2><p class=muted>" + meta.join(" ") + "</p><table><thead><tr><th>Code</th><th>Name</th><th>Length</th><th>Value</th></tr></thead><tbody>" + rows + "</tbody></table>";
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    out.hidden = false;
+    try { render(DhcpTools.decodeOptions(hex.value)); }
+    catch (err) { out.innerHTML = "<p class=err>" + err.message + "</p>"; }
+  });
+  document.getElementById("load-sample").addEventListener("click", function () {
+    hex.value = DhcpTools.SAMPLE_OPTIONS_HEX.replace(/(.{2})/g, "$1 ").trim();
+    form.requestSubmit();
+  });
+})();
+</script>
+</body>
+</html>

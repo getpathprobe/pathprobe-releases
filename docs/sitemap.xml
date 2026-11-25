@@ -46,6 +46,41 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://getpathprobe.com/tools/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/tools/dhcp-option-decoder/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/tools/dhcp-scope-calculator/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/tools/dhcp-wireshark-filter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/compare/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/compare/jackedin-vs-terminals/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://getpathprobe.com/compare/pathprobe-vs-dhcping-nmap-wireshark/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://getpathprobe.com/LICENSE</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

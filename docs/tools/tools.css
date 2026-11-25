@@ -1,0 +1,24 @@
+/* Forms and result tables for the free browser tools. */
+.tool-note{border:1px solid var(--p2);background:rgba(76,195,255,.07);padding:12px 14px;border-radius:8px;margin:0 0 20px}
+.tool-form{display:grid;gap:14px;margin:20px 0;background:var(--panel);border:1px solid var(--p3);border-radius:10px;padding:16px 18px}
+.tool-form label{display:grid;gap:6px;font-weight:600;color:var(--ink)}
+.tool-form .hint{font-weight:400;color:var(--mute);font-size:.9rem}
+.tool-form input[type=text],.tool-form input[type=number],.tool-form textarea,.tool-form select{
+  font:16px/1.5 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;
+  background:#03111c;color:#9fe3ff;border:1px solid var(--p3);border-radius:8px;padding:10px 12px;width:100%;max-width:100%
+}
+.tool-form textarea{min-height:140px;resize:vertical}
+.tool-form .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.tool-actions{display:flex;flex-wrap:wrap;gap:8px}
+.tool-actions button{cursor:pointer}
+.chk{display:flex;flex-wrap:wrap;gap:8px 16px;font-weight:400}
+.chk label{display:flex;align-items:center;gap:6px;font-weight:500}
+.result{margin:18px 0}
+.result h2{margin-top:8px}
+.result table{display:table;width:100%;max-width:100%}
+.result td.num,.result th.num{text-align:right;font-variant-numeric:tabular-nums}
+.filter-out{white-space:pre-wrap;word-break:break-all}
+.err{color:#ffb4b4;border:1px solid #7a3030;background:rgba(120,20,20,.25);padding:10px 12px;border-radius:8px}
+.okmsg{color:var(--mint);font-size:.9rem}
+.cta-box{margin:32px 0 8px;padding:18px;border:1px solid var(--p3);border-radius:10px;background:var(--panel)}
+.tool-list{display:grid;gap:16px}
