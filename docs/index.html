@@ -9,6 +9,7 @@
 <link rel="canonical" href="https://getpathprobe.com/">
 <link rel="stylesheet" href="pp-chrome.css">
 <link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="yt-lite.css">
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
@@ -390,6 +391,21 @@ bound v4=2 v6=0 tx=6 txerr=0 rx=6 arp=0 ndp=0 icmp=0 dropped=0</pre>
 <h2 id="video-h">See PathProbe in 1 minute 45 seconds</h2>
 <video class="video" controls preload="none" playsinline poster="media/pathprobe-promo-poster.jpg" width="1920" height="1080"><source src="media/pathprobe-promo.mp4" type="video/mp4"><track kind="captions" src="media/pathprobe-promo.en.vtt" srclang="en" label="English">Your browser can't play this video. <a href="media/pathprobe-promo.mp4">Download the MP4</a>.</video>
 <p class="small">Simulated DHCP clients on a lab network, ping from the server side, pcapng capture. Captions available. Voiceover is AI-generated. <a href="https://youtu.be/Rwzd4Iog3-U">Watch on YouTube</a> · <a href="https://www.youtube.com/@BeenThere.BuiltThat">Watch the tutorials on YouTube</a></p>
+</div>
+</section>
+
+<section id="dhcp-howto" aria-labelledby="dhcp-howto-h">
+<div class="wrap">
+<span class="eyebrow">How-to</span>
+<h2 id="dhcp-howto-h">How to test a DHCP server</h2>
+<p>A single laptop lease can hide a VLAN mismatch, a bad helper-address, or a server that only answers once. This walkthrough shows Discover / Offer / Request / Ack in Wireshark, then starts several clients from one computer and saves a pcapng. The PathProbe tour above is also <a href="https://youtu.be/Rwzd4Iog3-U">on YouTube</a>.</p>
+<div class="yt-lite" data-ytid="GX2Wj7nLD3k" data-title="How to Test a DHCP Server (and Actually Watch DORA Happen)">
+  <a class="yt-lite-fallback" href="https://youtu.be/GX2Wj7nLD3k">Watch on YouTube: How to Test a DHCP Server (and Actually Watch DORA Happen)</a>
+  <noscript>
+    <iframe class="yt-lite-iframe" src="https://www.youtube-nocookie.com/embed/GX2Wj7nLD3k" title="How to Test a DHCP Server (and Actually Watch DORA Happen)" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </noscript>
+</div>
+<p class="small">More DHCP labs: <a href="https://www.youtube.com/playlist?list=PLJ7cJSG-vIUQ">DHCP Labs with PathProbe</a> · written guide: <a href="blog/how-to-test-a-dhcp-server.html">How to test a DHCP server from Linux or Windows</a></p>
 </div>
 </section>
 
@@ -791,4 +807,5 @@ if (SALES_ENABLED) {
   }, true);
 })();
 </script>
+<script src="yt-lite.js" defer></script>
 </body></html>

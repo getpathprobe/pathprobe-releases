@@ -1,0 +1,9 @@
+/* Lazy YouTube embeds: no cookies until the viewer clicks Play. */
+.yt-lite{position:relative;margin:16px 0 8px;max-width:800px}
+.yt-lite-play,.yt-lite-iframe,.yt-lite noscript .yt-lite-iframe{
+  display:block;width:100%;aspect-ratio:16/9;height:auto;border:0;border-radius:8px;background:#0d1117
+}
+.yt-lite-play{position:relative;padding:0;cursor:pointer;overflow:hidden;border:0}
+.yt-lite-play img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-lite-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#000c;color:#fff;border:1px solid #fff;border-radius:999px;padding:8px 14px;font-size:.95em}
+.yt-lite-fallback{display:inline-block;margin:8px 0 0}
