@@ -12,7 +12,7 @@ The MCP server is `jackedin mcp` (stdio). It dials 127.0.0.1 only. Leave the app
 
 PathProbe is command-line only: no GUI and no API. `pathprobe mcp` is a Pro feature. Free remains available; Pro is $9.99 one-time.
 
-Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.3.0 and PathProbe 1.2.3. New in PathProbe 1.2.3: a 72-hour free Pro trial (no email, no card) on a computer with no license. New in JackedIN 1.3.0: batch mode. jackedin fleet runs one command or a command file across many devices over SSH, Telnet and serial consoles, with JSON, CSV or text output, script-friendly exit codes (0 complete, 1 failure, 3 timeout or partial, 2 usage) and reliable Cisco console recovery after a timeout. Every shipped program still checks itself against a signed integrity manifest. A modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Standalone Linux binaries ship with a <name>.integrity file to keep beside them. There is no macOS build of JackedIN yet.
+Only use these tools on networks and devices you own or are authorized to test. Current releases are JackedIN 1.3.0 and PathProbe 1.2.4. New in PathProbe 1.2.4: inline tap impairment profiles (`lossy-wifi`, `satellite`, `congested-wan`, `flaky-link`), `--for` auto-revert, `--rate` / `--dup` / `--reorder`, and integrity checks on every command. The 72-hour free Pro trial from 1.2.3 is unchanged. New in JackedIN 1.3.0: batch mode. jackedin fleet runs one command or a command file across many devices over SSH, Telnet and serial consoles, with JSON, CSV or text output, script-friendly exit codes (0 complete, 1 failure, 3 timeout or partial, 2 usage) and reliable Cisco console recovery after a timeout. Every shipped program still checks itself against a signed integrity manifest. A modified copy is refused with "This copy is damaged or has been modified; re-download from getpathprobe.com." Standalone Linux binaries ship with a <name>.integrity file to keep beside them. There is no macOS build of JackedIN yet.
 
 ## JackedIN
 
@@ -28,8 +28,8 @@ Only use these tools on networks and devices you own or are authorized to test. 
 ## PathProbe
 
 - [Product page and download](https://getpathprobe.com/): Free and Pro builds
-- [PathProbe 1.2.3 release](https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.3): release notes and installers
-- [SHA256SUMS (PathProbe 1.2.3)](https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.3/SHA256SUMS): checksums for that release
+- [PathProbe 1.2.4 release](https://github.com/getpathprobe/pathprobe-releases/releases/tag/v1.2.4): release notes and installers
+- [SHA256SUMS (PathProbe 1.2.4)](https://github.com/getpathprobe/pathprobe-releases/releases/download/v1.2.4/SHA256SUMS): checksums for that release
 - [Inline tap guide](https://getpathprobe.com/tap-guide.html): PathProbe inline tap (Pro, Linux and Raspberry Pi only): connection diagram, capture commands, and manual tc netem impairment
 
 ## Optional

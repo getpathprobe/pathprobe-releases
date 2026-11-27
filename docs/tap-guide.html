@@ -1,10 +1,10 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inline tap guide — PathProbe</title><meta name="description" content="PathProbe Pro inline tap for Linux and Raspberry Pi: connection diagram, capture and Wireshark commands, and optional Linux tc netem impairment."><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#000000"><meta name="color-scheme" content="dark"><link rel="stylesheet" href="/pp-chrome.css"><link rel="stylesheet" href="/pp.css"></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inline tap guide — PathProbe</title><meta name="description" content="PathProbe Pro inline tap for Linux and Raspberry Pi: connection diagram, capture, Wireshark, and tap impair profiles, --for, rate, duplication, reorder, and status."><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#000000"><meta name="color-scheme" content="dark"><link rel="stylesheet" href="/pp-chrome.css"><link rel="stylesheet" href="/pp.css"></head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="bar"><a class="brand" href="/"><img src="/favicon.svg" alt="" width="34" height="34"><strong>PathProbe</strong></a><nav aria-label="Main"><ul><li class="keep"><a href="/#tap">Inline tap <span class="tagnew">New</span></a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/bundle/">Lab Bundle</a></li><li><a href="/jackedin/">JackedIN</a></li><li><a href="/blog/">Blog</a></li><li><a href="/tools/">Tools</a></li><li><a href="/compare/">Compare</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat">Tutorials</a></li><li><a href="/feedback/?product=pathprobe">Feedback</a></li><li><a href="mailto:service@getpathprobe.com">Support</a></li><li class="keep"><a href="/#pricing" class="cta">Buy Pro</a></li></ul></nav></div></header>
 <main id="main" class="wrap">
 <h1>Inline tap guide</h1>
-<p>The inline tap is a <strong>Pro</strong> feature and is <strong>Linux only</strong> (including Raspberry Pi). It is not included in the Windows build. <code>tap status</code> and <code>tap reset</code> can be run on the Free tier so you can inspect or tear down a leftover bridge without a license; <code>tap bridge</code> and <code>tap capture</code> require Pro.</p>
-<p>This guide uses documentation addresses only (<code>192.0.2.0/24</code>). Do not copy real IPs, MAC addresses, or hostnames into examples or screenshots you share.</p>
+<p>The inline tap is a <strong>Pro</strong> feature and is <strong>Linux only</strong> (including Raspberry Pi). It is not included in the Windows build. <code>tap status</code>, <code>tap reset</code>, <code>tap impair --status</code>, <code>tap impair --clear</code>, and <code>tap profiles list</code> / <code>show</code> can be run on the Free tier. <code>tap bridge</code>, <code>tap capture</code>, <code>tap impair</code> apply, and <code>tap profiles save</code> require Pro.</p>
+<p>This guide does not use IP addresses, MAC addresses, hostnames, or personal information. Default examples use <code>eth1</code> upstream and <code>eth2</code> downstream, with <code>eth0</code> as management.</p>
 <h2>Connection diagram</h2>
 <p><img src="tap-guide.png" alt="Device 1 connects to USB NIC eth1 on a Raspberry Pi. The Pi bridges eth1 and eth2 as br-tap with no IP address. eth2 connects to Device 2. The built-in NIC eth0 is management only and is never bridged." width="980" height="420" style="max-width:100%;height:auto;background:#0f1419;border-radius:12px"></p>
 <p>Download the diagram: <a href="tap-guide.svg">SVG</a> · <a href="tap-guide.png">PNG</a> · <a href="TAP-GUIDE.md">Markdown copy</a></p>
@@ -14,16 +14,18 @@
 <li>Create the bridge (<code>tap bridge</code>)</li>
 <li>Capture to a pcapng file (<code>tap capture --file</code>)</li>
 <li>Stream live pcapng to stdout for Wireshark (<code>tap capture --stdout</code>)</li>
+<li>Apply temporary impairment with netem (<code>tap impair</code>): built-in or saved profiles, <code>--rate</code>, <code>--dup</code>, <code>--reorder</code>, delay, jitter, and loss</li>
+<li>Auto-revert impairment with <code>--for</code>, Ctrl-C, or a crash (<code>tap impair --status</code> and <code>--clear</code>)</li>
 <li>Inspect the setup (<code>tap status</code>, including <code>--json</code>)</li>
-<li>Tear the bridge down and restore each member NIC's pre-bridge flags, including promiscuous mode (<code>tap reset</code>)</li>
+<li>Tear the bridge down and restore each member NIC's pre-bridge flags and NetworkManager state, including promiscuous mode (<code>tap reset</code>)</li>
 </ul>
 <p>Capture uses <strong>dumpcap</strong> (Debian and Raspberry Pi OS package <code>wireshark-common</code>). Install it before the first capture. USB 3 adapters are recommended. USB-C NICs that only attach through USB-A converters often run at 480 Mbps; that is expected, not a PathProbe failure.</p>
 <p>A buying guide for the Pi, two USB 3 gigabit adapters, power supply, case, microSD card, and short patch cables is on the <a href="/tap-kit.html">inline tap hardware kit</a> page.</p>
 <p>The Pi (or other Linux host) built-in NIC is <strong>management only</strong>. Do not add it to the bridge. PathProbe refuses the default-route interface unless you pass <code>--allow-default-route</code>.</p>
-<p>Impairment with <code>tc netem</code> (delay, loss, and so on) is a <strong>manual Linux technique</strong>, not a PathProbe command yet. The examples below apply <code>tc</code> to the bridge <em>member</em> ports.</p>
 <h2>Commands</h2>
 <p>Activate a Pro license first on this computer, then:</p>
 <pre><code># Create the transparent bridge (Pro, Linux).
+# Defaults are eth1 upstream and eth2 downstream.
 sudo pathprobe tap bridge --upstream eth1 --downstream eth2 --mgmt eth0
 
 # Inspect (Free or Pro).
@@ -33,15 +35,16 @@ pathprobe tap status --json
 # Capture to a file (Pro). Duration is a Go duration: 20s, not 20.
 sudo pathprobe tap capture --file pathprobe-tap.pcapng --duration 30s
 
-# Optional BPF filter (documentation address only).
-sudo pathprobe tap capture --file pathprobe-tap.pcapng --filter 'not host 192.0.2.10' --duration 30s
+# Optional BPF filter. Keep filters generic; do not paste real addresses.
+sudo pathprobe tap capture --file pathprobe-tap.pcapng --filter 'icmp or arp' --duration 30s
 
 # Live stream to Wireshark on the same computer (pcapng on stdout, logs on stderr).
 sudo pathprobe tap capture --stdout --duration 30s 2&gt;tap.log | wireshark -k -i -
 
 # Live stream over SSH to Wireshark on your workstation.
-# Use a documentation host (192.0.2.10) in examples; substitute your management address privately.
-ssh user@192.0.2.10 'sudo pathprobe tap capture --stdout --duration 30s' | wireshark -k -i -
+# Substitute the tap host privately; do not publish its address.
+# ssh to the tap host, then:  sudo pathprobe tap capture --stdout --duration 30s
+# pipe that pcapng stream into:  wireshark -k -i -
 
 # Tear down the bridge and restore member NIC flags, including promiscuous mode.
 sudo pathprobe tap reset
@@ -50,26 +53,39 @@ sudo pathprobe tap reset
 pathprobe tap reset
 </code></pre>
 <p><code>--stdout</code> and <code>--file -</code> are the same: pcapng on stdout. Do not combine <code>--stdout</code> with a real <code>--file</code> path.</p>
-<h2>Manual impairment with tc netem (not a PathProbe command)</h2>
-<p>These examples run on the Linux host that owns <code>br-tap</code>. They attach to a <strong>member port</strong> (<code>eth1</code> or <code>eth2</code>), not to <code>br-tap</code> itself. You need <code>iproute2</code> (<code>tc</code>). PathProbe does not add, show, or remove these rules for you.</p>
-<pre><code>tc qdisc show dev eth2
+<h2>Impairment with tap impair (Pro)</h2>
+<p><code>tap impair</code> applies Linux netem on the existing bridge member ports (<code>eth1</code> and/or <code>eth2</code>), not on <code>br-tap</code> itself and never on the management NIC. Apply requires Pro and a bridge that is already up. <code>--status</code>, <code>--clear</code>, and <code>tap profiles list</code> / <code>show</code> are free.</p>
+<p>Use <code>--for</code> so impairment auto-reverts when the timer expires, when you press Ctrl-C, or if the process crashes. Confirm with <code>tap impair --status</code>. <code>--clear</code> removes netem and leaves the bridge up. <code>tap reset</code> also clears netem when it tears the bridge down.</p>
+<pre><code># Built-in profiles (Pro). Defaults stay eth1 upstream, eth2 downstream.
+sudo pathprobe tap impair --profile lossy-wifi --for 30s
+sudo pathprobe tap impair --profile satellite --for 30s
+sudo pathprobe tap impair --profile congested-wan --for 30s
+sudo pathprobe tap impair --profile flaky-link --for 30s
 
-# Delay and jitter (100 ms ± 20 ms)
-sudo tc qdisc add dev eth2 root netem delay 100ms 20ms
-sudo tc qdisc del dev eth2 root
+# Rate cap, duplication, and reorder (Pro). Combine with --delay / --jitter / --loss as needed.
+sudo pathprobe tap impair --dir both --rate 1mbit --for 30s
+sudo pathprobe tap impair --dir both --dup 5% --for 30s
+sudo pathprobe tap impair --dir both --reorder 10% --for 30s
 
-# Loss, duplicate, corrupt, reorder
-sudo tc qdisc add dev eth2 root netem loss 1%
-sudo tc qdisc add dev eth2 root netem duplicate 1%
-sudo tc qdisc add dev eth2 root netem corrupt 0.1%
-sudo tc qdisc add dev eth2 root netem delay 10ms reorder 5%
-sudo tc qdisc del dev eth2 root
+# Watch current impairment (Free or Pro).
+pathprobe tap impair --status
 
-# Rate limit with Token Bucket Filter (tbf), 10 Mbit/s
-sudo tc qdisc add dev eth2 root tbf rate 10mbit burst 32kbit latency 50ms
-sudo tc qdisc del dev eth2 root
+# Remove netem and leave the bridge up (Free or Pro).
+pathprobe tap impair --clear
+
+# Built-in and saved profiles (list and show are Free; save is Pro).
+pathprobe tap profiles list
+pathprobe tap profiles show --name lossy-wifi
+sudo pathprobe tap profiles save --name lab-lossy --delay 40ms --loss 2% --rate 20mbit
 </code></pre>
-<p>There can be only one <code>root</code> qdisc at a time; <code>tc qdisc del dev eth2 root</code> removes whatever you installed.</p>
+<p>Built-in profiles:</p>
+<ul>
+<li><code>lossy-wifi</code> — 40 ms delay and jitter, 2% loss, 2% reorder, 20 Mbit/s rate</li>
+<li><code>satellite</code> — 300 ms delay, 50 ms jitter, 0.5% loss, 25 Mbit/s rate</li>
+<li><code>congested-wan</code> — 80 ms delay, 20 ms jitter, 1% loss, 5 Mbit/s rate</li>
+<li><code>flaky-link</code> — 20 ms delay, 10 ms jitter, 5% loss, 2% duplication, 2% reorder</li>
+</ul>
+<p><code>--dir</code> is <code>to-downstream</code>, <code>to-upstream</code>, or <code>both</code>. There is one netem at a time per member; a new apply replaces the previous settings until auto-revert or <code>--clear</code>.</p>
 <h2>Optional Linux inspection</h2>
 <pre><code>ip -br link
 bridge link
@@ -77,9 +93,10 @@ bridge fdb show br br-tap
 ip -br addr show br-tap
 sudo tcpdump -n -i br-tap -c 20 'icmp or arp'
 ip -br addr show eth0
+pathprobe tap impair --status
 </code></pre>
 <h2>Reset and cleanup</h2>
-<p><code>pathprobe tap reset</code> deletes <code>br-tap</code> and restores saved pre-bridge flags on the member NICs. After reset, give NetworkManager (or your DHCP client) a chance to recover an address on a member NIC that should be used again. Do not add the management NIC to the bridge, and do not apply netem on the management NIC.</p>
-<p>Buy PathProbe Pro: <a href="https://getpathprobe.com/#pricing">https://getpathprobe.com/#pricing</a>. Download: <a href="index.html#download">PathProbe 1.2.3</a>.</p>
+<p><code>pathprobe tap reset</code> deletes <code>br-tap</code>, clears leftover netem, and restores saved pre-bridge flags and NetworkManager managed state on the member NICs. <code>tap reset</code> accepts the same <code>--mgmt</code> and <code>--allow-default-route</code> flags as <code>tap bridge</code> and does not touch the management interface. After reset, give NetworkManager (or your DHCP client) a moment if a member NIC should have an address again. Do not add the management NIC to the bridge, and do not impair the management NIC.</p>
+<p>Buy PathProbe Pro: <a href="https://getpathprobe.com/#pricing">https://getpathprobe.com/#pricing</a>. Download: <a href="index.html#download">PathProbe 1.2.4</a>.</p>
 </main>
 <footer class="site"><div class="inner"><div class="cols"><div><a class="brand" href="/"><img src="/favicon.svg" alt="" width="28" height="28"><strong>PathProbe</strong></a><p>Command-line network testing for Linux, Windows and Raspberry Pi.</p></div><div><h4>Product</h4><ul><li><a href="/#tap">Inline tap</a></li><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#download">Download</a></li><li><a href="/tap-guide.html">Tap guide</a></li><li><a href="/tap-kit.html">Tap hardware kit</a></li><li><a href="/bundle/">Lab Bundle</a></li></ul></div><div><h4>Learn</h4><ul><li><a href="/blog/">Blog</a></li><li><a href="https://www.youtube.com/@BeenThere.BuiltThat" rel="me noopener">YouTube: Been There, Built That</a></li><li><a href="/techradiopass/">Tech Radio Pass (ham exam prep)</a></li><li><a href="/jackedin/">JackedIN</a></li></ul></div><div><h4>Support</h4><ul><li><a href="/feedback/?product=pathprobe">Leave feedback / Report a problem</a></li><li><a href="mailto:service@getpathprobe.com">service@getpathprobe.com</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/refund.html">Refunds</a></li><li><a href="/terms.html">Terms</a></li></ul></div></div><div class="legal"><span>© 2026 PathProbe. All rights reserved.</span><span>Payments by Paddle.com, Merchant of Record.</span></div></div></footer></body></html>

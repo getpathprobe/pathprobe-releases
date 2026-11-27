@@ -1,8 +1,8 @@
 # PathProbe inline tap guide
 
-The inline tap is a **Pro** feature and is **Linux only** (including Raspberry Pi). It is not included in the Windows build. Status and reset can be run on the Free tier so you can inspect or tear down a leftover bridge without a license; `tap bridge` and `tap capture` require Pro.
+The inline tap is a **Pro** feature and is **Linux only** (including Raspberry Pi). It is not included in the Windows build. `tap status`, `tap reset`, `tap impair --status`, `tap impair --clear`, and `tap profiles list` / `show` can be run on the Free tier. `tap bridge`, `tap capture`, `tap impair` apply, and `tap profiles save` require Pro.
 
-This guide uses documentation addresses only (`192.0.2.0/24`). Do not copy real IPs, MAC addresses, or hostnames into examples or screenshots you share.
+This guide does not use IP addresses, MAC addresses, hostnames, or personal information. Default examples use `eth1` upstream and `eth2` downstream, with `eth0` as management.
 
 ## What it does
 
@@ -13,14 +13,14 @@ You can:
 - Create the bridge (`tap bridge`)
 - Capture to a pcapng file (`tap capture --file`)
 - Stream live pcapng to stdout for Wireshark (`tap capture --stdout`)
+- Apply temporary impairment with netem (`tap impair`): built-in or saved profiles, `--rate`, `--dup`, `--reorder`, delay, jitter, and loss
+- Auto-revert impairment with `--for`, Ctrl-C, or a crash (`tap impair --status` and `--clear`)
 - Inspect the setup (`tap status`, including `--json`)
-- Tear the bridge down and restore each member NIC's pre-bridge flags, including promiscuous mode (`tap reset`)
+- Tear the bridge down and restore each member NIC's pre-bridge flags and NetworkManager state, including promiscuous mode (`tap reset`)
 
 Capture uses **dumpcap** (Debian and Raspberry Pi OS package `wireshark-common`). Install it before the first capture. USB 3 adapters are recommended. USB-C NICs that only attach through USB-A converters often run at 480 Mbps; that is expected, not a PathProbe failure.
 
 The Pi (or other Linux host) built-in NIC is **management only**. Do not add it to the bridge. PathProbe refuses the default-route interface unless you pass `--allow-default-route`.
-
-Impairment with `tc netem` (delay, loss, and so on) is a **manual Linux technique**, not a PathProbe command yet. The examples below apply `tc` to the bridge *member* ports.
 
 ## Connection diagram
 
@@ -48,6 +48,7 @@ Activate a Pro license first on this computer, then:
 
 ```bash
 # Create the transparent bridge (Pro, Linux).
+# Defaults are eth1 upstream and eth2 downstream.
 # Default-route / management NIC is refused unless you pass --allow-default-route.
 sudo pathprobe tap bridge --upstream eth1 --downstream eth2 --mgmt eth0
 
@@ -59,15 +60,16 @@ pathprobe tap status --json
 # PathProbe creates the file so capture still works in a 0700 directory.
 sudo pathprobe tap capture --file pathprobe-tap.pcapng --duration 30s
 
-# Optional BPF filter (documentation address only).
-sudo pathprobe tap capture --file pathprobe-tap.pcapng --filter 'not host 192.0.2.10' --duration 30s
+# Optional BPF filter. Keep filters generic; do not paste real addresses.
+sudo pathprobe tap capture --file pathprobe-tap.pcapng --filter 'icmp or arp' --duration 30s
 
 # Live stream to Wireshark on the same computer (pcapng on stdout, logs on stderr).
 sudo pathprobe tap capture --stdout --duration 30s 2>tap.log | wireshark -k -i -
 
 # Live stream over SSH to Wireshark on your workstation.
-# Use a documentation host (192.0.2.10) in examples; substitute your management address privately.
-ssh user@192.0.2.10 'sudo pathprobe tap capture --stdout --duration 30s' | wireshark -k -i -
+# Substitute the tap host privately; do not publish its address.
+# ssh to the tap host, then:  sudo pathprobe tap capture --stdout --duration 30s
+# pipe that pcapng stream into:  wireshark -k -i -
 
 # Tear down the bridge and restore member NIC flags, including promiscuous mode.
 sudo pathprobe tap reset
@@ -78,69 +80,48 @@ pathprobe tap reset
 
 `--stdout` and `--file -` are the same: pcapng on stdout. Do not combine `--stdout` with a real `--file` path.
 
-## Manual impairment with tc netem (not a PathProbe command)
+## Impairment with tap impair (Pro)
 
-These examples run on the Linux host that owns `br-tap`. They attach to a **member port** (`eth1` or `eth2`), not to `br-tap` itself. You need `iproute2` (`tc`). This is ordinary Linux traffic control. PathProbe does not add, show, or remove these rules for you.
+`tap impair` applies Linux netem on the existing bridge member ports (`eth1` and/or `eth2`), not on `br-tap` itself and never on the management NIC. Apply requires Pro and a bridge that is already up. `--status`, `--clear`, and `tap profiles list` / `show` are free.
 
-Pick one port at a time. Using Device 2's documentation address `192.0.2.20` is optional; most netem rules apply to all traffic on that port.
-
-Show the current queueing discipline:
+Use `--for` so impairment auto-reverts when the timer expires, when you press Ctrl-C, or if the process crashes. Confirm with `tap impair --status`. `--clear` removes netem and leaves the bridge up. `tap reset` also clears netem when it tears the bridge down.
 
 ```bash
-tc qdisc show dev eth2
+# Built-in profiles (Pro). Defaults stay eth1 upstream, eth2 downstream.
+sudo pathprobe tap impair --profile lossy-wifi --for 30s
+sudo pathprobe tap impair --profile satellite --for 30s
+sudo pathprobe tap impair --profile congested-wan --for 30s
+sudo pathprobe tap impair --profile flaky-link --for 30s
+
+# Rate cap, duplication, and reorder (Pro). Combine with --delay / --jitter / --loss as needed.
+sudo pathprobe tap impair --dir both --rate 1mbit --for 30s
+sudo pathprobe tap impair --dir both --dup 5% --for 30s
+sudo pathprobe tap impair --dir both --reorder 10% --for 30s
+
+# Watch current impairment (Free or Pro).
+pathprobe tap impair --status
+
+# Remove netem and leave the bridge up (Free or Pro).
+pathprobe tap impair --clear
+
+# Built-in and saved profiles (list and show are Free; save is Pro).
+pathprobe tap profiles list
+pathprobe tap profiles show --name lossy-wifi
+sudo pathprobe tap profiles save --name lab-lossy --delay 40ms --loss 2% --rate 20mbit
 ```
 
-Delay and jitter (100 ms ± 20 ms):
+Built-in profiles:
 
-```bash
-sudo tc qdisc add dev eth2 root netem delay 100ms 20ms
-tc qdisc show dev eth2
-sudo tc qdisc del dev eth2 root
-```
+- `lossy-wifi` — 40 ms delay and jitter, 2% loss, 2% reorder, 20 Mbit/s rate
+- `satellite` — 300 ms delay, 50 ms jitter, 0.5% loss, 25 Mbit/s rate
+- `congested-wan` — 80 ms delay, 20 ms jitter, 1% loss, 5 Mbit/s rate
+- `flaky-link` — 20 ms delay, 10 ms jitter, 5% loss, 2% duplication, 2% reorder
 
-Loss (1% of packets):
-
-```bash
-sudo tc qdisc add dev eth2 root netem loss 1%
-sudo tc qdisc del dev eth2 root
-```
-
-Duplicate (1%):
-
-```bash
-sudo tc qdisc add dev eth2 root netem duplicate 1%
-sudo tc qdisc del dev eth2 root
-```
-
-Corrupt (0.1%):
-
-```bash
-sudo tc qdisc add dev eth2 root netem corrupt 0.1%
-sudo tc qdisc del dev eth2 root
-```
-
-Reorder (5% of packets, with a delay so reordering can occur):
-
-```bash
-sudo tc qdisc add dev eth2 root netem delay 10ms reorder 5%
-sudo tc qdisc del dev eth2 root
-```
-
-Rate limit with Token Bucket Filter (tbf), 10 Mbit/s:
-
-```bash
-sudo tc qdisc add dev eth2 root tbf rate 10mbit burst 32kbit latency 50ms
-tc qdisc show dev eth2
-sudo tc qdisc del dev eth2 root
-```
-
-You can combine netem options on one `tc qdisc add ... netem` line. There can be only one `root` qdisc at a time; `tc qdisc del dev eth2 root` removes whatever you installed. To change a running netem, use `tc qdisc change` or delete and re-add.
-
-If `tc` reports that the device does not exist, check `ip -br link` and use the member name PathProbe reported in `tap status`.
+`--dir` is `to-downstream`, `to-upstream`, or `both`. There is one netem at a time per member; a new apply replaces the previous settings until auto-revert or `--clear`.
 
 ## Optional Linux inspection
 
-These are also manual Linux commands, useful while the bridge is up. Examples use `192.0.2.0/24` only.
+These are also manual Linux commands, useful while the bridge is up.
 
 ```bash
 # Bridge membership and forwarding
@@ -156,28 +137,23 @@ sudo tcpdump -n -i br-tap -c 20 'icmp or arp'
 
 # Confirm the management NIC is still independent
 ip -br addr show eth0
+
+# Current PathProbe impairment, if any
+pathprobe tap impair --status
 ```
 
 ## Reset and cleanup
 
-`pathprobe tap reset` deletes `br-tap` and restores saved pre-bridge flags on the member NICs (promiscuous mode, and when a snapshot exists also allmulti / noarp / multicast and up/down). If you upgraded mid-session and no snapshot is present, reset turns promiscuous mode off and leaves the NIC up.
+`pathprobe tap reset` deletes `br-tap`, clears leftover netem, and restores saved pre-bridge flags and NetworkManager managed state on the member NICs (promiscuous mode, and when a snapshot exists also allmulti / noarp / multicast and up/down). `tap reset` accepts the same `--mgmt` and `--allow-default-route` flags as `tap bridge` and does not touch the management interface. If you upgraded mid-session and no snapshot is present, reset turns promiscuous mode off and leaves the NIC up.
 
-After reset, give NetworkManager (or your DHCP client) a chance to recover a management or lab address on a member NIC that should be used again, for example:
-
-```bash
-# Example only; use your connection name.
-nmcli device set eth1 managed yes
-nmcli connection up "Wired connection 2"
-```
-
-Do not add the management NIC to the bridge. Do not apply netem on the management NIC.
+After reset, give NetworkManager (or your DHCP client) a moment if a member NIC should have an address again. Do not add the management NIC to the bridge. Do not impair the management NIC.
 
 ## License and platforms
 
 | Item | Rule |
 | --- | --- |
-| `tap bridge`, `tap capture` | Pro, Linux (including Raspberry Pi) |
-| `tap status`, `tap reset` | Free or Pro, Linux |
+| `tap bridge`, `tap capture`, `tap impair` apply, `tap profiles save` | Pro, Linux (including Raspberry Pi) |
+| `tap status`, `tap reset`, `tap impair --status`, `tap impair --clear`, `tap profiles list` / `show` | Free or Pro, Linux |
 | Windows | The `tap` command is not present |
 
 Buy PathProbe Pro: https://getpathprobe.com/#pricing
